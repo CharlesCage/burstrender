@@ -10,7 +10,7 @@ BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3), identif
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [TODO] (#TODO)
+- [TODO](#todo)
 - [Contributing](#contributing)
 - [License](#license)
 
