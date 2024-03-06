@@ -1,0 +1,6 @@
+/testimages/
+/testoutput/
+.venv/
+/*.png
+/*.mp4
+/*.gif
