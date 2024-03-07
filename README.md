@@ -65,6 +65,12 @@ However, if you want more control, you can try this process:
 4. Take a look at the generated PNGs. If you like them, move on to the next step. Otherwise, add the TK argument with parameters and run it again until you like the results.
 5. Now remove the `--sample-images-only` argument and run the command to generate GIFs and/or MP4(s) for all the bursts.
 
+### CR3 RAW Image Cropping
+
+Currently burstrender expects CR3s shot on a Canon R3. These Canon RAW files include black bars on the top and left of the image because the sensor area is larger than the output image. This information is included in the EXIF and gets automatcially handled in most display applications. I couldn't figure out how to automatically detect and remove these, so right now burstrender just assumes the CR3s were shot at an intended 6000x4000 and applies a 6000x4000+0+0 crop with gravity set to SouthEast (i.e. it takes the bottom-right-most 6000x4000 pixels of the image). 
+
+If you are using a different camera and/or different settings and this doesn't work for you, OR you want to crop the image differently, you can use the TK argument to specify an [ImageMagick crop string](https://www.imagemagick.org/Usage/crop/#crop_gravity). You can also use the TK argument to specify the [ImageMagick gravity setting](https://www.imagemagick.org/Usage/crop/#crop_gravity).
+
 ## TODO
 
 - [ ] Package for at least semi-easy deployment
