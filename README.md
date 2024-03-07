@@ -27,8 +27,7 @@ Burstrender reads some basic parameters from a config.yaml file. Check the inclu
 
 ## Usage
 ```
-usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH] [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH]
-                   [--detect-only] [--sample-images-only] [-ns] [--gif-only] [-q] [-v]
+usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH] [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH] [--detect-only] [--sample-images-only] [-ns] [--gif-only] [--modulate-string MODULATE_STRING] [--crop-string CROP_STRING] [--gravity-string GRAVITY_STRING] [-q] [-v]
 
 Render MP4s, Stabilized MP4s, and GIFs from burst CR3 RAW photos.
 
@@ -47,6 +46,12 @@ options:
   -ns, --no-stabilization
                         Do not stabilize the images
   --gif-only            Keep only final GIF and remove prelim MP4 files
+  --modulate-string MODULATE_STRING
+                        Specify a modulate string for ImageMagick. (Default is 120.)
+  --crop-string CROP_STRING
+                        Specify a crop string for ImageMagick. (Default is 6000x4000+0+0.)
+  --gravity-string GRAVITY_STRING
+                        Specify a gravity string for ImageMagick. (Default is SouthEast.)
   -q, --quiet           Suppress progress bars
   -v, --version         Show program version
 
