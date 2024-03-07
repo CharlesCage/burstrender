@@ -26,11 +26,11 @@ WORK IN PROGESS
 
 ### Configuring ImageMagick for RAW
 
-* Find ImageMagick's `delegates.xml` file.
+1. Find ImageMagick's `delegates.xml` file.
 
-You're going to blah.
+   You're going to blah.
 
- 
+2. 
 
 ### Installing ffmpeg
 
