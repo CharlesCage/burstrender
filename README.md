@@ -19,8 +19,32 @@ BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3), identif
 Instructions on how to install and run your project.
 
 ## Usage
+```
+usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH] [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH]
+                   [--detect-only] [--sample-images-only] [-ns] [--gif-only] [-q] [-v]
 
+Render MP4s, Stabilized MP4s, and GIFs from burst CR3 RAW photos.
 
+options:
+  -h, --help            show this help message and exit
+  --source-path SOURCE_PATH
+                        Specify a source path for the input CR3 files. (If omitted, the current working directory is used.)
+  --destination-path DESTINATION_PATH
+                        Specify a destination path for rendered videos and/or gifs. (If omitted, the current working directory is used.)
+  --seconds-between-bursts SECONDS_BETWEEN_BURSTS
+                        Specify minimum time between detected bursts in seconds. (Default is 2.)
+  --minimum-burst-length MINIMUM_BURST_LENGTH
+                        Specify minimum number of photos in burst. (Default is 10.)
+  --detect-only         Detect burst photos and display information only
+  --sample-images-only  Render the PNG for first image of each burst only
+  -ns, --no-stabilization
+                        Do not stabilize the images
+  --gif-only            Keep only final GIF and remove prelim MP4 files
+  -q, --quiet           Suppress progress bars
+  -v, --version         Show program version
+
+By Chuck Cage (chuckcage@corporation3355.org)
+```
 
 ## TODO
 
