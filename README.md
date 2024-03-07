@@ -18,6 +18,21 @@ BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3), identif
 
 Instructions on how to install and run your project.
 
+WORK IN PROGESS
+
+### Installing RawTherapee
+
+### Installing ImageMagick
+
+### Configuring ImageMagick for RAW
+
+1. Find ImageMagick's `delegates.xml` file.
+   This is blah.
+2. 
+
+### Installing ffmpeg
+
+
 ### config.yaml
 
 Burstrender reads some basic parameters from a config.yaml file. Check the included file to adjust the defaults as needed for your install. Specifically:

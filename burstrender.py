@@ -20,6 +20,7 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
+# Implement exit codes
 # Add CLI arg for movie width (default 2000)
 # Add CLI arg for movie speed (default 2.0 / half speed
 # Update README.md
