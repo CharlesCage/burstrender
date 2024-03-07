@@ -46,6 +46,18 @@ options:
 By Chuck Cage (chuckcage@corporation3355.org)
 ```
 
+### Best Practices
+
+If you call burstrender from a folder containing CR3 files, it'll automatically read the EXIF data from all the CR3s, try to break them into bursts by looking for gaps of >2 seconds and eliminating bursts of less than 10 images, and then produce a half-speed, 2000px-wide MP4, a slightly-less-than-2000px-wide shake-stabilized MP4, and a 1000px-wide looping GIF from each burst.
+
+However, if you want more control, you can try this process:
+
+1. Execute burstrender with the `--detect-only` argument, along with any `--source-path `and `--destination-path` you need.
+2. Look at the burst data returned. If you like it, go on to the next step. If not, add `--seconds-between-bursts` and/or `--minimum-burst-length` parameters to your command and run it again until you like the results.
+3. Remove the `--detect-only` argument from your command (keeping any other changes) and add the `--sample-images-only` argument. Run the command again. This will generate PNGs from the first CR3 file in each burst.
+4. Take a look at the generated PNGs. If you like them, move on to the next step. Otherwise, add the TK argument with parameters and run it again until you like the results.
+5. Now remove the `--sample-images-only` argument and run the command to generate GIFs and/or MP4(s) for all the bursts.
+
 ## TODO
 
 - [ ] Package for at least semi-easy deployment
