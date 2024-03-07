@@ -27,7 +27,8 @@ WORK IN PROGESS
 ### Configuring ImageMagick for RAW
 
 1. Find ImageMagick's `delegates.xml` file.
-   This is blah.
+
+You're going to blah.
 
 2. 
 
