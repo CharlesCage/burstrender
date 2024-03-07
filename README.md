@@ -28,6 +28,7 @@ WORK IN PROGESS
 
 1. Find ImageMagick's `delegates.xml` file.
    This is blah.
+
 2. 
 
 ### Installing ffmpeg
