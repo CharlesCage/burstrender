@@ -63,7 +63,7 @@ from loguru import logger
 import config
 
 # VERSION
-version = "1.1"
+version = "1.2"
 config.exit_code = 0
 config.exir_reason = ""
 
