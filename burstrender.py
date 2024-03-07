@@ -540,7 +540,6 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "-ns",
         "--no-stabilization",
         action="store_true",
         help="Do not stabilize the images",
