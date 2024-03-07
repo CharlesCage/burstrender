@@ -48,7 +48,14 @@ By Chuck Cage (chuckcage@corporation3355.org)
 
 ### Best Practices
 
-If you call burstrender from a folder containing CR3 files, it'll automatically read the EXIF data from all the CR3s, try to break them into bursts by looking for gaps of >2 seconds and eliminating bursts of less than 10 images, and then produce a half-speed, 2000px-wide MP4, a slightly-less-than-2000px-wide shake-stabilized MP4, and a 1000px-wide looping GIF from each burst.
+If you call burstrender from a folder containing CR3 files, it'll automatically 
+
+* read the EXIF data from all the CR3s
+* try to break them into bursts by looking for gaps of >2 seconds and eliminating bursts of less than 10 images
+* produce a half-speed, 2000px-wide MP4
+* produce a slightly-less-than-2000px-wide shake-stabilized MP4
+* and produce a 1000px-wide looping GIF
+* all for each detected burst
 
 However, if you want more control, you can try this process:
 
