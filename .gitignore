@@ -1,6 +1,7 @@
-/testimages/
-/testoutput/
+testimages/
+testoutput/
 .venv/
-/*.png
-/*.mp4
-/*.gif
+*.png
+*.mp4
+*.gif
+*.trf

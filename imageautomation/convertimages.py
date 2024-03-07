@@ -20,7 +20,9 @@ Global Variables (via config):
 """
 
 # History
-# 2024-03-05 Initial version
+# 2024-03-06 Add logging and quiet option
+# 2024-03-06 Add tqdm progress bar, single-file processing, and working directory
+# 2024-03-05 Firsts version
 
 # TODO
 # None
@@ -31,6 +33,9 @@ Global Variables (via config):
 
 # General
 import subprocess
+
+# Modules
+from .utilities import PrintLog
 
 # TUI progress bar
 from tqdm import tqdm
@@ -60,7 +65,7 @@ def render_pngs_from_cr3s(cr3_files, output_file):
     """
 
     # Loop through cr3_files and execute command to convert each CR3 file to a PNG file
-    for cr3_file in tqdm(cr3_files, desc="Converting CR3 to PNG", disable=True if len(cr3_files) == 1 else config.quiet):
+    for cr3_file in tqdm(cr3_files, desc="Converting CR3s to PNGs", leave=False, disable=True if len(cr3_files) == 1 else config.quiet):
         try:
             completed_process = subprocess.run(
                 [
@@ -75,24 +80,33 @@ def render_pngs_from_cr3s(cr3_files, output_file):
                     f"6000x4000+0+0",
                     f"-resize",
                     f"2000",
-                    f"{config.destination_path}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
+                    f"{config.destination_path if len(cr3_files) == 1 else config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
                 ],
                 capture_output=True,
             )
 
         except FileNotFoundError as exc:
-            print(f"Process failed because the executable could not be found.\n{exc}")
+            PrintLog.error(
+                f"Failed to convert {cr3_file} to {output_file}.png "
+                f"because the convert (ImageMagick) executable could not be found\n{exc}"
+            )
             return False
 
         except subprocess.CalledProcessError as exc:
-            print(
-                f"Process failed because did not return a successful return code. "
+            PrintLog.error(
+                f"Failed to convert {cr3_file} to {output_file}.png "
+                f"because convert (ImageMagick) did not return a successful return code. "
                 f"Returned {exc.returncode}\n{exc}"
             )
             return False
 
         except subprocess.TimeoutExpired as exc:
-            print(f"Process timed out.\n{exc}")
+            PrintLog.error(
+                f"Failed to convert {cr3_file} to {output_file}.png "
+                f"because process timed out.\n{exc}"
+            )
             return False
+        
+        PrintLog.debug(f"Converted {cr3_file} to {output_file}.png")
 
     return True

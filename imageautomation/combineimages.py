@@ -6,7 +6,9 @@ Classes:
 
 Functions:
 
-    None
+    create_mp4
+    stabilize_mp4
+    create_gif_from_mp4
 
 Variables:
 
@@ -20,7 +22,8 @@ Global Variables (via config):
 """
 
 # History
-# 2024-03-05 Initial version
+# 2024-03-06 Add logging and quiet option, fix misplaced return statements
+# 2024-03-05 First version
 
 # TODO
 # None
@@ -30,11 +33,10 @@ Global Variables (via config):
 #
 
 # General
-import pandas as pd
 import subprocess
 
-# TUI progress bar
-from tqdm import tqdm
+# Modules
+from .utilities import PrintLog
 
 # Logging
 from loguru import logger
@@ -49,7 +51,7 @@ def create_mp4(output_file):
     Parameters:
 
         output_file : str
-            The output file name for the MP4 file
+            The base file name for the input PNG and output MP4 files
 
     Returns:
 
@@ -63,7 +65,7 @@ def create_mp4(output_file):
             [
                 f"ffmpeg",
                 f"-i",
-                f"{output_file}-image_%03d.png",
+                f"{config.working_directory}/{output_file}-image_%03d.png",
                 f"-vf",
                 f"scale=2000:-2,setpts=2.0*PTS",
                 f"-c:v",
@@ -78,29 +80,36 @@ def create_mp4(output_file):
                 f"medium",
                 f"-movflags",
                 f"faststart",
-                f"{output_file}.mp4",
+                f"{config.working_directory}/{output_file}.mp4",
             ],
             capture_output=True,
         )
-        # Print "MP4 created" if the process was successful
-        print(f"Created {output_file}.mp4")
-
-        return True
 
     except FileNotFoundError as exc:
-        print(f"Process failed because the executable could not be found.\n{exc}")
+        PrintLog.error(
+            f"Failed to create {output_file}.mp4 "
+            f"because the ffmpeg executable could not be found\n{exc}"
+        )
         return False
 
     except subprocess.CalledProcessError as exc:
-        print(
-            f"Process failed because did not return a successful return code. "
+        PrintLog.error(
+            f"Failed to create {output_file}.mp4 "
+            f"because ffmpeg did not return a successful return code. "
             f"Returned {exc.returncode}\n{exc}"
         )
         return False
 
     except subprocess.TimeoutExpired as exc:
-        print(f"Process timed out.\n{exc}")
+        PrintLog.error(
+            f"Failed to create {output_file}.mp4 "
+            f"because process timed out\n{exc}"
+        )
         return False
+
+    PrintLog.debug(f"Created {output_file}.mp4")
+    
+    return True
 
 
 def stabilize_mp4(output_file):
@@ -110,7 +119,7 @@ def stabilize_mp4(output_file):
     Parameters:
 
         output_file : str
-            The output file name for the MP4 file
+            The base file name (no ext) for the MP4 input and output files
 
     Returns:
 
@@ -124,32 +133,39 @@ def stabilize_mp4(output_file):
             [
                 f"ffmpeg",
                 f"-i",
-                f"{output_file}.mp4",
+                f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabdetect=shakiness=10:accuracy=15:result='{output_file}.trf'",
+                f"vidstabdetect=shakiness=10:accuracy=15:result='{config.working_directory}/{output_file}.trf'",
                 f"-f",
                 f"null",
                 f"-",
             ],
             capture_output=True,
         )
-        # Print "MP4 created" if the process was successful
-        print(f"Created {output_file}.trf stabilization analysis file")
 
     except FileNotFoundError as exc:
-        print(f"Process failed because the executable could not be found.\n{exc}")
+        PrintLog.error(
+            f"Failed to process stabilization analysis for {output_file}.mp4 "
+            f"because the ffmpeg executable could not be found.\n{exc}"
+        )
         return False
 
     except subprocess.CalledProcessError as exc:
-        print(
-            f"Process failed because did not return a successful return code. "
+        PrintLog.error(
+            f"Failed to process stabilization analysis for {output_file}.mp4 "
+            f"because ffmpeg did not return a successful return code. "
             f"Returned {exc.returncode}\n{exc}"
         )
         return False
 
     except subprocess.TimeoutExpired as exc:
-        print(f"Process timed out.\n{exc}")
+        PrintLog.error(
+            f"Failed to process stabilization analysis for {output_file}.mp4 "
+            f"because process timed out.\n{exc}"
+        )
         return False
+    
+    PrintLog.debug(f"Stabilization analysis complete for {output_file}.mp4")
 
     # Execute command to stabilize the MP4 file
     try:
@@ -157,41 +173,51 @@ def stabilize_mp4(output_file):
             [
                 f"ffmpeg",
                 f"-i",
-                f"{output_file}.mp4",
+                f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabtransform=smoothing=30:input='{output_file}.trf'",
-                f"{output_file}-stabilized.mp4",
+                f"vidstabtransform=smoothing=30:input='{config.working_directory}/{output_file}.trf'",
+                f"{config.working_directory}/{output_file}-stabilized.mp4",
             ],
             capture_output=True,
         )
-        # Print "MP4 created" if the process was successful
-        print(f"Created {output_file}-stabilized.mp4")
-        return True
 
     except FileNotFoundError as exc:
-        print(f"Process failed because the executable could not be found.\n{exc}")
+        PrintLog.error(
+            f"Failed to stabilize {output_file}.mp4 "
+            f"because the ffmpeg executable could not be found.\n{exc}"
+        )
         return False
 
     except subprocess.CalledProcessError as exc:
-        print(
-            f"Process failed because did not return a successful return code. "
+        PrintLog.error(
+            f"Failed to stabilize {output_file}.mp4 "
+            f"because ffmpeg did not return a successful return code. "
             f"Returned {exc.returncode}\n{exc}"
         )
         return False
 
     except subprocess.TimeoutExpired as exc:
-        print(f"Process timed out.\n{exc}")
+        PrintLog.error(
+            f"Failed to stabilize {output_file}.mp4 "
+            f"because process timed out.\n{exc}"
+        )
         return False
 
+    PrintLog.debug(f"Stabilized {output_file}.mp4")
+    return True
 
-def create_gif_from_mp4(output_file):
+def create_gif_from_mp4(output_file, no_stabilization=False):
     """
     Create a GIF file from the MP4 file using FFmpeg.
 
     Parameters:
 
             output_file : str
-                The output file name for the GIF file
+                The base file name (no ext) for the MP4 input and output files
+
+            no_stabilization : bool
+                True if the MP4 file is not stabilized, False otherwise
+                Default is False
 
     Returns:
 
@@ -204,26 +230,35 @@ def create_gif_from_mp4(output_file):
             [
                 f"ffmpeg",
                 f"-i",
-                f"{output_file}-stabilized.mp4",
+                f"{config.working_directory}/{output_file}{'' if no_stabilization else'-stabilized'}.mp4",
                 f"-filter_complex",
                 f"[0:v] fps=30,scale=480:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse",
-                f"{output_file}.gif",
+                f"{config.working_directory}/{output_file}.gif",
             ],
             capture_output=True,
         )
-        # Print "GIF created" if the process was successful
-        print(f"Created {output_file}.gif")
-        return True
 
     except FileNotFoundError as exc:
-        print(f"Process failed because the executable could not be found.\n{exc}")
+        PrintLog.error(
+            f"Failed to create {output_file}.gif "
+            f"because the ffmpeg executable could not be found\n{exc}"
+        )
         return False
+    
     except subprocess.CalledProcessError as exc:
-        print(
-            f"Process failed because did not return a successful return code. "
+        PrintLog.error(
+            f"Failed to create {output_file}.gif "
+            f"because ffmpeg did not return a successful return code. "
             f"Returned {exc.returncode}\n{exc}"
         )
         return False
+    
     except subprocess.TimeoutExpired as exc:
-        print(f"Process timed out.\n{exc}")
+        PrintLog.error(
+            f"Failed to create {output_file}.gif "
+            f"because process timed out.\n{exc}"
+        )
         return False
+
+    PrintLog.debug(f"Created {output_file}.gif")
+    return True

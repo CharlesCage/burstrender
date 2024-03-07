@@ -6,7 +6,8 @@ Classes:
 
 Functions:
 
-    None
+    extractEXIF
+    detect_bursts
 
 Variables:
 
@@ -20,6 +21,7 @@ Global Variables (via config):
 """
 
 # History
+# 2024-03-06 Add logging and quiet option
 # 2024-03-05 Added detect-only functionality and tqdm progress bar
 # 2024-03-05 Initial version
 
@@ -35,6 +37,9 @@ import os
 import pandas as pd
 import warnings
 import exiftool
+
+# Modules
+from .utilities import PrintLog
 
 # TUI progress bar
 from tqdm import tqdm
@@ -84,6 +89,8 @@ def extractEXIF(directory):
 
             # Append the EXIF data to the dataframe
             df = pd.concat([df, pd.DataFrame([exif_data])], ignore_index=True)
+
+    PrintLog.debug(f"Extracted EXIF data from {len(df)} CR3 files")
 
     # Return the Da the dataframe
     return df
@@ -158,5 +165,7 @@ def detect_bursts(df, detect_only=False, seconds_between_bursts=2, min_burst_len
 
             # Append the list of full path filenames to the cr3_files_list
             output_list.append(cr3_files)
+
+    PrintLog.debug(f"Detected {len(output_list)} burst(s)")
 
     return output_list
