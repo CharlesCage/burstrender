@@ -248,3 +248,168 @@
 2024-03-06 17:53:25.952 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
 2024-03-06 17:53:25.952 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
 2024-03-06 17:53:25.952 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 08:49:25.346 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 08:49:25.347 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 08:49:25.348 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 08:49:25.349 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 08:49:25.349 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 08:49:25.349 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 08:49:25.349 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 08:49:25.349 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 08:49:25.349 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 08:49:25.350 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 08:49:28.774 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 08:49:28.786 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 08:49:28.786 | DEBUG    | imageautomation.utilities:debug:102 - Processing burst 1
+2024-03-07 08:49:31.794 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 08:49:34.821 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-07 08:49:37.834 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-07 08:49:40.823 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-07 08:51:42.218 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 08:51:42.220 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 08:51:42.221 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 08:51:42.222 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 08:51:42.223 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 08:51:42.223 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 08:51:42.223 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 08:51:42.223 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 08:51:42.223 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 08:51:42.223 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 08:51:45.666 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 08:51:45.678 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 08:51:45.678 | DEBUG    | imageautomation.utilities:debug:102 - Processing burst 1
+2024-03-07 08:51:48.711 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 08:51:51.715 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-07 08:51:54.719 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-07 08:51:57.724 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-07 09:13:07.024 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 09:13:07.026 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 09:13:07.026 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 09:13:07.027 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 09:13:07.028 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 09:13:07.028 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 09:13:07.028 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 09:13:07.028 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 09:13:07.028 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 09:13:07.028 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 09:13:07.028 | DEBUG    | imageautomation.utilities:debug:102 - Default modulate string: 120
+2024-03-07 09:13:10.404 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 09:13:10.416 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 09:13:10.416 | DEBUG    | imageautomation.utilities:debug:102 - Processing burst 1
+2024-03-07 09:13:13.425 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 09:13:53.023 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 09:13:53.024 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 09:13:53.025 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 09:13:53.026 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 09:13:53.026 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 09:13:53.026 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 09:13:53.026 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 09:13:53.026 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 09:13:53.026 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 09:13:53.026 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 09:13:53.026 | DEBUG    | imageautomation.utilities:debug:102 - Default modulate string: 120
+2024-03-07 09:13:57.157 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 09:13:57.182 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 09:14:00.154 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 09:14:03.239 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-07 09:14:06.290 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-07 09:14:55.940 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 09:14:55.941 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 09:14:55.942 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 09:14:55.943 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 09:14:55.943 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 09:14:55.943 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 09:14:55.943 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 09:14:55.943 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 09:14:55.944 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 09:14:55.944 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 09:14:55.944 | DEBUG    | imageautomation.utilities:debug:102 - Modulate string from CLI arg: 150
+2024-03-07 09:15:00.070 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 09:15:00.095 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 09:15:03.119 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 09:15:06.129 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-07 09:15:09.171 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-07 09:15:51.070 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 09:15:51.071 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 09:15:51.072 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 09:15:51.073 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 09:15:51.073 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 09:15:51.073 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 09:15:51.073 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 09:15:51.074 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 09:15:51.074 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 09:15:51.074 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 09:15:51.074 | DEBUG    | imageautomation.utilities:debug:102 - Modulate string from CLI arg: 20
+2024-03-07 09:15:55.270 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 09:15:55.295 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 09:15:57.904 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 09:16:00.568 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-07 09:16:03.235 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-07 09:23:20.346 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 09:23:20.347 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 09:23:20.348 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 09:23:20.349 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 09:23:20.350 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 09:23:20.350 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 09:23:20.350 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 09:23:20.350 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 09:23:20.350 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 09:23:20.350 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 09:23:20.350 | DEBUG    | imageautomation.utilities:debug:102 - Modulate string from CLI arg: 20
+2024-03-07 09:23:20.350 | DEBUG    | imageautomation.utilities:debug:102 - Default crop string: 6000x4000+0+0
+2024-03-07 09:23:24.505 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 09:23:24.530 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 09:23:27.163 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 09:23:29.834 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-07 09:23:32.444 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-07 09:24:21.701 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 09:24:21.702 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 09:24:21.703 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 09:24:21.704 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 09:24:21.704 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 09:24:21.705 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 09:24:21.705 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 09:24:21.705 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 09:24:21.705 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 09:24:21.705 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 09:24:21.705 | DEBUG    | imageautomation.utilities:debug:102 - Default modulate string: 120
+2024-03-07 09:24:21.705 | DEBUG    | imageautomation.utilities:debug:102 - Crop string from CLI arg: 4000x2000+0+0
+2024-03-07 09:24:25.873 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 09:24:25.899 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 09:24:28.537 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 09:24:31.213 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-07 09:24:33.881 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-07 09:28:31.806 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 09:28:31.808 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 09:28:31.809 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Default modulate string: 120
+2024-03-07 09:28:31.810 | DEBUG    | imageautomation.utilities:debug:102 - Default crop string: 6000x4000+0+0
+2024-03-07 09:28:31.811 | DEBUG    | imageautomation.utilities:debug:102 - Gravity string from CLI arg: NorthWest
+2024-03-07 09:28:35.914 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 09:28:35.938 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 09:28:38.968 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-07 09:28:42.038 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-07 09:28:45.068 | DEBUG    | imageautomation.utilities:debug:102 - Converted /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-07 10:14:32.510 | DEBUG    | imageautomation.utilities:debug:102 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-07 10:14:32.511 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-07 10:14:32.511 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-07 10:14:32.512 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Default source path: /home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Default seconds between bursts: 2
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Default minimum burst length: 10
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Default modulate string: 120
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Default crop string: 6000x4000+0+0
+2024-03-07 10:14:32.513 | DEBUG    | imageautomation.utilities:debug:102 - Default gravity string: SouthEast
+2024-03-07 10:14:35.914 | DEBUG    | imageautomation.utilities:debug:102 - Extracted EXIF data from 163 CR3 files
+2024-03-07 10:14:35.926 | DEBUG    | imageautomation.utilities:debug:102 - Detected 3 burst(s)
+2024-03-07 10:14:35.926 | DEBUG    | imageautomation.utilities:debug:102 - Output data for --detect-only

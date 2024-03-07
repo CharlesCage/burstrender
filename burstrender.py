@@ -1,5 +1,12 @@
 # History
 #
+# 2024-03-07 V1.2 Done with basic image processing CLI and docs
+# 2024-03-07 # Update README.md
+# 2024-03-07 Add CLI arg for gravity
+# 2024-03-07 Add CLI arg for crop string (default 6000x4000+0+0)
+# 2024-03-07 Add CLI arg for brightness (default 120)
+# 2024-03-07 Document default config.yaml
+# 2024-03-07 Add log location to config.yaml
 # 2024-03-06 V1.1 Done with basic features
 # 2024-03-06 Add basic error handling
 # 2024-03-06 Add quiet mode
@@ -13,13 +20,10 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
-# Add log location to config.yaml
-# Document default config.yaml
-# Add CLI arg for brightness (default 120)
-# Add CLI arg for camera image dimensions (defaulot 6000x4000)
 # Add CLI arg for movie width (default 2000)
 # Add CLI arg for movie speed (default 2.0 / half speed
 # Update README.md
+# Add validation for modulate, crop, and gravity strings
 
 
 # FIGURE OUT DEPLOYMENT
@@ -70,9 +74,12 @@ config.exir_reason = ""
 # Clear default logger sinks
 logger.remove()
 
+# Set log path (and level) from config file# config.log_level = Configuration().get()['logging']['level']
+config.log_path = Configuration().get()['logging']['path']
+
 # Add sink for log file
 logger.add(
-    "logs/burstrender.log",
+    f"{config.log_path}/burstrender.log",
     rotation="10 MB",
     retention=10,
     backtrace=True,
@@ -157,7 +164,6 @@ def delete_files(filespec):
             ],
             capture_output=True,
         )
-    # TODO: Logging
 
     except FileNotFoundError as exc:
         PrintLog.error(
@@ -300,6 +306,30 @@ def main(args):
     else:
         config.min_burst_length = 10
         PrintLog.debug(f"Default minimum burst length: {config.min_burst_length}")
+
+    # Set the modulate string for ImageMagick
+    if args.modulate_string:
+        config.modulate_string = args.modulate_string
+        PrintLog.debug(f"Modulate string from CLI arg: {config.modulate_string}")
+    else:
+        config.modulate_string = "120"
+        PrintLog.debug(f"Default modulate string: {config.modulate_string}")
+
+    # Set the crop string for ImageMagick
+    if args.crop_string:
+        config.crop_string = args.crop_string
+        PrintLog.debug(f"Crop string from CLI arg: {config.crop_string}")
+    else:
+        config.crop_string = "6000x4000+0+0"
+        PrintLog.debug(f"Default crop string: {config.crop_string}")
+
+    # Set the gravity string for ImageMagick
+    if args.gravity_string:
+        config.gravity_string = args.gravity_string
+        PrintLog.debug(f"Gravity string from CLI arg: {config.gravity_string}")
+    else:
+        config.gravity_string = "SouthEast"
+        PrintLog.debug(f"Default gravity string: {config.gravity_string}")
 
     #
     # Process images
@@ -520,6 +550,24 @@ if __name__ == "__main__":
         "--gif-only",
         action="store_true",
         help="Keep only final GIF and remove prelim MP4 files",
+    )
+
+    parser.add_argument(
+        "--modulate-string",
+        action="store",
+        help="Specify a modulate string for ImageMagick. (Default is 120.)",
+    )
+
+    parser.add_argument(
+        "--crop-string",
+        action="store",
+        help="Specify a crop string for ImageMagick. (Default is 6000x4000+0+0.)",
+    )
+
+    parser.add_argument(
+        "--gravity-string",
+        action="store",
+        help="Specify a gravity string for ImageMagick. (Default is SouthEast.)",
     )
 
     parser.add_argument(

@@ -20,6 +20,9 @@ Global Variables (via config):
 """
 
 # History
+# 2024-03-07 Add gravity_string to config
+# 2024-03-07 Add crop_string to config
+# 2024-03-07 Add modulate_string to config
 # 2024-03-06 Add logging and quiet option
 # 2024-03-06 Add tqdm progress bar, single-file processing, and working directory
 # 2024-03-05 Firsts version
@@ -73,11 +76,11 @@ def render_pngs_from_cr3s(cr3_files, output_file):
                     f"{cr3_file}",
                     f"-auto-level",
                     f"-modulate",
-                    f"120",
+                    f"{config.modulate_string}",
                     f"-gravity",
-                    f"SouthEast",
+                    f"{config.gravity_string}",
                     f"-crop",
-                    f"6000x4000+0+0",
+                    f"{config.crop_string}",
                     f"-resize",
                     f"2000",
                     f"{config.destination_path if len(cr3_files) == 1 else config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
