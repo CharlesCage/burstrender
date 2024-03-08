@@ -194,7 +194,7 @@ Burstrender reads some basic parameters from a config.yaml file. Check the inclu
 
    Your prompt should now be preceeded with `(.venv)` and maybe look something like `(.venv) chuckcage@joshua:~/github/burstrender$`.
 
-### Install Requirements
+### Install Python Requirements
 
 Ok. If you're on Debian WSL this gets just super fun and complicated. If you're on Debian 12, you can probably just skip to the `pip3 install -r requirements.txt` command below. Otherwise, make sure you're still in the burstrender folder with the virtual environment activated (from previous step) and here we go:
 
