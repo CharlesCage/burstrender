@@ -22,8 +22,7 @@ And yes, this is pretty hacky. If you wish to improve, please share.
 
 ### Install RawTherapee
 
-Need to install 5.9 or later. This is in Debian 12 ("Bookworm"). 
-Check with apt list rawtherapee
+Need to install 5.9 or later. This is in Debian 12 ("Bookworm"). Check with `apt list rawtherapee`.
 
 1. Check to see if RawTherapee is already installed by issuing the `rawtherapee-cli` command. If RawTherapee responds, you're good to go.
 
