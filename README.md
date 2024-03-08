@@ -133,7 +133,7 @@ ImageMagick can't handle RAW files out of the box, at least not in most availabl
 
    `<delegate decode="dng:decode" command="&quot;rawtherapee-cli&quot; -o &quot;%u.png&quot; -n -Y -c &quot;%F&quot;"/>`
 
-   Some additional help if you're doing this in WSL: you may need to enable Copy/Paste within the WSL shell (or [mintty]([https://](https://mintty.github.io/) if you're using that). In most of them it's under Options/Options or sometimes (like in mintty) under Options/Text. These enable you to use `Ctrl+Shift+V` to paste from the Windows clipboard, so you can copy the line above and paste it into your terminal edit app (probably vim or nano),
+   Some additional help if you're doing this in WSL: you may need to enable Copy/Paste within the WSL shell (or [mintty](https://mintty.github.io/) if you're using that). In most of them it's under Options/Options or sometimes (like in mintty) under Options/Text. These enable you to use `Ctrl+Shift+V` to paste from the Windows clipboard, so you can copy the line above and paste it into your terminal edit app (probably vim or nano),
 
 3. Test the new ImageMagick configuration.
 
