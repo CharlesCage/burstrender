@@ -75,8 +75,14 @@ config.exir_reason = ""
 # Clear default logger sinks
 logger.remove()
 
-# Set log path (and level) from config file# config.log_level = Configuration().get()['logging']['level']
+# Set log path (and level) from config file
 config.log_path = Configuration().get()['logging']['path']
+if config.log_path == "default" or not config.log_path:
+    config.log_path = f"{pathlib.Path(__file__).parent.absolute() / 'logs'}"
+else:
+    config.log_path = Configuration().get()['logging']['path']
+
+# TODO: config.log_level = Configuration().get()['logging']['level']
 
 # Add sink for log file
 logger.add(
@@ -281,7 +287,7 @@ def main(args):
         config.source_path = args.source_path
         PrintLog.debug(f"Source path from CLI arg: {config.source_path}")
     else:
-        config.source_path = "/home/chuckcage/Insync/chuckcage@corporation3355.org/Google Drive/SportsPhotos/Burst Photos"
+        config.source_path = "."
         PrintLog.debug(f"Default source path: {config.source_path}")
 
     # Set the destination path for the rendered videos and/or gifs
@@ -342,7 +348,7 @@ def main(args):
     # Exit if no CR3 files are found
     if df.empty:
         PrintLog.warning(
-            f"No CR3 files found in the source path: {config.ource_path}. "
+            f"No CR3 files found in the source path: {config.source_path}/ "
             f"Use the --source-path argument to specify a different source path"
         )
         exit()

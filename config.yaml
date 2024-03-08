@@ -1,7 +1,7 @@
 # This YAML file contains configuration settings for the burstrender application.
 
 paths:
-  # The path to the directory where the application will store temporary files.
+  # The path to the folder where the application will store temporary files.
   # Make sure the user running the application has write permissions to this directory
   # and that the directory has enough space to store the temporary files.
   # default = ~/burstrender/working
@@ -13,4 +13,5 @@ logging:
   # The path where log files will be stored. Make sure the user running the application
   # has write permissions to this directory. Log files are limited to 10 MB in size and
   # are rotated when they reach this size. 10 log files are kept before they are deleted.
-  path: logs
+  # default = logs subfolder in the repo clone folder
+  path: default

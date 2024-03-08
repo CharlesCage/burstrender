@@ -36,6 +36,7 @@ Global Variables (via config):
 # General
 import yaml
 from colorama import Fore, Style
+import pathlib
 
 # TUI progress bar
 
@@ -51,24 +52,10 @@ import config
 #
 
 
-class ColorPrint:
+class PrintLog:
     """
-    A class to represent color printing opions.
-
-    Attributes:
-
-        None
-
-    Methods:
-
-        print_yellow(message)
-            Prints a message in yellow
-
-        print_red(message)
-            Prints a message in red
-
+    TODO: Add description
     """
-
     @staticmethod
     def print_yellow(message):
         """Prints a message in yellow"""
@@ -79,22 +66,16 @@ class ColorPrint:
         """Prints a message in red"""
         print(f"{Fore.RED}{message}{Style.RESET_ALL}")
 
-
-class PrintLog(ColorPrint):
-    """
-    Extend ColorPrint to include logging.
-    """
-
     def error(message):
         """Prints a message in red and logs an error"""
         if not config.quiet:
-            super().print_red(message)
+            PrintLog.print_red(message)  # Fix: Remove 'self' and call PrintLog.print_red()
         logger.error(message)
 
     def warning(message):
         """Prints a message in yellow and logs a warning"""
         if not config.quiet:
-            super().print_yellow(message)
+            PrintLog.print_yellow(message)  # Fix: Remove 'self' and call PrintLog.print_yellow()
         logger.warning(message)
 
     def debug(message):
@@ -131,13 +112,13 @@ class Configuration:
     @logger.catch
     def __init__(self):
         """Constructs all necessary attributes for the Config object."""
-        self.source = "config.yaml"
+        self.source = f"{pathlib.Path(__file__).parent.parent.absolute() / 'config.yaml'}"
 
     @logger.catch
     def get(self):
         """Retrieve, load, and returns the full config file"""
 
-        with open("config.yaml", "r") as file:
+        with open(self.source, "r") as file:
             configuration = yaml.safe_load(file)
 
         return configuration

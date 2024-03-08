@@ -10,7 +10,8 @@
             "request": "launch",
             "program": "${file}",
             "args": [
-                "--sample-images-only", 
+                "--source-path", 
+                "~/", 
             ],
             "console": "integratedTerminal",
             "justMyCode": true

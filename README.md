@@ -16,31 +16,105 @@ BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3), identif
 
 ## Installation
 
-Instructions on how to install and run your project.
+Apologies for the manual/crappy way this installation works. I'm still learning to deploy Python well. Right now it's important to know that this is only designed to work on Linux or on the Debian WSL system under Windows. I've deployed to both with success following these instructions. TODO: package this properly.
 
-WORK IN PROGESS
+And yes, this is pretty hacky. If you wish to improve, please share.
 
 ### Installing RawTherapee
 
+1. Check to see if RawTherapee is already installed by issuing the `rawtherapee-cli` command. If RawTherapee responds, you're good to go.
+
+2. Otherwise, install RawTherapee with `sudo apt install rawtherapee` or whatever works for your distro.
+   
+3. Repeat #1 above to make sure `rawtherapee-cli` responds.
+
+If for some reason RawTherapee is not in your distribution, you can potentially get it [here]([https://](https://rawtherapee.com/)) as a Linux AppImage and source code. If you install it as an AppImage or compile it from source you'll want to make sure it ends up in your PATH such that you can execute it as your user (the one you intend to run burstrender with) from anywhere. You can test this with #1 above.
+
 ### Installing ImageMagick
+
+1. Check to see if ImageMagick is already installed by issuing the `convert` command. If convert responds, you're good to go.
+
+2. Otherwise, install ImageMagick with `sudo apt install imagemagick` or whatever works for your distro.
+   
+3. Repeat #1 above to make sure convert responds. Pretty much every distro in existence seems to have ffmpeg, but if for some reason you compile it from source or install it via other mechanisms, be sure to make sure it's in your PATH such that you can execute it as your user (the one you intend to run burstrender with) from anywhere. You can test this with #1 above.
 
 ### Configuring ImageMagick for RAW
 
+ImageMagick can't handle RAW files out of the box, at least not in most available versions. And some versions that handle RAW don't handle CR3s. I avoid this problem by adding RawTherapee as a helper for ImageMagick RAW file processing. There are other possibilities, including adding various RAW libraries and compiling some of the latest versions of ImageMagick from source. See the resource below if you want/need to try that method. But this worked great for me and involed less mess.
+
 1. Find ImageMagick's `delegates.xml` file.
 
-  You're going to blah.
+   The easiest way I've found to locating this file is with the command locate `delegates.xml`. However, if your distro does not provide this, you may need to resort to other search techniques. Additionally, if you find multiple `delegates.xml` files (I didn't, thankfully!) you may have some luck with the command `convert -debug "all" abc.xyz test.jpg`. This will produce a ton of console logging output from ImageMagick, and you can look for a `Loading delegate configure file:` line which should tell you which file ImageMagick is actually using.
 
-1. 
+2. Edit the `delegates.xml` file.
+   
+   Our goal here is to add RawTherapee as a helper app for DNG fiiles (which will also handle our CR3s). I had luck searching for `dng` in the `delegates.xml` file. If you find a line with something like `<delegate decode="dng:decode"...`  you'll want to modify it to match the line below. If you don't find such a line, add the line below:
+
+   `<delegate decode="dng:decode" command="&quot;rawtherapee-cli&quot; -o &quot;%u.png&quot; -n -Y -c &quot;%F&quot;"/>`
+
+3. Test the new ImageMagick configuration.
+
+   Grab a CR3 and try to convert it to a PNG directly with ImageMagick using the following command:
+
+   `convert -debug your-file-here.CR3 test.PNG`
+
+   If all goes well you should get an output PNG, and you should see a `rawtherapee-cli` command in the spew of console logging.
+
+If this doesn't work, [this is a great resource](https://www.isoftstoneinc.com/insights/libraw-rawtherapee-imagemagick/) for understanding how the whole process works and what you might need to do in order to make it work for your potentially unique ImageMagick and RawTherapee installation.
 
 ### Installing ffmpeg
 
+1. You may already have ffmpeg installed. It's pretty damn common. Check by issuing the command `ffmpeg`. If it's installed, you're good to go.
+   
+2. If not, install it via `sudo apt install ffmpeg` or whatever works for your distro. You shouldn't need any special version of this as all the features used here have been in the package for a long time.
 
-### config.yaml
+### Clone the Repo
+
+
+1. If you don't already have git installed, install it with `sudo apt install git`.
+   
+2. Clone this repo into somewhere safe, like maybe underneath `~/github` in your home folder. It doesn't matter where you put it, but this is probably the easiest.
+
+### Checking config.yaml
 
 Burstrender reads some basic parameters from a config.yaml file. Check the included file to adjust the defaults as needed for your install. Specifically:
 
 * The default working folder is set to `~/.burstrender/working`. Make sure this location (or whatever location you choose) can accommodate at minimum the PNGs, MP4s, and GIF for the largest burst you process. (Burstrender cleans up the created PNGs and moves the MP4s and GIF to the output folder after processing each burst.)
 * The default logging path is `TK`. Burstrender automatically rotates log files when they reach 10 MB, and 10 log files are kept before they are deleted. (So the total log storage should never be that large.)
+
+### Activate .venv and Install Requirements
+
+1. Change directories to the location where you git cloned the repo. In the example here, we put it in `~/github/burstrender`. So for that you'd `cd ~/github/burstrender`.
+   
+2. Activate the .venv virtual environment there with the command source `.venv/bin/activate`.
+   
+3. Install the requirements with the command `pip3 install -r requirements.txt`.
+   
+4. Deactivate the .venv virtual environment with the command `deactivate`.
+
+### Edit the burstrender Script
+
+In order to allow execution of burstrender.py within the .venv virtual environment from anywhere and without calling the python instance, this file is a shell script designed to do all that for you. But you need to do a few things to get it working.
+
+1. Edit the `burstrender` script file provided with the repo and adjust the paths so that they reference the location in which you put the git clone of this repo. NOTE that this is not the burstrender folder, but rather the burstrender file within the burstrender folder. If you cloned the repo to `~/github/burstrender` then it's already good to go.
+   
+2. Make the `burstrender` script executable with the command `chmod +x burstrender` or whatever works for your distro.
+
+### Add a Symlink for the burstrender Script
+
+1. Find a location that's in your PATH. The easiest way to do this is to open a shell and type `$PATH`. A common location for this would be `/usr/local/bin`. But YMMV. Find a place in the path that you're comfortable placing a symlink referencing the `burstrender` script.
+   
+2. Create the symlink from the burstrender script to your chosen target location from #1 above. For example, if you cloned the repo to `~/github/burstrender` and you chose `/usr/local/bin` above, you'd use the command:
+   
+   `sudo ln -s /home/YOUR_USERNAME_HERE/github/burstrender/burstrender /usr/local/bin/burstrender`
+   
+   We used `sudo` here because of the location. 
+
+### Test Your Install
+
+Test the install by executing `burstrender -h` from somewhere outside the place you put the symlink or the place you put the cloned repo. You should see the help output from burstrender.
+
+And you're ready to go!
 
 ## Usage
 ```
