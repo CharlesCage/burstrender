@@ -50,7 +50,6 @@ Seriously, this worked for me, but do it at your own risk. For this example, I'm
    deb http://deb.debian.org/debian bullseye-updates main non-free contrib
    deb http://security.debian.org/debian-security bullseye-security main non-free contrib
    deb http://ftp.debian.org/debian bullseye-backports main non-free contrib
-
    ```
 
    Edit it (with `sudo`, of course, since `/etc/apt/` is owned by `root`). Add the following line:
@@ -71,7 +70,6 @@ Seriously, this worked for me, but do it at your own risk. For this example, I'm
    Package: *
    Pin: release a=unstable
    Pin-Priority: 100
-
    ```
 
    This essentially says "default everything to oldstable (what WSL currently uses) but let me request installing packages from unstable."
