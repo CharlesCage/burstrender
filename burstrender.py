@@ -1,5 +1,6 @@
 # History
 #
+# 2024-03-08 V1.3 First deployable-ish version
 # 2024-03-07 V1.2 Done with basic image processing CLI and docs
 # 2024-03-07 # Update README.md
 # 2024-03-07 Add CLI arg for gravity
@@ -64,7 +65,7 @@ from loguru import logger
 import config
 
 # VERSION
-version = "1.2"
+version = "1.3"
 config.exit_code = 0
 config.exir_reason = ""
 

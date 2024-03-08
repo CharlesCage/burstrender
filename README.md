@@ -70,7 +70,6 @@ If this doesn't work, [this is a great resource](https://www.isoftstoneinc.com/i
 
 ### Clone the Repo
 
-
 1. If you don't already have git installed, install it with `sudo apt install git`.
    
 2. Clone this repo into somewhere safe, like maybe underneath `~/github` in your home folder. It doesn't matter where you put it, but this is probably the easiest.
@@ -79,8 +78,9 @@ If this doesn't work, [this is a great resource](https://www.isoftstoneinc.com/i
 
 Burstrender reads some basic parameters from a config.yaml file. Check the included file to adjust the defaults as needed for your install. Specifically:
 
-* The default working folder is set to `~/.burstrender/working`. Make sure this location (or whatever location you choose) can accommodate at minimum the PNGs, MP4s, and GIF for the largest burst you process. (Burstrender cleans up the created PNGs and moves the MP4s and GIF to the output folder after processing each burst.)
-* The default logging path is `TK`. Burstrender automatically rotates log files when they reach 10 MB, and 10 log files are kept before they are deleted. (So the total log storage should never be that large.)
+* The default working folder is set to `~/.burstrender/working`. Make sure this location (or whatever location you choose) can accommodate at minimum the PNGs, MP4s, and GIF for the largest burst you process. (Burstrender cleans up the created PNGs and moves the MP4s and GIF to the output folder after processing each burst.) If the selected location doesn't exist, burstrender will try to create it.
+
+* The default logging path is the `logs` folder underneath the location where you cloned this repo. Burstrender automatically rotates log files when they reach 10 MB, and 10 log files are kept before they are deleted. (So the total log storage should never be that large.) You can specify anywhere you like for the logs, but make sure the user that will run burstrender has the appropriate permissions for the log location.
 
 ### Activate .venv and Install Requirements
 
