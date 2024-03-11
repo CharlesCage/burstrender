@@ -54,7 +54,31 @@ import config
 
 class PrintLog:
     """
-    TODO: Add description
+    A class to print messages in different colors and log them.
+
+    Attributes:
+    
+            None
+
+    Methods:
+
+        print_yellow(message):
+            Prints a message in yellow
+
+        print_red(message):
+            Prints a message in red
+
+        error(message):
+            Prints a message in red and logs an error
+
+        warning(message):
+            Prints a message in yellow and logs a warning
+
+        debug(message):
+            Logs a debug message
+
+        success(message):
+            Logs a success message
     """
     @staticmethod
     def print_yellow(message):
