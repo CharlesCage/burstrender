@@ -776,3 +776,18 @@
 2024-03-08 11:59:53.593 | DEBUG    | imageautomation.utilities:debug:83 - Converted ././Copy of G05 South Side 00085.CR3 to burst_1.png
 2024-03-08 11:59:56.639 | DEBUG    | imageautomation.utilities:debug:83 - Converted ././Copy of G05 South Side 00664.CR3 to burst_2.png
 2024-03-08 11:59:59.637 | DEBUG    | imageautomation.utilities:debug:83 - Converted ././Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 09:33:38.189 | DEBUG    | imageautomation.utilities:debug:107 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 09:33:38.191 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 09:33:38.192 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 09:33:38.192 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 09:33:38.193 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 09:33:38.193 | DEBUG    | imageautomation.utilities:debug:107 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 09:33:38.193 | DEBUG    | imageautomation.utilities:debug:107 - Source path from CLI arg: /home/chuckcage/
+2024-03-11 09:33:38.193 | DEBUG    | imageautomation.utilities:debug:107 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 09:33:38.193 | DEBUG    | imageautomation.utilities:debug:107 - Default seconds between bursts: 2
+2024-03-11 09:33:38.193 | DEBUG    | imageautomation.utilities:debug:107 - Default minimum burst length: 10
+2024-03-11 09:33:38.193 | DEBUG    | imageautomation.utilities:debug:107 - Default modulate string: 120
+2024-03-11 09:33:38.194 | DEBUG    | imageautomation.utilities:debug:107 - Default crop string: 6000x4000+0+0
+2024-03-11 09:33:38.194 | DEBUG    | imageautomation.utilities:debug:107 - Default gravity string: SouthEast
+2024-03-11 09:33:38.232 | DEBUG    | imageautomation.utilities:debug:107 - Extracted EXIF data from 0 CR3 files
+2024-03-11 09:33:38.232 | WARNING  | imageautomation.utilities:warning:103 - No CR3 files found in the source path: /home/chuckcage// Use the --source-path argument to specify a different source path

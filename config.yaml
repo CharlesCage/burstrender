@@ -8,7 +8,7 @@ paths:
   working: default
 
 logging:
-  # The logging level for the application. Possible values: debug, info, warning, error.
+  # The logging level for the application. Possible values: debug, info, success, warning, error, critical.
   level: debug
   # The path where log files will be stored. Make sure the user running the application
   # has write permissions to this directory. Log files are limited to 10 MB in size and

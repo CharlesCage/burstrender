@@ -1,5 +1,6 @@
 # History
 #
+# 2024-03-11 Add logging level selection
 # 2024-03-08 V1.3 First deployable-ish version
 # 2024-03-07 V1.2 Done with basic image processing CLI and docs
 # 2024-03-07 # Update README.md
@@ -83,11 +84,16 @@ if config.log_path == "default" or not config.log_path:
 else:
     config.log_path = Configuration().get()['logging']['path']
 
-# TODO: config.log_level = Configuration().get()['logging']['level']
+config.log_level = Configuration().get()['logging']['level'].upper()
+if config.log_level == "DEFAULT" or not config.log_level:
+    config.log_level = "DEBUG"
+elif not any(config.log_level in s for s in ["TRACE", "DEBUG", "INFO", "SUCCESS", "WARNING", "ERROR", "CRITICAL"]):
+    config.log_level = "DEBUG"
 
 # Add sink for log file
 logger.add(
     f"{config.log_path}/burstrender.log",
+    level=config.log_level,
     rotation="10 MB",
     retention=10,
     backtrace=True,
