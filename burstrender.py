@@ -1,5 +1,6 @@
 # History
 #
+# 2024-03-11 v1.4 Exit code
 # 2024-03-11 Update README.md
 # 2024-03-11 Implement exit codes
 # 2024-03-11 Refactor to use run_subprocess, clean up imports
@@ -61,7 +62,7 @@ from loguru import logger
 import config
 
 # VERSION
-version = "1.3"
+version = "1.4"
 config.exit_code = 0
 config.exir_reason = ""
 
