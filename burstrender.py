@@ -1,5 +1,8 @@
 # History
 #
+# 2024-03-11 Validate minimum burst length
+# 2024-03-11 Validate seconds between bursts
+# 2024-03-11 Validate gravity string
 # 2024-03-11 v1.4 Exit code
 # 2024-03-11 Update README.md
 # 2024-03-11 Implement exit codes
@@ -28,10 +31,7 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
-# Add CLI arg for movie width (default 2000)
 # Add CLI arg for movie speed (default 2.0 / half speed
-# Add validation for modulate, crop, and gravity strings
-
 
 #
 # Imports
@@ -138,6 +138,7 @@ def move_files(target_file, destination_file):
 
     return result
 
+
 def delete_files(filespec):
     """
     Delete a list of files.
@@ -162,7 +163,6 @@ def delete_files(filespec):
         )
         return False
 
-
     command = [
         f"sh",
         f"-c",
@@ -177,6 +177,7 @@ def delete_files(filespec):
     )
 
     return result
+
 
 def clear_working_directory():
     """
@@ -219,12 +220,14 @@ def clear_working_directory():
 
     if not delete_files(f"{config.working_directory}/*.mp4"):
         result = False
-    
+
     if not delete_files(f"{config.working_directory}/*.gif"):
         result = False
 
     if not result:
-        PrintLog.warning(f"Failed to clear working directory: {config.working_directory}")
+        PrintLog.warning(
+            f"Failed to clear working directory: {config.working_directory}"
+        )
         return False
     else:
         PrintLog.debug(f"Cleared working directory: {config.working_directory}")
@@ -260,6 +263,7 @@ def cleanup_files(output_file):
 
     return result
 
+
 def move_output_files(output_file, mp4=True, stabilized=True, gif=True):
     """
     Move the output files to the destination path.
@@ -271,7 +275,7 @@ def move_output_files(output_file, mp4=True, stabilized=True, gif=True):
 
         mp4 : bool
             Move the MP4 file if True
-        
+
         stabilized : bool
             Move the stabilized MP4 file if True
 
@@ -314,6 +318,7 @@ def move_output_files(output_file, mp4=True, stabilized=True, gif=True):
 
     return result
 
+
 def main(args):
     """
     Main function to render burst photos to MP4s, Stabilized MP4s, and GIFs.
@@ -343,7 +348,7 @@ def main(args):
         PrintLog.warning(f"Failed to clear the working directory")
     else:
         PrintLog.debug(f"Cleaned up the working directory")
-    
+
     #
     # Set global variables
     #
@@ -367,6 +372,21 @@ def main(args):
     # Set the minimum time between detected bursts in seconds
     if args.seconds_between_bursts:
         config.seconds_between_bursts = args.seconds_between_bursts
+
+        # Validate seconds between bursts (positive integer)
+        try:
+            config.seconds_between_bursts = int(config.seconds_between_bursts)
+            if config.seconds_between_bursts < 1:
+                PrintLog.critical(
+                    f"Invalid seconds between bursts: {config.seconds_between_bursts}. Must be a positive integer."
+                )
+                sys.exit(config.exit_code)
+        except ValueError:
+            PrintLog.critical(
+                f"Invalid seconds between bursts: {config.seconds_between_bursts}. Must be a positive integer."
+            )
+            sys.exit(config.exit_code)
+
         PrintLog.debug(
             f"Seconds between bursts from CLI arg: {config.seconds_between_bursts}"
         )
@@ -379,6 +399,21 @@ def main(args):
     # Set the minimum number of photos in burst
     if args.minimum_burst_length:
         config.min_burst_length = args.minimum_burst_length
+
+        # Validate minimum burst length (positive integer)
+        try:
+            config.min_burst_length = int(config.min_burst_length)
+            if config.min_burst_length < 1:
+                PrintLog.critical(
+                    f"Invalid minimum burst length: {config.min_burst_length}. Must be a positive integer."
+                )
+                sys.exit(config.exit_code)
+        except ValueError:
+            PrintLog.critical(
+                f"Invalid minimum burst length: {config.min_burst_length}. Must be a positive integer."
+            )
+            sys.exit(config.exit_code)
+
         PrintLog.debug(f"Minimum burst length from CLI arg: {config.min_burst_length}")
     else:
         config.min_burst_length = 10
@@ -403,6 +438,24 @@ def main(args):
     # Set the gravity string for ImageMagick
     if args.gravity_string:
         config.gravity_string = args.gravity_string
+
+        # Validate gravity string
+        if config.gravity_string not in [
+            "NorthWest",
+            "North",
+            "NorthEast",
+            "West",
+            "Center",
+            "East",
+            "SouthWest",
+            "South",
+            "SouthEast",
+        ]:
+            PrintLog.critical(
+                f"Invalid gravity string: {config.gravity_string}. "
+                f"Must be one of: NorthWest, North, NorthEast, West, Center, East, SouthWest, South, SouthEast"
+            )
+            sys.exit(config.exit_code)
         PrintLog.debug(f"Gravity string from CLI arg: {config.gravity_string}")
     else:
         config.gravity_string = "SouthEast"
@@ -442,7 +495,7 @@ def main(args):
             print(
                 f"  Burst {burst_info.index(burst) + 1}: {burst['start']} to {burst['end']} ({burst['frames']} photos)"
             )
-        sys,exit(config.exit_code)
+        sys, exit(config.exit_code)
     else:
         cr3_files_list = detect_bursts(
             df,
@@ -494,7 +547,9 @@ def main(args):
 
         # Render PNGs from CR3 files
         if not render_pngs_from_cr3s(cr3_files, output_file):
-            PrintLog.info(f"Failed to render some PNGs from CR3 files for {output_file}. Skipping.")
+            PrintLog.info(
+                f"Failed to render some PNGs from CR3 files for {output_file}. Skipping."
+            )
             if not cleanup_files(output_file):
                 PrintLog.warning(f"Failed to cleanup files for {output_file}")
             continue
@@ -516,7 +571,9 @@ def main(args):
 
         # Create MP4 from PNGs
         if not create_mp4(output_file):
-            PrintLog.error(f"Failed to create MP4 from PNGs for {output_file}. Skipping.")
+            PrintLog.error(
+                f"Failed to create MP4 from PNGs for {output_file}. Skipping."
+            )
             if not cleanup_files(output_file):
                 PrintLog.warning(f"Failed to cleanup files for {output_file}")
             continue
@@ -547,7 +604,9 @@ def main(args):
         render_progress_bar.refresh()
 
         if not create_gif_from_mp4(output_file, args.no_stabilization):
-            PrintLog.error(f"Failed to create GIF from MP4 for {output_file}. Skipping.")
+            PrintLog.error(
+                f"Failed to create GIF from MP4 for {output_file}. Skipping."
+            )
             if not move_output_files(output_file, output_mp4, output_stabilized, False):
                 PrintLog.warning(f"Failed to move files for {output_file}")
             if not cleanup_files(output_file):
@@ -562,9 +621,11 @@ def main(args):
         render_progress_bar.set_description("Moving Output Files")
         render_progress_bar.refresh()
 
-        if not move_output_files(output_file, output_mp4, output_stabilized, output_gif):
+        if not move_output_files(
+            output_file, output_mp4, output_stabilized, output_gif
+        ):
             PrintLog.warning(f"Failed to move files for {output_file}")
-        
+
         render_progress_bar.update(1)
         render_progress_bar.refresh()
 
@@ -587,6 +648,7 @@ def main(args):
 
     # Done
     sys.exit(config.exit_code)
+
 
 # Run main function
 if __name__ == "__main__":
