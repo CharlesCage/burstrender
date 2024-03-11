@@ -2505,3 +2505,490 @@ rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or 
 2024-03-11 12:18:41.723 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/burst_3-image_*.png
 2024-03-11 12:18:41.724 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/burst_3.trf
 2024-03-11 12:18:41.725 | SUCCESS  | imageautomation.utilities:success:134 - Completed burst 3
+2024-03-11 12:38:47.471 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:38:47.472 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:38:47.473 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:38:47.473 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:38:47.474 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:38:47.474 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:38:47.474 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:38:47.474 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:38:47.474 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:38:47.474 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:38:47.475 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:38:47.475 | DEBUG    | imageautomation.utilities:debug:130 - Default modulate string: 120
+2024-03-11 12:38:47.475 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:38:47.475 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:38:50.775 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:38:50.787 | DEBUG    | imageautomation.utilities:debug:130 - Detected 3 burst(s)
+2024-03-11 12:38:53.746 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 12:38:56.772 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 12:38:59.748 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 12:39:39.311 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:39:39.312 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:39:39.313 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:39:39.314 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:39:39.314 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:39:39.314 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:39:39.315 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:39:39.315 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:39:39.315 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:39:39.315 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:39:39.315 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:39:39.315 | DEBUG    | imageautomation.utilities:debug:130 - Default modulate string: 120
+2024-03-11 12:39:39.315 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:39:39.315 | CRITICAL | imageautomation.utilities:critical:108 - Invalid gravity string: Foo. Must be one of: NorthWest, North, NorthEast, West, Center, East, SouthWest, South, SouthEast
+2024-03-11 12:46:22.028 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:22.029 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:46:22.030 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:46:22.031 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Seconds between bursts from CLI arg: 3
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Default modulate string: 120
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:46:22.032 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:46:25.315 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:46:25.328 | DEBUG    | imageautomation.utilities:debug:130 - Detected 3 burst(s)
+2024-03-11 12:46:25.329 | DEBUG    | imageautomation.utilities:debug:130 - Output data for --detect-only
+2024-03-11 12:46:31.059 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:31.060 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:46:31.061 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:46:31.062 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Seconds between bursts from CLI arg: 300
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Default modulate string: 120
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:46:31.063 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:46:34.319 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:46:34.331 | DEBUG    | imageautomation.utilities:debug:130 - Detected 2 burst(s)
+2024-03-11 12:46:34.331 | DEBUG    | imageautomation.utilities:debug:130 - Output data for --detect-only
+2024-03-11 12:46:42.284 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:42.285 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:46:42.286 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:46:42.287 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:46:42.288 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:46:42.288 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:42.288 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:46:42.288 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:46:42.288 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:46:42.288 | CRITICAL | imageautomation.utilities:critical:108 - Invalid seconds between bursts: foo. Must be a positive integer.
+2024-03-11 12:46:47.467 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:47.468 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:46:47.469 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:46:47.470 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:46:47.471 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:46:47.471 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:47.471 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:46:47.471 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:46:47.471 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:46:47.471 | CRITICAL | imageautomation.utilities:critical:108 - Invalid seconds between bursts: 1.4. Must be a positive integer.
+2024-03-11 12:46:53.603 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:53.604 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:46:53.605 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:46:53.605 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:46:53.606 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:46:53.606 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:46:53.606 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:46:53.606 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:46:53.606 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:46:53.606 | CRITICAL | imageautomation.utilities:critical:108 - Invalid seconds between bursts: .2. Must be a positive integer.
+2024-03-11 12:48:11.881 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:11.882 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:48:11.883 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:48:11.884 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:48:11.885 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:48:11.885 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:11.885 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:48:11.885 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:48:11.885 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:48:11.885 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:48:11.885 | CRITICAL | imageautomation.utilities:critical:108 - Invalid minimum burst length: .2. Must be a positive integer.
+2024-03-11 12:48:16.230 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:16.231 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:48:16.232 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:48:16.233 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:48:16.234 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:48:16.234 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:16.234 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:48:16.234 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:48:16.234 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:48:16.234 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:48:16.234 | CRITICAL | imageautomation.utilities:critical:108 - Invalid minimum burst length: -4. Must be a positive integer.
+2024-03-11 12:48:23.231 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:23.232 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:48:23.233 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:48:23.234 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:48:23.235 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:48:23.235 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:23.235 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:48:23.235 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:48:23.235 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:48:23.235 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:48:23.235 | CRITICAL | imageautomation.utilities:critical:108 - Invalid minimum burst length: 0. Must be a positive integer.
+2024-03-11 12:48:27.511 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:27.512 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:48:27.513 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:48:27.513 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:48:27.514 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:48:27.514 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:27.514 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:48:27.514 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:48:27.514 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:48:27.514 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:48:27.514 | CRITICAL | imageautomation.utilities:critical:108 - Invalid minimum burst length: foo. Must be a positive integer.
+2024-03-11 12:48:32.849 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:32.850 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:48:32.851 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:48:32.852 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Minimum burst length from CLI arg: 1
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Default modulate string: 120
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:48:32.853 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:48:36.148 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:48:36.160 | DEBUG    | imageautomation.utilities:debug:130 - Detected 3 burst(s)
+2024-03-11 12:48:36.160 | DEBUG    | imageautomation.utilities:debug:130 - Output data for --detect-only
+2024-03-11 12:50:43.879 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:50:43.880 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:50:43.881 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:50:43.882 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Modulate string from CLI arg: 120,70
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:50:43.883 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:50:47.161 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:50:47.173 | DEBUG    | imageautomation.utilities:debug:130 - Detected 3 burst(s)
+2024-03-11 12:50:50.038 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 12:50:52.940 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 12:50:55.834 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 12:53:01.248 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:53:01.249 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:53:01.250 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:53:01.251 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:53:01.252 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:53:01.252 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:53:01.252 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:53:01.253 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:53:01.253 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:53:01.253 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:53:01.253 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:53:01.253 | DEBUG    | imageautomation.utilities:debug:130 - Modulate string from CLI arg: 120,70
+2024-03-11 12:53:01.253 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:53:01.253 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:53:05.320 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:53:05.345 | DEBUG    | imageautomation.utilities:debug:130 - Detected 3 burst(s)
+2024-03-11 12:53:25.985 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:53:25.987 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:53:25.987 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:53:25.988 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Modulate string from CLI arg: 120,0
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:53:25.989 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:53:29.280 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:53:29.292 | DEBUG    | imageautomation.utilities:debug:130 - Detected 3 burst(s)
+2024-03-11 12:53:31.739 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 12:53:34.217 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 12:53:36.671 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 12:54:15.923 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:54:15.924 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:54:15.925 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:54:15.925 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:54:15.926 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:54:15.926 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:54:15.926 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:54:15.926 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:54:15.926 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:54:15.926 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:54:15.926 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:54:15.926 | DEBUG    | imageautomation.utilities:debug:130 - Modulate string from CLI arg: 120,100,33.3
+2024-03-11 12:54:15.927 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:54:15.927 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:54:19.201 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:54:19.213 | DEBUG    | imageautomation.utilities:debug:130 - Detected 3 burst(s)
+2024-03-11 12:54:22.177 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 12:54:25.103 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 12:54:28.056 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png

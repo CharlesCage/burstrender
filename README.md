@@ -319,7 +319,7 @@ Currently burstrender expects CR3s shot on a Canon R3. These Canon RAW files inc
 
 If you are using a different camera and/or different settings and this doesn't work for you, OR you want to crop the image differently, you can use the following arguemnts/parameters to adjust ImageMagick's cropping of the CR3 file during conversion to PNG:
 
-`--crop-string` allows you to directly specify an [ImageMagick crop string](https://www.imagemagick.org/Usage/crop/#crop_gravity) for the conversion. The default is *6000x4000+0+0*.
+`--crop-string` allows you to directly specify an [ImageMagick crop string](https://www.imagemagick.org/Usage/crop/#crop_gravity) for the conversion. The default is *6000x4000+0+0*. Improperly formatted crop-string parameters may lead to errors in RAW converstion.
 
 `--gravity-string` allows you to specify an [ImageMagick gravity setting](https://www.imagemagick.org/Usage/crop/#crop_gravity). The default is *SouthEast*.
 
@@ -331,7 +331,7 @@ During the conversion from CR3 RAW to PNG, burstrender applies the [auto-level](
 
 However, you can tweak with the follwoing arugments/parameters:
 
-`--modulate-string` allows you to specify an [ImageMagick modulate string](https://imagemagick.org/Usage/color_mods/#modulate) for the conversion. The defailt is *120*.
+`--modulate-string` allows you to specify an [ImageMagick modulate string](https://imagemagick.org/Usage/color_mods/#modulate) for the conversion. The defailt is *120*. Improperly formatted modulate-string parameters may lead to errors in RAW conversion.
 
 ### Specifying Desired Output
 
