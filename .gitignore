@@ -1,7 +1,6 @@
 testimages/
 testoutput/
 .venv/
-.vscode/
 logs/
 *.png
 *.mp4
