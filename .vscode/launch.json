@@ -13,8 +13,6 @@
                 "--source-path", 
                 "testimages",
                 "--sample-images-only",
-                "--modulate-string",
-                "120,70"
             ],
             "console": "integratedTerminal",
             "justMyCode": true
