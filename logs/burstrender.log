@@ -791,3 +791,69 @@
 2024-03-11 09:33:38.194 | DEBUG    | imageautomation.utilities:debug:107 - Default gravity string: SouthEast
 2024-03-11 09:33:38.232 | DEBUG    | imageautomation.utilities:debug:107 - Extracted EXIF data from 0 CR3 files
 2024-03-11 09:33:38.232 | WARNING  | imageautomation.utilities:warning:103 - No CR3 files found in the source path: /home/chuckcage// Use the --source-path argument to specify a different source path
+2024-03-11 09:44:32.977 | DEBUG    | imageautomation.utilities:debug:107 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 09:44:32.979 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 09:44:32.980 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 09:44:32.980 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Source path from CLI arg: /home/chuckcage/
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Default seconds between bursts: 2
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Default minimum burst length: 10
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Default modulate string: 120
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Default crop string: 6000x4000+0+0
+2024-03-11 09:44:32.981 | DEBUG    | imageautomation.utilities:debug:107 - Default gravity string: SouthEast
+2024-03-11 09:44:33.018 | DEBUG    | imageautomation.utilities:debug:107 - Extracted EXIF data from 0 CR3 files
+2024-03-11 09:44:33.019 | WARNING  | imageautomation.utilities:warning:103 - No CR3 files found in the source path: /home/chuckcage// Use the --source-path argument to specify a different source path
+2024-03-11 09:44:36.054 | DEBUG    | imageautomation.utilities:debug:107 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 09:44:36.056 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 09:44:36.056 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 09:44:36.057 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Source path from CLI arg: /home/chuckcage/
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Default seconds between bursts: 2
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Default minimum burst length: 10
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Default modulate string: 120
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Default crop string: 6000x4000+0+0
+2024-03-11 09:44:36.058 | DEBUG    | imageautomation.utilities:debug:107 - Default gravity string: SouthEast
+2024-03-11 09:44:36.096 | DEBUG    | imageautomation.utilities:debug:107 - Extracted EXIF data from 0 CR3 files
+2024-03-11 09:44:36.096 | WARNING  | imageautomation.utilities:warning:103 - No CR3 files found in the source path: /home/chuckcage// Use the --source-path argument to specify a different source path
+2024-03-11 09:45:13.240 | DEBUG    | imageautomation.utilities:debug:107 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 09:45:13.241 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 09:45:13.242 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 09:45:13.243 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Source path from CLI arg: testimages
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Default seconds between bursts: 2
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Default minimum burst length: 10
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Default modulate string: 120
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Default crop string: 6000x4000+0+0
+2024-03-11 09:45:13.244 | DEBUG    | imageautomation.utilities:debug:107 - Default gravity string: SouthEast
+2024-03-11 09:45:16.685 | DEBUG    | imageautomation.utilities:debug:107 - Extracted EXIF data from 163 CR3 files
+2024-03-11 09:45:16.697 | DEBUG    | imageautomation.utilities:debug:107 - Detected 3 burst(s)
+2024-03-11 09:45:16.700 | DEBUG    | imageautomation.utilities:debug:107 - Converted testimages/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 09:45:16.703 | DEBUG    | imageautomation.utilities:debug:107 - Converted testimages/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 09:45:16.706 | DEBUG    | imageautomation.utilities:debug:107 - Converted testimages/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 09:46:00.203 | DEBUG    | imageautomation.utilities:debug:107 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 09:46:00.204 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 09:46:00.205 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 09:46:00.206 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 09:46:00.206 | DEBUG    | imageautomation.utilities:debug:107 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 09:46:00.206 | DEBUG    | imageautomation.utilities:debug:107 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 09:46:00.207 | DEBUG    | imageautomation.utilities:debug:107 - Source path from CLI arg: testimages
+2024-03-11 09:46:00.207 | DEBUG    | imageautomation.utilities:debug:107 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 09:46:00.207 | DEBUG    | imageautomation.utilities:debug:107 - Default seconds between bursts: 2
+2024-03-11 09:46:00.207 | DEBUG    | imageautomation.utilities:debug:107 - Default minimum burst length: 10
+2024-03-11 09:46:00.207 | DEBUG    | imageautomation.utilities:debug:107 - Default modulate string: 120
+2024-03-11 09:46:00.207 | DEBUG    | imageautomation.utilities:debug:107 - Default crop string: 6000x4000+0+0
+2024-03-11 09:46:00.207 | DEBUG    | imageautomation.utilities:debug:107 - Default gravity string: SouthEast
+2024-03-11 09:46:03.583 | DEBUG    | imageautomation.utilities:debug:107 - Extracted EXIF data from 163 CR3 files
+2024-03-11 09:46:03.595 | DEBUG    | imageautomation.utilities:debug:107 - Detected 3 burst(s)
+2024-03-11 09:46:03.599 | DEBUG    | imageautomation.utilities:debug:107 - Converted testimages/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 09:46:03.602 | DEBUG    | imageautomation.utilities:debug:107 - Converted testimages/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 09:46:03.605 | DEBUG    | imageautomation.utilities:debug:107 - Converted testimages/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png

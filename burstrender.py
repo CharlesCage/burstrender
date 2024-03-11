@@ -1,5 +1,6 @@
 # History
 #
+# 2024-03-11 Implement quiet mode
 # 2024-03-11 Add logging level selection
 # 2024-03-08 V1.3 First deployable-ish version
 # 2024-03-07 V1.2 Done with basic image processing CLI and docs
@@ -344,6 +345,9 @@ def main(args):
     else:
         config.gravity_string = "SouthEast"
         PrintLog.debug(f"Default gravity string: {config.gravity_string}")
+
+    # Set the quiet mode
+    config.quiet = args.quiet
 
     #
     # Process images
