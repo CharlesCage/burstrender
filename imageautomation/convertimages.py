@@ -20,6 +20,7 @@ Global Variables (via config):
 """
 
 # History
+# 2024-03-11 Fix error handling in render_pngs_from_cr3s
 # 2024-03-07 Add gravity_string to config
 # 2024-03-07 Add crop_string to config
 # 2024-03-07 Add modulate_string to config
@@ -85,13 +86,16 @@ def render_pngs_from_cr3s(cr3_files, output_file):
                     f"2000",
                     f"{config.destination_path if len(cr3_files) == 1 else config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
                 ],
+                check=True,
                 capture_output=True,
             )
 
         except FileNotFoundError as exc:
             PrintLog.error(
                 f"Failed to convert {cr3_file} to {output_file}.png "
-                f"because the convert (ImageMagick) executable could not be found\n{exc}"
+                f"because the convert (ImageMagick) executable could not be found\n{exc}\n"
+                f"Please ensure that ImageMagick is installed and the convert executable is in your PATH.\n"
+                f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
             )
             return False
 
@@ -99,14 +103,16 @@ def render_pngs_from_cr3s(cr3_files, output_file):
             PrintLog.error(
                 f"Failed to convert {cr3_file} to {output_file}.png "
                 f"because convert (ImageMagick) did not return a successful return code. "
-                f"Returned {exc.returncode}\n{exc}"
+                f"Returned {exc.returncode}\n{exc}\n"
+                f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
             )
             return False
 
         except subprocess.TimeoutExpired as exc:
             PrintLog.error(
                 f"Failed to convert {cr3_file} to {output_file}.png "
-                f"because process timed out.\n{exc}"
+                f"because process timed out.\n{exc}/n"
+                f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
             )
             return False
         

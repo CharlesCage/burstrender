@@ -1,5 +1,6 @@
 # History
 #
+# 2024-03-11 Convert source/dest paths to absolute
 # 2024-03-11 Implement quiet mode
 # 2024-03-11 Add logging level selection
 # 2024-03-08 V1.3 First deployable-ish version
@@ -79,16 +80,19 @@ config.exir_reason = ""
 logger.remove()
 
 # Set log path (and level) from config file
-config.log_path = Configuration().get()['logging']['path']
+config.log_path = Configuration().get()["logging"]["path"]
 if config.log_path == "default" or not config.log_path:
     config.log_path = f"{pathlib.Path(__file__).parent.absolute() / 'logs'}"
 else:
-    config.log_path = Configuration().get()['logging']['path']
+    config.log_path = Configuration().get()["logging"]["path"]
 
-config.log_level = Configuration().get()['logging']['level'].upper()
+config.log_level = Configuration().get()["logging"]["level"].upper()
 if config.log_level == "DEFAULT" or not config.log_level:
     config.log_level = "DEBUG"
-elif not any(config.log_level in s for s in ["TRACE", "DEBUG", "INFO", "SUCCESS", "WARNING", "ERROR", "CRITICAL"]):
+elif not any(
+    config.log_level in s
+    for s in ["TRACE", "DEBUG", "INFO", "SUCCESS", "WARNING", "ERROR", "CRITICAL"]
+):
     config.log_level = "DEBUG"
 
 # Add sink for log file
@@ -155,6 +159,7 @@ def move_files(target_file, destination_file):
 
     PrintLog.debug(f"Moved {target_file} to {destination_file}")
 
+
 def delete_files(filespec):
     """
     Delete a list of files.
@@ -196,9 +201,11 @@ def delete_files(filespec):
     except subprocess.TimeoutExpired as exc:
         PrintLog.error(
             f"Failed to remove files {filespec} "
-            f"because process for rm timed out.\n{exc}")
+            f"because process for rm timed out.\n{exc}"
+        )
 
     PrintLog.debug(f"Removed files: {filespec}")
+
 
 def clear_working_directory():
     """
@@ -292,7 +299,7 @@ def main(args):
 
     # Set the source path for the input CR3 files
     if args.source_path:
-        config.source_path = args.source_path
+        config.source_path = os.path.abspath(args.source_path)
         PrintLog.debug(f"Source path from CLI arg: {config.source_path}")
     else:
         config.source_path = "."
@@ -300,7 +307,7 @@ def main(args):
 
     # Set the destination path for the rendered videos and/or gifs
     if args.destination_path:
-        config.destination_path = args.destination_path
+        config.destination_path = os.path.abspath(args.destination_path)
         PrintLog.debug(f"Destination path from CLI arg: {config.destination_path}")
     else:
         config.destination_path = os.getcwd()
@@ -309,10 +316,14 @@ def main(args):
     # Set the minimum time between detected bursts in seconds
     if args.seconds_between_bursts:
         config.seconds_between_bursts = args.seconds_between_bursts
-        PrintLog.debug(f"Seconds between bursts from CLI arg: {config.seconds_between_bursts}")
+        PrintLog.debug(
+            f"Seconds between bursts from CLI arg: {config.seconds_between_bursts}"
+        )
     else:
         config.seconds_between_bursts = 2
-        PrintLog.debug(f"Default seconds between bursts: {config.seconds_between_bursts}")
+        PrintLog.debug(
+            f"Default seconds between bursts: {config.seconds_between_bursts}"
+        )
 
     # Set the minimum number of photos in burst
     if args.minimum_burst_length:
@@ -366,10 +377,15 @@ def main(args):
 
     # Call the detect_bursts function to detect burst photo groups
     if args.detect_only:
-        burst_info = detect_bursts(df, True, config.seconds_between_bursts, config.min_burst_length)
+        burst_info = detect_bursts(
+            df,
+            True,
+            config.seconds_between_bursts,
+            config.min_burst_length,
+        )
 
         PrintLog.debug(f"Output data for --detect-only")
-        
+
         print(f"Detected {len(burst_info)} burst(s):")
         for burst in burst_info:
             print(
@@ -378,7 +394,10 @@ def main(args):
         exit()
     else:
         cr3_files_list = detect_bursts(
-            df, False, config.seconds_between_bursts, config.min_burst_length
+            df,
+            False,
+            config.seconds_between_bursts,
+            config.min_burst_length,
         )
 
     # Output sample images and exit if requested
@@ -406,7 +425,9 @@ def main(args):
     for cr3_files in tqdm(
         cr3_files_list, desc="Processing Bursts", unit="burst", disable=config.quiet
     ):
-        PrintLog.debug("Processing burst {}".format(cr3_files_list.index(cr3_files) + 1))
+        PrintLog.debug(
+            "Processing burst {}".format(cr3_files_list.index(cr3_files) + 1)
+        )
 
         # Get the output file path for the GIF
         output_file = "burst_{}".format(cr3_files_list.index(cr3_files) + 1)
@@ -442,7 +463,6 @@ def main(args):
         render_progress_bar.update(1)
         render_progress_bar.refresh()
 
-
         # Stabilize MP4
         if not args.no_stabilization:
             render_progress_bar.set_description("Stabilizing MP4")
@@ -453,7 +473,7 @@ def main(args):
                 cleanup_files(output_file)
                 exit()
 
-            PrintLog.debug(f"Stabilized MP4 for {output_file}") 
+            PrintLog.debug(f"Stabilized MP4 for {output_file}")
             render_progress_bar.update(1)
             render_progress_bar.refresh()
 
@@ -502,11 +522,13 @@ def main(args):
 
         render_progress_bar.update(1)
         render_progress_bar.refresh()
-        
+
         # Close render progress bar
         render_progress_bar.close()
 
-        PrintLog.success("Completed burst {}".format(cr3_files_list.index(cr3_files) + 1))
+        PrintLog.success(
+            "Completed burst {}".format(cr3_files_list.index(cr3_files) + 1)
+        )
 
 
 # Run main function
