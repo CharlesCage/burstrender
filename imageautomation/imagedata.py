@@ -21,6 +21,7 @@ Global Variables (via config):
 """
 
 # History
+# 2024-03-11 Update documentation
 # 2024-03-06 Add logging and quiet option
 # 2024-03-05 Added detect-only functionality and tqdm progress bar
 # 2024-03-05 Initial version
@@ -105,10 +106,19 @@ def detect_bursts(df, detect_only=False, seconds_between_bursts=2, min_burst_len
         df : pandas.DataFrame
             A pandas dataframe containing the EXIF data from the CR3 files
 
+        detect_only : bool
+            If True, return a list of burst_info dictionaries instead of a list of CR3 files (default False)
+
+        seconds_between_bursts : int
+            The maximum time difference in seconds between consecutive rows to consider as a burst (default 2)
+
+        min_burst_length : int
+            The minimum number of CR3 files in a burst to be considered a burst (default 10)
+
     Returns:
 
-        list
-            A list of lists, where each list item is a burst and each inner list contains the CR3 files in a burst
+        output_list : list
+            A list of CR3 files in each burst or a list of burst_info dictionaries
     """
 
     # Combine the columns EXIF:DateTimeOriginal and EXIF:SubSecTimeOriginal into a new column

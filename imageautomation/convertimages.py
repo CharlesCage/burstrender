@@ -20,6 +20,7 @@ Global Variables (via config):
 """
 
 # History
+# 2024-03-11 Refactor render_pngs_from_cr3s to use run_subprocess
 # 2024-03-11 Fix error handling in render_pngs_from_cr3s
 # 2024-03-07 Add gravity_string to config
 # 2024-03-07 Add crop_string to config
@@ -36,10 +37,10 @@ Global Variables (via config):
 #
 
 # General
-import subprocess
 
 # Modules
 from .utilities import PrintLog
+from .utilities import run_subprocess
 
 # TUI progress bar
 from tqdm import tqdm
@@ -49,6 +50,7 @@ from loguru import logger
 
 # Config for global variables
 import config
+
 
 def render_pngs_from_cr3s(cr3_files, output_file):
     """
@@ -69,53 +71,32 @@ def render_pngs_from_cr3s(cr3_files, output_file):
     """
 
     # Loop through cr3_files and execute command to convert each CR3 file to a PNG file
-    for cr3_file in tqdm(cr3_files, desc="Converting CR3s to PNGs", leave=False, disable=True if len(cr3_files) == 1 else config.quiet):
-        try:
-            completed_process = subprocess.run(
-                [
-                    f"convert",
-                    f"{cr3_file}",
-                    f"-auto-level",
-                    f"-modulate",
-                    f"{config.modulate_string}",
-                    f"-gravity",
-                    f"{config.gravity_string}",
-                    f"-crop",
-                    f"{config.crop_string}",
-                    f"-resize",
-                    f"2000",
-                    f"{config.destination_path if len(cr3_files) == 1 else config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
-                ],
-                check=True,
-                capture_output=True,
-            )
+    for cr3_file in tqdm(
+        cr3_files,
+        desc="Converting CR3s to PNGs",
+        leave=False,
+        disable=True if len(cr3_files) == 1 else config.quiet,
+    ):
+        command = [
+            f"convert",
+            f"{cr3_file}",
+            f"-auto-level",
+            f"-modulate",
+            f"{config.modulate_string}",
+            f"-gravity",
+            f"{config.gravity_string}",
+            f"-crop",
+            f"{config.crop_string}",
+            f"-resize",
+            f"2000",
+            f"{config.destination_path if len(cr3_files) == 1 else config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
+        ]
 
-        except FileNotFoundError as exc:
-            PrintLog.error(
-                f"Failed to convert {cr3_file} to {output_file}.png "
-                f"because the convert (ImageMagick) executable could not be found\n{exc}\n"
-                f"Please ensure that ImageMagick is installed and the convert executable is in your PATH.\n"
-                f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
-            )
-            return False
+        result = run_subprocess(
+            "convert",
+            command,
+            f"Converted {cr3_file} to {output_file}.png",
+            f"Failed to convert {cr3_file} to {output_file}.png",
+        )
 
-        except subprocess.CalledProcessError as exc:
-            PrintLog.error(
-                f"Failed to convert {cr3_file} to {output_file}.png "
-                f"because convert (ImageMagick) did not return a successful return code. "
-                f"Returned {exc.returncode}\n{exc}\n"
-                f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
-            )
-            return False
-
-        except subprocess.TimeoutExpired as exc:
-            PrintLog.error(
-                f"Failed to convert {cr3_file} to {output_file}.png "
-                f"because process timed out.\n{exc}/n"
-                f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
-            )
-            return False
-        
-        PrintLog.debug(f"Converted {cr3_file} to {output_file}.png")
-
-    return True
+    return result

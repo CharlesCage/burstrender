@@ -12,7 +12,6 @@
             "args": [
                 "--source-path", 
                 "testimages", 
-                "--sample-images-only", 
             ],
             "console": "integratedTerminal",
             "justMyCode": true

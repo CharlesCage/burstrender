@@ -355,6 +355,18 @@ Note that burstrender will still need to make MP4s in order to create GIFs, but 
 
 `--version` or `-v` oututs the version of burstrender you're using
 
+### Exit Codes
+
+Burstrender provides standard exit codes to facilitate use in scripts. Codes are as follows:
+
+| Exit Code | Description                 |
+|-----------|-----------------------------|
+| 0         | Success                     |
+| 1         | Critical error              |
+| 2         | Non-critical error          |
+
+Specifically, burstrender will continue on all warning and errors, but will exit immediately on critical errors. Additionally, if burstrender fails to produce any image combination renderings (i.e. MP4, stabilized MP4, or GIF), it will attempt to move any renderings successfully completed for the burst then skip to the next burst and continue.
+
 ### Best Practices
 
 If you call burstrender from a folder containing CR3 files, it'll automatically 

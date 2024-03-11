@@ -1,5 +1,8 @@
 # History
 #
+# 2024-03-11 Update README.md
+# 2024-03-11 Implement exit codes
+# 2024-03-11 Refactor to use run_subprocess, clean up imports
 # 2024-03-11 Convert source/dest paths to absolute
 # 2024-03-11 Implement quiet mode
 # 2024-03-11 Add logging level selection
@@ -24,7 +27,6 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
-# Implement exit codes
 # Add CLI arg for movie width (default 2000)
 # Add CLI arg for movie speed (default 2.0 / half speed
 # Update README.md
@@ -44,9 +46,8 @@
 
 # General
 import os
+import sys
 import pathlib
-import pandas as pd
-import subprocess
 import argparse
 
 # Modules
@@ -56,7 +57,7 @@ from imageautomation.combineimages import create_mp4
 from imageautomation.combineimages import stabilize_mp4
 from imageautomation.combineimages import create_gif_from_mp4
 from imageautomation.convertimages import render_pngs_from_cr3s
-from imageautomation.utilities import PrintLog, Configuration
+from imageautomation.utilities import PrintLog, Configuration, run_subprocess
 
 # TUI progress bar
 from tqdm import tqdm
@@ -124,41 +125,25 @@ def move_files(target_file, destination_file):
 
     Returns:
 
-        None
+        result : bool
+            True if the process was successful, False otherwise
     """
 
     # Execute the mv command to remove files
-    try:
-        completed_process = subprocess.run(
-            [
-                f"sh",
-                f"-c",
-                f"mv {target_file} {destination_file}",
-            ],
-            capture_output=True,
-        )
-    # TODO: Logging
+    command = [
+        f"sh",
+        f"-c",
+        f"mv {target_file} {destination_file}",
+    ]
 
-    except FileNotFoundError as exc:
-        PrintLog.error(
-            f"Failed to move {target_file} to {destination_file} "
-            f"because the mv executable could not be found\n{exc}"
-        )
-    except subprocess.CalledProcessError as exc:
-        PrintLog.error(
-            f"Failed to move {target_file} to {destination_file} "
-            f"because mv did not return a successful return code"
-            f"Returned {exc.returncode}\n{exc}"
-        )
+    result = run_subprocess(
+        "mv",
+        command,
+        f"Moved {target_file} to {destination_file}",
+        f"Failed to move {target_file} to {destination_file}",
+    )
 
-    except subprocess.TimeoutExpired as exc:
-        PrintLog.error(
-            f"Failed to move {target_file} to {destination_file} "
-            f"because process for mv timed out.\n{exc}"
-        )
-
-    PrintLog.debug(f"Moved {target_file} to {destination_file}")
-
+    return result
 
 def delete_files(filespec):
     """
@@ -171,41 +156,34 @@ def delete_files(filespec):
 
     Returns:
 
-        None
+        result : bool
+            True if the process was successful, False otherwise
     """
 
     # Execute the rm command to remove files
-    try:
-        completed_process = subprocess.run(
-            [
-                f"sh",
-                f"-c",
-                f"rm {filespec}",
-            ],
-            capture_output=True,
-        )
 
-    except FileNotFoundError as exc:
+    # protection here to assure that filespec is not a directory or root
+    if filespec == "/" or filespec == "/home" or filespec == "/home/":
         PrintLog.error(
-            f"Failed to remove files {filespec} "
-            f"because the executable for rm could not be found\n{exc}"
+            f"Will not delete files in root or home. Will not delete files: {filespec}"
         )
+        return False
 
-    except subprocess.CalledProcessError as exc:
-        PrintLog.error(
-            f"Failed to remove files {filespec} "
-            f"because rm did not return a successful return code"
-            f"Returned {exc.returncode}\n{exc}"
-        )
 
-    except subprocess.TimeoutExpired as exc:
-        PrintLog.error(
-            f"Failed to remove files {filespec} "
-            f"because process for rm timed out.\n{exc}"
-        )
+    command = [
+        f"sh",
+        f"-c",
+        f"rm {filespec}",
+    ]
 
-    PrintLog.debug(f"Removed files: {filespec}")
+    result = run_subprocess(
+        "rm",
+        command,
+        f"Removed files: {filespec}",
+        f"Failed to remove files: {filespec}",
+    )
 
+    return result
 
 def clear_working_directory():
     """
@@ -213,11 +191,12 @@ def clear_working_directory():
 
     Parameters:
 
-        None
+        None (uses global variable config.working_directory)
 
     Returns:
 
-        None
+        result : bool
+            True if the process was successful, False otherwise
     """
 
     # Remove all files from the working directory
@@ -225,7 +204,7 @@ def clear_working_directory():
         PrintLog.error(
             f"Failed to clear working directory because no working directory was set"
         )
-        return
+        return False
 
     if (
         config.working_directory == "/"
@@ -235,14 +214,28 @@ def clear_working_directory():
         PrintLog.error(
             f"Working directory is root or home. Will not delete files there!."
         )
-        return
+        return False
 
-    delete_files(f"{config.working_directory}/*.png")
-    delete_files(f"{config.working_directory}/*.trf")
-    delete_files(f"{config.working_directory}/*.mp4")
-    delete_files(f"{config.working_directory}/*.gif")
+    result = True
 
-    PrintLog.debug(f"Cleared working directory: {config.working_directory}")
+    if not delete_files(f"{config.working_directory}/*.png"):
+        result = False
+
+    if not delete_files(f"{config.working_directory}/*.trf"):
+        result = False
+
+    if not delete_files(f"{config.working_directory}/*.mp4"):
+        result = False
+    
+    if not delete_files(f"{config.working_directory}/*.gif"):
+        result = False
+
+    if not result:
+        PrintLog.warning(f"Failed to clear working directory: {config.working_directory}")
+        return False
+    else:
+        PrintLog.debug(f"Cleared working directory: {config.working_directory}")
+        return True
 
 
 def cleanup_files(output_file):
@@ -254,17 +247,79 @@ def cleanup_files(output_file):
         output_file : str
             The best filename for the group output (ex. "burst_1")
 
+        Uses global variable config.working_directory
+
     Returns:
 
-        None
+        result : bool
+            True if the process was successful, False otherwise
     """
 
+    result = True
+
     # Remove PNG files
-    delete_files(f"{config.working_directory}/{output_file}-image_*.png")
+    if not delete_files(f"{config.working_directory}/{output_file}-image_*.png"):
+        result = False
 
     # Remove TRF file
-    delete_files(f"{config.working_directory}/{output_file}.trf")
+    if not delete_files(f"{config.working_directory}/{output_file}.trf"):
+        result = False
 
+    return result
+
+def move_output_files(output_file, mp4=True, stabilized=True, gif=True):
+    """
+    Move the output files to the destination path.
+
+    Parameters:
+
+        output_file : str
+            The best filename for the group output (ex. "burst_1")
+
+        mp4 : bool
+            Move the MP4 file if True
+        
+        stabilized : bool
+            Move the stabilized MP4 file if True
+
+        gif : bool
+            Move the GIF file if True
+
+        Uses global variables config.working_directory and config.destination_path
+
+    Returns:
+
+        result : bool
+            True if the process was successful, False otherwise
+    """
+
+    result = True
+
+    # Move MP4 file
+    if mp4:
+        if not move_files(
+            f"{config.working_directory}/{output_file}.mp4",
+            f"{config.destination_path}/{output_file}.mp4",
+        ):
+            result = False
+
+    # Move stabilized MP4 file
+    if stabilized:
+        if not move_files(
+            f"{config.working_directory}/{output_file}-stabilized.mp4",
+            f"{config.destination_path}/{output_file}-stabilized.mp4",
+        ):
+            result = False
+
+    # Move GIF file
+    if gif:
+        if not move_files(
+            f"{config.working_directory}/{output_file}.gif",
+            f"{config.destination_path}/{output_file}.gif",
+        ):
+            result = False
+
+    return result
 
 def main(args):
     """
@@ -282,17 +337,20 @@ def main(args):
     try:
         pathlib.Path(config.working_directory).mkdir(parents=True, exist_ok=True)
     except Exception as e:
-        PrintLog.error(
-            f"Could not create working directory: {config.working_directory}. "
+        PrintLog.critical(
+            f"Could not create or access working directory: {config.working_directory}. "
             f"Assure you have permissions or change the working directory in config.yaml"
         )
-        exit()
+        sys.exit(config.exit_code)
 
     PrintLog.debug(f"Working directory confirmed/created: {config.working_directory}")
 
     # Empty the working directory
-    clear_working_directory()
-
+    if not clear_working_directory():
+        PrintLog.warning(f"Failed to clear the working directory")
+    else:
+        PrintLog.debug(f"Cleaned up the working directory")
+    
     #
     # Set global variables
     #
@@ -373,7 +431,7 @@ def main(args):
             f"No CR3 files found in the source path: {config.source_path}/ "
             f"Use the --source-path argument to specify a different source path"
         )
-        exit()
+        sys.exit(config.exit_code)
 
     # Call the detect_bursts function to detect burst photo groups
     if args.detect_only:
@@ -391,7 +449,7 @@ def main(args):
             print(
                 f"  Burst {burst_info.index(burst) + 1}: {burst['start']} to {burst['end']} ({burst['frames']} photos)"
             )
-        exit()
+        sys,exit(config.exit_code)
     else:
         cr3_files_list = detect_bursts(
             df,
@@ -415,11 +473,20 @@ def main(args):
                 continue
 
         # Done
-        exit()
+        sys.exit(config.exit_code)
 
     #
     # Process bursts
     #
+
+    # Set output values
+    output_gif = True
+    if args.gif_only:
+        output_mp4 = False
+        output_stabilized = False
+    else:
+        output_mp4 = True
+        output_stabilized = not args.no_stabilization
 
     # Iterate over each group of CR3 files
     for cr3_files in tqdm(
@@ -434,8 +501,9 @@ def main(args):
 
         # Render PNGs from CR3 files
         if not render_pngs_from_cr3s(cr3_files, output_file):
-            PrintLog.error(f"Failed to render PNGs from CR3 files for {output_file}")
-            cleanup_files(output_file)
+            PrintLog.info(f"Failed to render some PNGs from CR3 files for {output_file}. Skipping.")
+            if not cleanup_files(output_file):
+                PrintLog.warning(f"Failed to cleanup files for {output_file}")
             continue
 
         # Set rendering progress bar
@@ -455,9 +523,10 @@ def main(args):
 
         # Create MP4 from PNGs
         if not create_mp4(output_file):
-            PrintLog.error(f"Failed to create MP4 from PNGs for {output_file}")
-            cleanup_files(output_file)
-            exit()
+            PrintLog.error(f"Failed to create MP4 from PNGs for {output_file}. Skipping.")
+            if not cleanup_files(output_file):
+                PrintLog.warning(f"Failed to cleanup files for {output_file}")
+            continue
 
         PrintLog.debug(f"Created MP4 from PNGs for {output_file}")
         render_progress_bar.update(1)
@@ -469,9 +538,12 @@ def main(args):
             render_progress_bar.refresh()
 
             if not stabilize_mp4(output_file):
-                PrintLog.error(f"Failed to stabilize MP4 for {output_file}")
-                cleanup_files(output_file)
-                exit()
+                PrintLog.error(f"Failed to stabilize MP4 for {output_file}. Skipping.")
+                if not move_output_files(output_file, output_mp4, False, False):
+                    PrintLog.warning(f"Failed to move files for {output_file}")
+                if not cleanup_files(output_file):
+                    PrintLog.warning(f"Failed to cleanup files for {output_file}")
+                continue
 
             PrintLog.debug(f"Stabilized MP4 for {output_file}")
             render_progress_bar.update(1)
@@ -482,9 +554,12 @@ def main(args):
         render_progress_bar.refresh()
 
         if not create_gif_from_mp4(output_file, args.no_stabilization):
-            PrintLog.error(f"Failed to create GIF from MP4 for {output_file}")
-            cleanup_files(output_file)
-            exit()
+            PrintLog.error(f"Failed to create GIF from MP4 for {output_file}. Skipping.")
+            if not move_output_files(output_file, output_mp4, output_stabilized, False):
+                PrintLog.warning(f"Failed to move files for {output_file}")
+            if not cleanup_files(output_file):
+                PrintLog.warning(f"Failed to cleanup files for {output_file}")
+            continue
 
         PrintLog.debug(f"Created GIF from MP4 for {output_file}")
         render_progress_bar.update(1)
@@ -494,23 +569,9 @@ def main(args):
         render_progress_bar.set_description("Moving Output Files")
         render_progress_bar.refresh()
 
-        if not args.gif_only:
-            move_files(
-                f"{config.working_directory}/{output_file}.mp4",
-                f"{config.destination_path}/{output_file}.mp4",
-            )
-
-        if not args.no_stabilization and not args.gif_only:
-            move_files(
-                f"{config.working_directory}/{output_file}-stabilized.mp4",
-                f"{config.destination_path}/{output_file}-stabilized.mp4",
-            )
-
-        move_files(
-            f"{config.working_directory}/{output_file}.gif",
-            f"{config.destination_path}/{output_file}.gif",
-        )
-
+        if not move_output_files(output_file, output_mp4, output_stabilized, output_gif):
+            PrintLog.warning(f"Failed to move files for {output_file}")
+        
         render_progress_bar.update(1)
         render_progress_bar.refresh()
 
@@ -518,7 +579,8 @@ def main(args):
         render_progress_bar.set_description("Cleaning Up Temp Files")
         render_progress_bar.refresh()
 
-        cleanup_files(output_file)
+        if not cleanup_files(output_file):
+            PrintLog.warning(f"Failed to cleanup files for {output_file}")
 
         render_progress_bar.update(1)
         render_progress_bar.refresh()
@@ -530,6 +592,8 @@ def main(args):
             "Completed burst {}".format(cr3_files_list.index(cr3_files) + 1)
         )
 
+    # Done
+    sys.exit(config.exit_code)
 
 # Run main function
 if __name__ == "__main__":

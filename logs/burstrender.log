@@ -1673,3 +1673,835 @@ convert-im6.q16: no images defined `/home/chuckcage/gitlab/burstrender/burst_3-i
 2024-03-11 10:20:21.343 | DEBUG    | imageautomation.utilities:debug:107 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
 2024-03-11 10:20:24.384 | DEBUG    | imageautomation.utilities:debug:107 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
 2024-03-11 10:20:27.455 | DEBUG    | imageautomation.utilities:debug:107 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 10:34:56.560 | DEBUG    | imageautomation.utilities:debug:108 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 10:34:56.561 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 10:34:56.562 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 10:34:56.563 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Default seconds between bursts: 2
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Default minimum burst length: 10
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Default modulate string: 120
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Default crop string: 6000x4000+0+0
+2024-03-11 10:34:56.564 | DEBUG    | imageautomation.utilities:debug:108 - Default gravity string: SouthEast
+2024-03-11 10:35:00.694 | DEBUG    | imageautomation.utilities:debug:108 - Extracted EXIF data from 163 CR3 files
+2024-03-11 10:35:00.719 | DEBUG    | imageautomation.utilities:debug:108 - Detected 3 burst(s)
+2024-03-11 10:35:03.734 | DEBUG    | imageautomation.utilities:debug:108 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 10:35:06.777 | DEBUG    | imageautomation.utilities:debug:108 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 10:35:09.834 | DEBUG    | imageautomation.utilities:debug:108 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 10:36:20.374 | DEBUG    | imageautomation.utilities:debug:108 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 10:36:20.375 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 10:36:20.376 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 10:36:20.377 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Source path from CLI arg: testimages
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Default seconds between bursts: 2
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Default minimum burst length: 10
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Default modulate string: 120
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Default crop string: 6000x4000+0+0
+2024-03-11 10:36:20.378 | DEBUG    | imageautomation.utilities:debug:108 - Default gravity string: SouthEast
+2024-03-11 10:36:24.566 | DEBUG    | imageautomation.utilities:debug:108 - Extracted EXIF data from 163 CR3 files
+2024-03-11 10:36:24.591 | DEBUG    | imageautomation.utilities:debug:108 - Detected 3 burst(s)
+2024-03-11 10:36:24.595 | ERROR    | imageautomation.utilities:error:98 - Failed to convert testimages/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+convert did not return a successful return code. Returned 1
+Command '['convert', 'testimages/testimages/Copy of G05 South Side 00085.CR3', '-auto-level', '-modulate', '120', '-gravity', 'SouthEast', '-crop', '6000x4000+0+0', '-resize', '2000', '/home/chuckcage/gitlab/burstrender/burst_1-image_001.png']' returned non-zero exit status 1.
+convert-im6.q16: unable to open image `testimages/testimages/Copy of G05 South Side 00085.CR3': No such file or directory @ error/blob.c/OpenBlob/2924.
+convert-im6.q16: no images defined `/home/chuckcage/gitlab/burstrender/burst_1-image_001.png' @ error/convert.c/ConvertImageCommand/3229.
+
+2024-03-11 10:36:24.598 | ERROR    | imageautomation.utilities:error:98 - Failed to convert testimages/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+convert did not return a successful return code. Returned 1
+Command '['convert', 'testimages/testimages/Copy of G05 South Side 00664.CR3', '-auto-level', '-modulate', '120', '-gravity', 'SouthEast', '-crop', '6000x4000+0+0', '-resize', '2000', '/home/chuckcage/gitlab/burstrender/burst_2-image_001.png']' returned non-zero exit status 1.
+convert-im6.q16: unable to open image `testimages/testimages/Copy of G05 South Side 00664.CR3': No such file or directory @ error/blob.c/OpenBlob/2924.
+convert-im6.q16: no images defined `/home/chuckcage/gitlab/burstrender/burst_2-image_001.png' @ error/convert.c/ConvertImageCommand/3229.
+
+2024-03-11 10:36:24.601 | ERROR    | imageautomation.utilities:error:98 - Failed to convert testimages/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+convert did not return a successful return code. Returned 1
+Command '['convert', 'testimages/testimages/Copy of G05 South Side 00714.CR3', '-auto-level', '-modulate', '120', '-gravity', 'SouthEast', '-crop', '6000x4000+0+0', '-resize', '2000', '/home/chuckcage/gitlab/burstrender/burst_3-image_001.png']' returned non-zero exit status 1.
+convert-im6.q16: unable to open image `testimages/testimages/Copy of G05 South Side 00714.CR3': No such file or directory @ error/blob.c/OpenBlob/2924.
+convert-im6.q16: no images defined `/home/chuckcage/gitlab/burstrender/burst_3-image_001.png' @ error/convert.c/ConvertImageCommand/3229.
+
+2024-03-11 10:36:40.871 | DEBUG    | imageautomation.utilities:debug:108 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 10:36:40.872 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 10:36:40.873 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 10:36:40.873 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Default source path: .
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Default seconds between bursts: 2
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Default minimum burst length: 10
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Default modulate string: 120
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Default crop string: 6000x4000+0+0
+2024-03-11 10:36:40.874 | DEBUG    | imageautomation.utilities:debug:108 - Default gravity string: SouthEast
+2024-03-11 10:36:40.912 | DEBUG    | imageautomation.utilities:debug:108 - Extracted EXIF data from 0 CR3 files
+2024-03-11 10:36:40.912 | WARNING  | imageautomation.utilities:warning:104 - No CR3 files found in the source path: ./ Use the --source-path argument to specify a different source path
+2024-03-11 10:40:32.087 | DEBUG    | imageautomation.utilities:debug:108 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 10:40:32.088 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 10:40:32.089 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 10:40:32.090 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Default seconds between bursts: 2
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Default minimum burst length: 10
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Default modulate string: 120
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Default crop string: 6000x4000+0+0
+2024-03-11 10:40:32.091 | DEBUG    | imageautomation.utilities:debug:108 - Default gravity string: SouthEast
+2024-03-11 10:40:36.252 | DEBUG    | imageautomation.utilities:debug:108 - Extracted EXIF data from 163 CR3 files
+2024-03-11 10:40:36.277 | DEBUG    | imageautomation.utilities:debug:108 - Detected 3 burst(s)
+2024-03-11 10:40:39.286 | DEBUG    | imageautomation.utilities:debug:108 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 10:40:42.352 | DEBUG    | imageautomation.utilities:debug:108 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 10:40:45.410 | DEBUG    | imageautomation.utilities:debug:108 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 10:50:07.429 | DEBUG    | imageautomation.utilities:debug:109 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 10:50:07.431 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 10:50:07.432 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 10:50:07.433 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 10:50:07.434 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 10:50:07.434 | DEBUG    | imageautomation.utilities:debug:109 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 10:50:07.434 | DEBUG    | imageautomation.utilities:debug:109 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 10:50:07.434 | DEBUG    | imageautomation.utilities:debug:109 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 10:50:07.434 | DEBUG    | imageautomation.utilities:debug:109 - Default seconds between bursts: 2
+2024-03-11 10:50:07.434 | DEBUG    | imageautomation.utilities:debug:109 - Default minimum burst length: 10
+2024-03-11 10:50:07.434 | DEBUG    | imageautomation.utilities:debug:109 - Default modulate string: 120
+2024-03-11 10:50:07.435 | DEBUG    | imageautomation.utilities:debug:109 - Default crop string: 6000x4000+0+0
+2024-03-11 10:50:07.435 | DEBUG    | imageautomation.utilities:debug:109 - Default gravity string: SouthEast
+2024-03-11 10:50:11.599 | DEBUG    | imageautomation.utilities:debug:109 - Extracted EXIF data from 163 CR3 files
+2024-03-11 10:50:11.624 | DEBUG    | imageautomation.utilities:debug:109 - Detected 3 burst(s)
+2024-03-11 10:50:11.625 | DEBUG    | imageautomation.utilities:debug:109 - Processing burst 1
+2024-03-11 10:50:14.656 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 10:50:17.670 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-11 10:50:20.712 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-11 10:50:23.717 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-11 10:50:26.703 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00088.CR3 to burst_1.png
+2024-03-11 10:50:29.734 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00089.CR3 to burst_1.png
+2024-03-11 10:50:32.750 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00090.CR3 to burst_1.png
+2024-03-11 10:50:35.734 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00091.CR3 to burst_1.png
+2024-03-11 10:50:38.779 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00092.CR3 to burst_1.png
+2024-03-11 10:50:41.784 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00093.CR3 to burst_1.png
+2024-03-11 10:50:44.793 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00094.CR3 to burst_1.png
+2024-03-11 10:50:47.781 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00095.CR3 to burst_1.png
+2024-03-11 10:50:50.776 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00096.CR3 to burst_1.png
+2024-03-11 10:50:53.775 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00097.CR3 to burst_1.png
+2024-03-11 10:50:56.805 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00098.CR3 to burst_1.png
+2024-03-11 10:50:59.819 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00099.CR3 to burst_1.png
+2024-03-11 10:51:02.811 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00100.CR3 to burst_1.png
+2024-03-11 10:51:05.837 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00101.CR3 to burst_1.png
+2024-03-11 10:51:08.823 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00102.CR3 to burst_1.png
+2024-03-11 10:51:11.853 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00103.CR3 to burst_1.png
+2024-03-11 10:51:14.834 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00104.CR3 to burst_1.png
+2024-03-11 10:51:17.855 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00105.CR3 to burst_1.png
+2024-03-11 10:51:20.863 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00106.CR3 to burst_1.png
+2024-03-11 10:51:23.890 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00107.CR3 to burst_1.png
+2024-03-11 10:51:26.879 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00108.CR3 to burst_1.png
+2024-03-11 10:51:29.875 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00109.CR3 to burst_1.png
+2024-03-11 10:51:32.898 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00110.CR3 to burst_1.png
+2024-03-11 10:51:35.879 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00111.CR3 to burst_1.png
+2024-03-11 10:51:38.884 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00112.CR3 to burst_1.png
+2024-03-11 10:51:41.894 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00113.CR3 to burst_1.png
+2024-03-11 10:51:44.931 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00114.CR3 to burst_1.png
+2024-03-11 10:51:47.928 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00115.CR3 to burst_1.png
+2024-03-11 10:51:50.921 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00116.CR3 to burst_1.png
+2024-03-11 10:51:53.906 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00117.CR3 to burst_1.png
+2024-03-11 10:51:56.913 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00118.CR3 to burst_1.png
+2024-03-11 10:51:59.932 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00119.CR3 to burst_1.png
+2024-03-11 10:52:02.969 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00120.CR3 to burst_1.png
+2024-03-11 10:52:05.983 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00121.CR3 to burst_1.png
+2024-03-11 10:52:08.973 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00122.CR3 to burst_1.png
+2024-03-11 10:52:11.990 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00123.CR3 to burst_1.png
+2024-03-11 10:52:14.979 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00124.CR3 to burst_1.png
+2024-03-11 10:52:17.991 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00125.CR3 to burst_1.png
+2024-03-11 10:52:20.967 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00126.CR3 to burst_1.png
+2024-03-11 10:52:24.019 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00127.CR3 to burst_1.png
+2024-03-11 10:52:27.040 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00128.CR3 to burst_1.png
+2024-03-11 10:52:30.040 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00129.CR3 to burst_1.png
+2024-03-11 10:52:33.036 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00130.CR3 to burst_1.png
+2024-03-11 10:52:35.974 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00131.CR3 to burst_1.png
+2024-03-11 10:52:38.944 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00132.CR3 to burst_1.png
+2024-03-11 10:52:41.954 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00133.CR3 to burst_1.png
+2024-03-11 10:52:43.451 | DEBUG    | imageautomation.utilities:debug:109 - Created burst_1.mp4
+2024-03-11 10:52:43.452 | DEBUG    | imageautomation.utilities:debug:109 - Created MP4 from PNGs for burst_1
+2024-03-11 10:52:44.581 | DEBUG    | imageautomation.utilities:debug:109 - Stabilization analysis complete for burst_1.mp4
+2024-03-11 10:52:46.468 | DEBUG    | imageautomation.utilities:debug:109 - Stabilized burst_1.mp4
+2024-03-11 10:52:46.468 | DEBUG    | imageautomation.utilities:debug:109 - Stabilized MP4 for burst_1
+2024-03-11 10:52:48.020 | DEBUG    | imageautomation.utilities:debug:109 - Created burst_1.gif
+2024-03-11 10:52:48.020 | DEBUG    | imageautomation.utilities:debug:109 - Created GIF from MP4 for burst_1
+2024-03-11 10:52:48.023 | DEBUG    | imageautomation.utilities:debug:109 - Moved /home/chuckcage/.burstrender/working/burst_1.mp4 to /home/chuckcage/gitlab/burstrender/burst_1.mp4
+2024-03-11 10:52:48.024 | DEBUG    | imageautomation.utilities:debug:109 - Moved /home/chuckcage/.burstrender/working/burst_1-stabilized.mp4 to /home/chuckcage/gitlab/burstrender/burst_1-stabilized.mp4
+2024-03-11 10:52:48.025 | DEBUG    | imageautomation.utilities:debug:109 - Moved /home/chuckcage/.burstrender/working/burst_1.gif to /home/chuckcage/gitlab/burstrender/burst_1.gif
+2024-03-11 10:52:48.037 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/burst_1-image_*.png
+2024-03-11 10:52:48.038 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/burst_1.trf
+2024-03-11 10:52:48.039 | SUCCESS  | imageautomation.utilities:success:113 - Completed burst 1
+2024-03-11 10:52:48.039 | DEBUG    | imageautomation.utilities:debug:109 - Processing burst 2
+2024-03-11 10:52:51.112 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 10:52:54.163 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00663.CR3 to burst_2.png
+2024-03-11 10:52:57.216 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00665.CR3 to burst_2.png
+2024-03-11 10:53:00.296 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00666.CR3 to burst_2.png
+2024-03-11 10:54:57.899 | DEBUG    | imageautomation.utilities:debug:109 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 10:54:57.902 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 10:54:57.903 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 10:54:57.903 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 10:54:57.904 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 10:54:57.904 | DEBUG    | imageautomation.utilities:debug:109 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 10:54:57.904 | DEBUG    | imageautomation.utilities:debug:109 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 10:54:57.904 | DEBUG    | imageautomation.utilities:debug:109 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 10:54:57.904 | DEBUG    | imageautomation.utilities:debug:109 - Default seconds between bursts: 2
+2024-03-11 10:54:57.904 | DEBUG    | imageautomation.utilities:debug:109 - Default minimum burst length: 10
+2024-03-11 10:54:57.904 | DEBUG    | imageautomation.utilities:debug:109 - Default modulate string: 120
+2024-03-11 10:54:57.905 | DEBUG    | imageautomation.utilities:debug:109 - Default crop string: 6000x4000+0+0
+2024-03-11 10:54:57.905 | DEBUG    | imageautomation.utilities:debug:109 - Default gravity string: SouthEast
+2024-03-11 10:55:02.062 | DEBUG    | imageautomation.utilities:debug:109 - Extracted EXIF data from 163 CR3 files
+2024-03-11 10:55:02.088 | DEBUG    | imageautomation.utilities:debug:109 - Detected 3 burst(s)
+2024-03-11 10:55:02.088 | DEBUG    | imageautomation.utilities:debug:109 - Processing burst 1
+2024-03-11 10:55:05.102 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 10:55:08.116 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-11 10:55:11.098 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-11 10:55:14.113 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-11 10:55:17.130 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00088.CR3 to burst_1.png
+2024-03-11 10:55:20.109 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00089.CR3 to burst_1.png
+2024-03-11 10:55:23.139 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00090.CR3 to burst_1.png
+2024-03-11 10:55:26.139 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00091.CR3 to burst_1.png
+2024-03-11 10:55:29.132 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00092.CR3 to burst_1.png
+2024-03-11 10:55:32.147 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00093.CR3 to burst_1.png
+2024-03-11 10:55:35.133 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00094.CR3 to burst_1.png
+2024-03-11 10:55:38.161 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00095.CR3 to burst_1.png
+2024-03-11 10:55:41.202 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00096.CR3 to burst_1.png
+2024-03-11 10:55:44.241 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00097.CR3 to burst_1.png
+2024-03-11 10:55:47.293 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00098.CR3 to burst_1.png
+2024-03-11 10:55:50.322 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00099.CR3 to burst_1.png
+2024-03-11 10:55:53.354 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00100.CR3 to burst_1.png
+2024-03-11 10:55:56.331 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00101.CR3 to burst_1.png
+2024-03-11 10:55:59.345 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00102.CR3 to burst_1.png
+2024-03-11 10:56:02.375 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00103.CR3 to burst_1.png
+2024-03-11 10:56:05.405 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00104.CR3 to burst_1.png
+2024-03-11 10:56:08.400 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00105.CR3 to burst_1.png
+2024-03-11 10:56:11.422 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00106.CR3 to burst_1.png
+2024-03-11 10:56:14.409 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00107.CR3 to burst_1.png
+2024-03-11 10:56:17.419 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00108.CR3 to burst_1.png
+2024-03-11 10:56:20.424 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00109.CR3 to burst_1.png
+2024-03-11 10:56:23.437 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00110.CR3 to burst_1.png
+2024-03-11 10:56:26.446 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00111.CR3 to burst_1.png
+2024-03-11 10:56:29.444 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00112.CR3 to burst_1.png
+2024-03-11 10:56:32.473 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00113.CR3 to burst_1.png
+2024-03-11 10:56:35.476 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00114.CR3 to burst_1.png
+2024-03-11 10:56:38.485 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00115.CR3 to burst_1.png
+2024-03-11 10:56:41.491 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00116.CR3 to burst_1.png
+2024-03-11 10:56:44.518 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00117.CR3 to burst_1.png
+2024-03-11 10:56:47.599 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00118.CR3 to burst_1.png
+2024-03-11 10:56:50.632 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00119.CR3 to burst_1.png
+2024-03-11 10:56:53.666 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00120.CR3 to burst_1.png
+2024-03-11 10:56:56.684 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00121.CR3 to burst_1.png
+2024-03-11 10:56:59.693 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00122.CR3 to burst_1.png
+2024-03-11 10:57:02.707 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00123.CR3 to burst_1.png
+2024-03-11 10:57:05.708 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00124.CR3 to burst_1.png
+2024-03-11 10:57:08.691 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00125.CR3 to burst_1.png
+2024-03-11 10:57:11.729 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00126.CR3 to burst_1.png
+2024-03-11 10:57:14.755 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00127.CR3 to burst_1.png
+2024-03-11 10:57:17.772 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00128.CR3 to burst_1.png
+2024-03-11 10:57:20.800 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00129.CR3 to burst_1.png
+2024-03-11 10:57:23.819 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00130.CR3 to burst_1.png
+2024-03-11 10:57:26.813 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00131.CR3 to burst_1.png
+2024-03-11 10:57:29.791 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00132.CR3 to burst_1.png
+2024-03-11 10:57:32.814 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00133.CR3 to burst_1.png
+2024-03-11 10:58:22.815 | DEBUG    | imageautomation.utilities:debug:109 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 10:58:22.817 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 10:58:22.818 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.trf
+2024-03-11 10:58:22.819 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.mp4
+2024-03-11 10:58:22.819 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.gif
+2024-03-11 10:58:22.819 | DEBUG    | imageautomation.utilities:debug:109 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 10:58:22.819 | DEBUG    | imageautomation.utilities:debug:109 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 10:58:22.820 | DEBUG    | imageautomation.utilities:debug:109 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 10:58:22.820 | DEBUG    | imageautomation.utilities:debug:109 - Default seconds between bursts: 2
+2024-03-11 10:58:22.820 | DEBUG    | imageautomation.utilities:debug:109 - Default minimum burst length: 10
+2024-03-11 10:58:22.820 | DEBUG    | imageautomation.utilities:debug:109 - Default modulate string: 120
+2024-03-11 10:58:22.820 | DEBUG    | imageautomation.utilities:debug:109 - Default crop string: 6000x4000+0+0
+2024-03-11 10:58:22.820 | DEBUG    | imageautomation.utilities:debug:109 - Default gravity string: SouthEast
+2024-03-11 10:58:26.936 | DEBUG    | imageautomation.utilities:debug:109 - Extracted EXIF data from 163 CR3 files
+2024-03-11 10:58:26.962 | DEBUG    | imageautomation.utilities:debug:109 - Detected 3 burst(s)
+2024-03-11 10:58:26.962 | DEBUG    | imageautomation.utilities:debug:109 - Processing burst 1
+2024-03-11 10:58:29.910 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 10:58:32.926 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-11 10:58:35.921 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-11 10:58:38.935 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-11 10:58:41.944 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00088.CR3 to burst_1.png
+2024-03-11 10:58:44.944 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00089.CR3 to burst_1.png
+2024-03-11 10:58:47.959 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00090.CR3 to burst_1.png
+2024-03-11 10:58:50.946 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00091.CR3 to burst_1.png
+2024-03-11 10:58:53.964 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00092.CR3 to burst_1.png
+2024-03-11 10:58:56.960 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00093.CR3 to burst_1.png
+2024-03-11 10:59:00.008 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00094.CR3 to burst_1.png
+2024-03-11 10:59:03.068 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00095.CR3 to burst_1.png
+2024-03-11 10:59:06.100 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00096.CR3 to burst_1.png
+2024-03-11 10:59:09.131 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00097.CR3 to burst_1.png
+2024-03-11 10:59:12.163 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00098.CR3 to burst_1.png
+2024-03-11 10:59:15.190 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00099.CR3 to burst_1.png
+2024-03-11 10:59:18.219 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00100.CR3 to burst_1.png
+2024-03-11 10:59:21.205 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00101.CR3 to burst_1.png
+2024-03-11 10:59:24.209 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00102.CR3 to burst_1.png
+2024-03-11 10:59:27.256 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00103.CR3 to burst_1.png
+2024-03-11 10:59:30.255 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00104.CR3 to burst_1.png
+2024-03-11 10:59:33.272 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00105.CR3 to burst_1.png
+2024-03-11 10:59:36.301 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00106.CR3 to burst_1.png
+2024-03-11 10:59:39.316 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00107.CR3 to burst_1.png
+2024-03-11 10:59:42.325 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00108.CR3 to burst_1.png
+2024-03-11 10:59:45.382 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00109.CR3 to burst_1.png
+2024-03-11 10:59:48.407 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00110.CR3 to burst_1.png
+2024-03-11 10:59:51.429 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00111.CR3 to burst_1.png
+2024-03-11 10:59:54.447 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00112.CR3 to burst_1.png
+2024-03-11 10:59:57.477 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00113.CR3 to burst_1.png
+2024-03-11 11:00:00.499 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00114.CR3 to burst_1.png
+2024-03-11 11:00:03.549 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00115.CR3 to burst_1.png
+2024-03-11 11:00:06.552 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00116.CR3 to burst_1.png
+2024-03-11 11:00:09.571 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00117.CR3 to burst_1.png
+2024-03-11 11:00:12.607 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00118.CR3 to burst_1.png
+2024-03-11 11:00:15.619 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00119.CR3 to burst_1.png
+2024-03-11 11:00:18.638 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00120.CR3 to burst_1.png
+2024-03-11 11:00:21.671 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00121.CR3 to burst_1.png
+2024-03-11 11:00:24.687 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00122.CR3 to burst_1.png
+2024-03-11 11:00:27.704 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00123.CR3 to burst_1.png
+2024-03-11 11:00:30.710 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00124.CR3 to burst_1.png
+2024-03-11 11:00:33.716 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00125.CR3 to burst_1.png
+2024-03-11 11:00:36.751 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00126.CR3 to burst_1.png
+2024-03-11 11:00:39.742 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00127.CR3 to burst_1.png
+2024-03-11 11:00:42.742 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00128.CR3 to burst_1.png
+2024-03-11 11:00:45.780 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00129.CR3 to burst_1.png
+2024-03-11 11:00:48.825 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00130.CR3 to burst_1.png
+2024-03-11 11:00:51.810 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00131.CR3 to burst_1.png
+2024-03-11 11:00:54.787 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00132.CR3 to burst_1.png
+2024-03-11 11:00:57.832 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00133.CR3 to burst_1.png
+2024-03-11 11:00:59.294 | DEBUG    | imageautomation.utilities:debug:109 - Created burst_1.mp4
+2024-03-11 11:00:59.295 | DEBUG    | imageautomation.utilities:debug:109 - Created MP4 from PNGs for burst_1
+2024-03-11 11:01:00.411 | DEBUG    | imageautomation.utilities:debug:109 - Stabilization analysis complete for burst_1.mp4
+2024-03-11 11:01:02.280 | DEBUG    | imageautomation.utilities:debug:109 - Stabilized burst_1.mp4
+2024-03-11 11:01:02.280 | DEBUG    | imageautomation.utilities:debug:109 - Stabilized MP4 for burst_1
+2024-03-11 11:01:03.850 | DEBUG    | imageautomation.utilities:debug:109 - Created burst_1.gif
+2024-03-11 11:01:03.850 | DEBUG    | imageautomation.utilities:debug:109 - Created GIF from MP4 for burst_1
+2024-03-11 11:01:03.854 | DEBUG    | imageautomation.utilities:debug:109 - Moved /home/chuckcage/.burstrender/working/burst_1.mp4 to /home/chuckcage/gitlab/burstrender/burst_1.mp4
+2024-03-11 11:01:03.855 | DEBUG    | imageautomation.utilities:debug:109 - Moved /home/chuckcage/.burstrender/working/burst_1-stabilized.mp4 to /home/chuckcage/gitlab/burstrender/burst_1-stabilized.mp4
+2024-03-11 11:01:03.855 | DEBUG    | imageautomation.utilities:debug:109 - Moved /home/chuckcage/.burstrender/working/burst_1.gif to /home/chuckcage/gitlab/burstrender/burst_1.gif
+2024-03-11 11:01:03.868 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/burst_1-image_*.png
+2024-03-11 11:01:03.869 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/burst_1.trf
+2024-03-11 11:01:03.870 | SUCCESS  | imageautomation.utilities:success:113 - Completed burst 1
+2024-03-11 11:01:03.870 | DEBUG    | imageautomation.utilities:debug:109 - Processing burst 2
+2024-03-11 11:01:06.914 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 11:01:09.944 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00663.CR3 to burst_2.png
+2024-03-11 11:05:53.175 | DEBUG    | imageautomation.utilities:debug:109 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 11:05:53.177 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 11:05:53.177 | ERROR    | imageautomation.utilities:error:99 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 11:05:53.178 | ERROR    | imageautomation.utilities:error:99 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 11:05:53.179 | ERROR    | imageautomation.utilities:error:99 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 11:05:53.179 | DEBUG    | imageautomation.utilities:debug:109 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 11:05:53.179 | DEBUG    | imageautomation.utilities:debug:109 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 11:05:53.179 | DEBUG    | imageautomation.utilities:debug:109 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 11:05:53.179 | DEBUG    | imageautomation.utilities:debug:109 - Default seconds between bursts: 2
+2024-03-11 11:05:53.179 | DEBUG    | imageautomation.utilities:debug:109 - Default minimum burst length: 10
+2024-03-11 11:05:53.179 | DEBUG    | imageautomation.utilities:debug:109 - Default modulate string: 120
+2024-03-11 11:05:53.179 | DEBUG    | imageautomation.utilities:debug:109 - Default crop string: 6000x4000+0+0
+2024-03-11 11:05:53.179 | DEBUG    | imageautomation.utilities:debug:109 - Default gravity string: SouthEast
+2024-03-11 11:10:04.743 | DEBUG    | imageautomation.utilities:debug:109 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 11:10:04.744 | WARNING  | imageautomation.utilities:warning:105 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 11:10:04.745 | WARNING  | imageautomation.utilities:warning:105 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 11:10:04.746 | WARNING  | imageautomation.utilities:warning:105 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 11:10:04.747 | WARNING  | imageautomation.utilities:warning:105 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 11:10:04.747 | DEBUG    | imageautomation.utilities:debug:109 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 11:10:04.747 | DEBUG    | imageautomation.utilities:debug:109 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 11:10:04.747 | DEBUG    | imageautomation.utilities:debug:109 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 11:10:04.748 | DEBUG    | imageautomation.utilities:debug:109 - Default seconds between bursts: 2
+2024-03-11 11:10:04.748 | DEBUG    | imageautomation.utilities:debug:109 - Default minimum burst length: 10
+2024-03-11 11:10:04.748 | DEBUG    | imageautomation.utilities:debug:109 - Default modulate string: 120
+2024-03-11 11:10:04.748 | DEBUG    | imageautomation.utilities:debug:109 - Default crop string: 6000x4000+0+0
+2024-03-11 11:10:04.748 | DEBUG    | imageautomation.utilities:debug:109 - Default gravity string: SouthEast
+2024-03-11 11:10:08.901 | DEBUG    | imageautomation.utilities:debug:109 - Extracted EXIF data from 163 CR3 files
+2024-03-11 11:10:08.925 | DEBUG    | imageautomation.utilities:debug:109 - Detected 3 burst(s)
+2024-03-11 11:10:08.926 | DEBUG    | imageautomation.utilities:debug:109 - Processing burst 1
+2024-03-11 11:10:40.224 | DEBUG    | imageautomation.utilities:debug:109 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 11:10:40.226 | DEBUG    | imageautomation.utilities:debug:109 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 11:10:40.227 | DEBUG    | imageautomation.utilities:debug:109 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 11:10:40.228 | DEBUG    | imageautomation.utilities:debug:109 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 11:10:40.228 | DEBUG    | imageautomation.utilities:debug:109 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 11:10:40.228 | DEBUG    | imageautomation.utilities:debug:109 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 11:10:40.228 | DEBUG    | imageautomation.utilities:debug:109 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 11:10:40.229 | DEBUG    | imageautomation.utilities:debug:109 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 11:10:40.229 | DEBUG    | imageautomation.utilities:debug:109 - Default seconds between bursts: 2
+2024-03-11 11:10:40.229 | DEBUG    | imageautomation.utilities:debug:109 - Default minimum burst length: 10
+2024-03-11 11:10:40.229 | DEBUG    | imageautomation.utilities:debug:109 - Default modulate string: 120
+2024-03-11 11:10:40.229 | DEBUG    | imageautomation.utilities:debug:109 - Default crop string: 6000x4000+0+0
+2024-03-11 11:10:40.229 | DEBUG    | imageautomation.utilities:debug:109 - Default gravity string: SouthEast
+2024-03-11 11:10:44.393 | DEBUG    | imageautomation.utilities:debug:109 - Extracted EXIF data from 163 CR3 files
+2024-03-11 11:10:44.417 | DEBUG    | imageautomation.utilities:debug:109 - Detected 3 burst(s)
+2024-03-11 11:10:44.418 | DEBUG    | imageautomation.utilities:debug:109 - Processing burst 1
+2024-03-11 11:10:47.444 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 11:10:50.470 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-11 11:10:53.476 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-11 11:10:56.459 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-11 11:10:59.466 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00088.CR3 to burst_1.png
+2024-03-11 11:11:02.438 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00089.CR3 to burst_1.png
+2024-03-11 11:11:05.427 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00090.CR3 to burst_1.png
+2024-03-11 11:11:08.391 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00091.CR3 to burst_1.png
+2024-03-11 11:11:11.376 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00092.CR3 to burst_1.png
+2024-03-11 11:11:14.386 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00093.CR3 to burst_1.png
+2024-03-11 11:11:17.399 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00094.CR3 to burst_1.png
+2024-03-11 11:11:20.420 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00095.CR3 to burst_1.png
+2024-03-11 11:11:23.439 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00096.CR3 to burst_1.png
+2024-03-11 11:11:26.474 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00097.CR3 to burst_1.png
+2024-03-11 11:11:29.500 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00098.CR3 to burst_1.png
+2024-03-11 11:11:32.551 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00099.CR3 to burst_1.png
+2024-03-11 11:11:35.546 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00100.CR3 to burst_1.png
+2024-03-11 11:11:38.567 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00101.CR3 to burst_1.png
+2024-03-11 11:11:41.596 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00102.CR3 to burst_1.png
+2024-03-11 11:11:44.648 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00103.CR3 to burst_1.png
+2024-03-11 11:11:47.632 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00104.CR3 to burst_1.png
+2024-03-11 11:11:50.630 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00105.CR3 to burst_1.png
+2024-03-11 11:11:53.653 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00106.CR3 to burst_1.png
+2024-03-11 11:11:56.683 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00107.CR3 to burst_1.png
+2024-03-11 11:11:59.719 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00108.CR3 to burst_1.png
+2024-03-11 11:12:02.723 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00109.CR3 to burst_1.png
+2024-03-11 11:12:05.742 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00110.CR3 to burst_1.png
+2024-03-11 11:12:08.771 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00111.CR3 to burst_1.png
+2024-03-11 11:12:11.793 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00112.CR3 to burst_1.png
+2024-03-11 11:12:14.781 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00113.CR3 to burst_1.png
+2024-03-11 11:12:17.788 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00114.CR3 to burst_1.png
+2024-03-11 11:12:20.773 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00115.CR3 to burst_1.png
+2024-03-11 11:12:23.798 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00116.CR3 to burst_1.png
+2024-03-11 11:12:26.841 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00117.CR3 to burst_1.png
+2024-03-11 11:12:29.859 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00118.CR3 to burst_1.png
+2024-03-11 11:12:32.870 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00119.CR3 to burst_1.png
+2024-03-11 11:12:35.883 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00120.CR3 to burst_1.png
+2024-03-11 11:12:38.861 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00121.CR3 to burst_1.png
+2024-03-11 11:12:41.860 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00122.CR3 to burst_1.png
+2024-03-11 11:12:44.869 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00123.CR3 to burst_1.png
+2024-03-11 11:12:47.916 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00124.CR3 to burst_1.png
+2024-03-11 11:12:50.959 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00125.CR3 to burst_1.png
+2024-03-11 11:12:53.975 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00126.CR3 to burst_1.png
+2024-03-11 11:12:56.988 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00127.CR3 to burst_1.png
+2024-03-11 11:13:00.003 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00128.CR3 to burst_1.png
+2024-03-11 11:13:03.018 | DEBUG    | imageautomation.utilities:debug:109 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00129.CR3 to burst_1.png
+2024-03-11 11:13:12.270 | DEBUG    | imageautomation.utilities:debug:110 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 11:13:12.282 | DEBUG    | imageautomation.utilities:debug:110 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 11:13:12.283 | DEBUG    | imageautomation.utilities:debug:110 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 11:13:12.284 | DEBUG    | imageautomation.utilities:debug:110 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Default seconds between bursts: 2
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Default minimum burst length: 10
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Default modulate string: 120
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Default crop string: 6000x4000+0+0
+2024-03-11 11:13:12.285 | DEBUG    | imageautomation.utilities:debug:110 - Default gravity string: SouthEast
+2024-03-11 11:13:16.472 | DEBUG    | imageautomation.utilities:debug:110 - Extracted EXIF data from 163 CR3 files
+2024-03-11 11:13:16.497 | DEBUG    | imageautomation.utilities:debug:110 - Detected 3 burst(s)
+2024-03-11 11:13:16.497 | DEBUG    | imageautomation.utilities:debug:110 - Processing burst 1
+2024-03-11 11:13:19.509 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 11:13:22.512 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-11 11:13:25.542 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-11 11:13:28.567 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-11 11:13:31.596 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00088.CR3 to burst_1.png
+2024-03-11 11:13:34.602 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00089.CR3 to burst_1.png
+2024-03-11 11:13:37.636 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00090.CR3 to burst_1.png
+2024-03-11 11:13:40.661 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00091.CR3 to burst_1.png
+2024-03-11 11:13:43.705 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00092.CR3 to burst_1.png
+2024-03-11 11:13:46.695 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00093.CR3 to burst_1.png
+2024-03-11 11:13:49.738 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00094.CR3 to burst_1.png
+2024-03-11 11:13:52.745 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00095.CR3 to burst_1.png
+2024-03-11 11:13:55.749 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00096.CR3 to burst_1.png
+2024-03-11 11:13:58.751 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00097.CR3 to burst_1.png
+2024-03-11 11:14:01.755 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00098.CR3 to burst_1.png
+2024-03-11 11:14:04.781 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00099.CR3 to burst_1.png
+2024-03-11 11:14:07.813 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00100.CR3 to burst_1.png
+2024-03-11 11:14:10.829 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00101.CR3 to burst_1.png
+2024-03-11 11:14:13.830 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00102.CR3 to burst_1.png
+2024-03-11 11:14:16.841 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00103.CR3 to burst_1.png
+2024-03-11 11:14:19.839 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00104.CR3 to burst_1.png
+2024-03-11 11:14:22.825 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00105.CR3 to burst_1.png
+2024-03-11 11:14:25.843 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00106.CR3 to burst_1.png
+2024-03-11 11:14:28.846 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00107.CR3 to burst_1.png
+2024-03-11 11:14:31.866 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00108.CR3 to burst_1.png
+2024-03-11 11:14:34.876 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00109.CR3 to burst_1.png
+2024-03-11 11:14:37.894 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00110.CR3 to burst_1.png
+2024-03-11 11:14:40.890 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00111.CR3 to burst_1.png
+2024-03-11 11:14:43.885 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00112.CR3 to burst_1.png
+2024-03-11 11:14:46.910 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00113.CR3 to burst_1.png
+2024-03-11 11:14:49.923 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00114.CR3 to burst_1.png
+2024-03-11 11:14:52.960 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00115.CR3 to burst_1.png
+2024-03-11 11:14:55.978 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00116.CR3 to burst_1.png
+2024-03-11 11:14:59.009 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00117.CR3 to burst_1.png
+2024-03-11 11:15:02.042 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00118.CR3 to burst_1.png
+2024-03-11 11:15:05.080 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00119.CR3 to burst_1.png
+2024-03-11 11:15:08.097 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00120.CR3 to burst_1.png
+2024-03-11 11:15:11.101 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00121.CR3 to burst_1.png
+2024-03-11 11:15:14.141 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00122.CR3 to burst_1.png
+2024-03-11 11:15:17.144 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00123.CR3 to burst_1.png
+2024-03-11 11:15:20.163 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00124.CR3 to burst_1.png
+2024-03-11 11:15:23.184 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00125.CR3 to burst_1.png
+2024-03-11 11:15:26.209 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00126.CR3 to burst_1.png
+2024-03-11 11:15:29.235 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00127.CR3 to burst_1.png
+2024-03-11 11:15:32.292 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00128.CR3 to burst_1.png
+2024-03-11 11:15:35.297 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00129.CR3 to burst_1.png
+2024-03-11 11:15:38.329 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00130.CR3 to burst_1.png
+2024-03-11 11:15:41.288 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00131.CR3 to burst_1.png
+2024-03-11 11:15:44.264 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00132.CR3 to burst_1.png
+2024-03-11 11:15:47.276 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00133.CR3 to burst_1.png
+2024-03-11 11:15:48.771 | DEBUG    | imageautomation.utilities:debug:110 - Created burst_1.mp4
+2024-03-11 11:15:48.771 | DEBUG    | imageautomation.utilities:debug:110 - Created MP4 from PNGs for burst_1
+2024-03-11 11:15:49.926 | DEBUG    | imageautomation.utilities:debug:110 - Stabilization analysis complete for burst_1.mp4
+2024-03-11 11:15:51.806 | DEBUG    | imageautomation.utilities:debug:110 - Stabilized burst_1.mp4
+2024-03-11 11:15:51.806 | DEBUG    | imageautomation.utilities:debug:110 - Stabilized MP4 for burst_1
+2024-03-11 11:15:53.355 | DEBUG    | imageautomation.utilities:debug:110 - Created burst_1.gif
+2024-03-11 11:15:53.355 | DEBUG    | imageautomation.utilities:debug:110 - Created GIF from MP4 for burst_1
+2024-03-11 11:15:53.357 | DEBUG    | imageautomation.utilities:debug:110 - Moved /home/chuckcage/.burstrender/working/burst_1.mp4 to /home/chuckcage/gitlab/burstrender/burst_1.mp4
+2024-03-11 11:15:53.358 | DEBUG    | imageautomation.utilities:debug:110 - Moved /home/chuckcage/.burstrender/working/burst_1-stabilized.mp4 to /home/chuckcage/gitlab/burstrender/burst_1-stabilized.mp4
+2024-03-11 11:15:53.359 | DEBUG    | imageautomation.utilities:debug:110 - Moved /home/chuckcage/.burstrender/working/burst_1.gif to /home/chuckcage/gitlab/burstrender/burst_1.gif
+2024-03-11 11:15:53.371 | DEBUG    | imageautomation.utilities:debug:110 - Removed files: /home/chuckcage/.burstrender/working/burst_1-image_*.png
+2024-03-11 11:15:53.372 | DEBUG    | imageautomation.utilities:debug:110 - Removed files: /home/chuckcage/.burstrender/working/burst_1.trf
+2024-03-11 11:15:53.373 | SUCCESS  | imageautomation.utilities:success:114 - Completed burst 1
+2024-03-11 11:15:53.373 | DEBUG    | imageautomation.utilities:debug:110 - Processing burst 2
+2024-03-11 11:15:56.431 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 11:15:59.491 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00663.CR3 to burst_2.png
+2024-03-11 11:16:45.607 | DEBUG    | imageautomation.utilities:debug:110 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 11:16:45.609 | DEBUG    | imageautomation.utilities:debug:110 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 11:16:45.610 | DEBUG    | imageautomation.utilities:debug:110 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 11:16:45.610 | DEBUG    | imageautomation.utilities:debug:110 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Default seconds between bursts: 2
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Default minimum burst length: 10
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Default modulate string: 120
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Default crop string: 6000x4000+0+0
+2024-03-11 11:16:45.611 | DEBUG    | imageautomation.utilities:debug:110 - Default gravity string: SouthEast
+2024-03-11 11:16:49.790 | DEBUG    | imageautomation.utilities:debug:110 - Extracted EXIF data from 163 CR3 files
+2024-03-11 11:16:49.815 | DEBUG    | imageautomation.utilities:debug:110 - Detected 3 burst(s)
+2024-03-11 11:16:49.815 | DEBUG    | imageautomation.utilities:debug:110 - Processing burst 1
+2024-03-11 11:16:52.834 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 11:16:55.876 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-11 11:16:58.892 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-11 11:17:01.913 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-11 11:17:04.919 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00088.CR3 to burst_1.png
+2024-03-11 11:17:07.912 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00089.CR3 to burst_1.png
+2024-03-11 11:17:10.922 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00090.CR3 to burst_1.png
+2024-03-11 11:17:13.957 | DEBUG    | imageautomation.utilities:debug:110 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00091.CR3 to burst_1.png
+2024-03-11 12:09:31.999 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:09:32.000 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/*.png
+2024-03-11 12:09:32.001 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:09:32.002 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:09:32.003 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:09:32.003 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:10:09.949 | DEBUG    | imageautomation.utilities:debug:130 - Working directory confirmed/created: /home/chuckcage/.burstrender/working
+2024-03-11 12:10:09.951 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.png
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.png']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.png': No such file or directory
+
+2024-03-11 12:10:09.951 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.trf
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.trf']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.trf': No such file or directory
+
+2024-03-11 12:10:09.952 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.mp4
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.mp4']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.mp4': No such file or directory
+
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Failed to remove files: /home/chuckcage/.burstrender/working/*.gif
+rm did not return a successful return code. Returned 1
+Command '['sh', '-c', 'rm /home/chuckcage/.burstrender/working/*.gif']' returned non-zero exit status 1.
+rm: cannot remove '/home/chuckcage/.burstrender/working/*.gif': No such file or directory
+
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Cleared working directory: /home/chuckcage/.burstrender/working
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Cleaned up the working directory
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Source path from CLI arg: /home/chuckcage/gitlab/burstrender/testimages
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Default destination path: /home/chuckcage/gitlab/burstrender
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Default seconds between bursts: 2
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Default minimum burst length: 10
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Default modulate string: 120
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Default crop string: 6000x4000+0+0
+2024-03-11 12:10:09.953 | DEBUG    | imageautomation.utilities:debug:130 - Default gravity string: SouthEast
+2024-03-11 12:10:14.048 | DEBUG    | imageautomation.utilities:debug:130 - Extracted EXIF data from 163 CR3 files
+2024-03-11 12:10:14.073 | DEBUG    | imageautomation.utilities:debug:130 - Detected 3 burst(s)
+2024-03-11 12:10:14.073 | DEBUG    | imageautomation.utilities:debug:130 - Processing burst 1
+2024-03-11 12:10:17.074 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00085.CR3 to burst_1.png
+2024-03-11 12:10:20.033 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00084.CR3 to burst_1.png
+2024-03-11 12:10:23.031 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00086.CR3 to burst_1.png
+2024-03-11 12:10:25.956 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00087.CR3 to burst_1.png
+2024-03-11 12:10:28.905 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00088.CR3 to burst_1.png
+2024-03-11 12:10:31.809 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00089.CR3 to burst_1.png
+2024-03-11 12:10:34.728 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00090.CR3 to burst_1.png
+2024-03-11 12:10:37.625 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00091.CR3 to burst_1.png
+2024-03-11 12:10:40.580 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00092.CR3 to burst_1.png
+2024-03-11 12:10:43.488 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00093.CR3 to burst_1.png
+2024-03-11 12:10:46.384 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00094.CR3 to burst_1.png
+2024-03-11 12:10:49.305 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00095.CR3 to burst_1.png
+2024-03-11 12:10:52.243 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00096.CR3 to burst_1.png
+2024-03-11 12:10:55.180 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00097.CR3 to burst_1.png
+2024-03-11 12:10:58.163 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00098.CR3 to burst_1.png
+2024-03-11 12:11:01.171 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00099.CR3 to burst_1.png
+2024-03-11 12:11:04.112 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00100.CR3 to burst_1.png
+2024-03-11 12:11:07.029 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00101.CR3 to burst_1.png
+2024-03-11 12:11:09.964 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00102.CR3 to burst_1.png
+2024-03-11 12:11:12.932 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00103.CR3 to burst_1.png
+2024-03-11 12:11:15.877 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00104.CR3 to burst_1.png
+2024-03-11 12:11:18.842 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00105.CR3 to burst_1.png
+2024-03-11 12:11:21.816 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00106.CR3 to burst_1.png
+2024-03-11 12:11:24.766 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00107.CR3 to burst_1.png
+2024-03-11 12:11:27.715 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00108.CR3 to burst_1.png
+2024-03-11 12:11:30.625 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00109.CR3 to burst_1.png
+2024-03-11 12:11:33.522 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00110.CR3 to burst_1.png
+2024-03-11 12:11:36.438 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00111.CR3 to burst_1.png
+2024-03-11 12:11:39.338 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00112.CR3 to burst_1.png
+2024-03-11 12:11:42.238 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00113.CR3 to burst_1.png
+2024-03-11 12:11:45.196 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00114.CR3 to burst_1.png
+2024-03-11 12:11:48.173 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00115.CR3 to burst_1.png
+2024-03-11 12:11:51.113 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00116.CR3 to burst_1.png
+2024-03-11 12:11:54.034 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00117.CR3 to burst_1.png
+2024-03-11 12:11:57.027 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00118.CR3 to burst_1.png
+2024-03-11 12:11:59.969 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00119.CR3 to burst_1.png
+2024-03-11 12:12:02.955 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00120.CR3 to burst_1.png
+2024-03-11 12:12:05.882 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00121.CR3 to burst_1.png
+2024-03-11 12:12:08.846 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00122.CR3 to burst_1.png
+2024-03-11 12:12:11.822 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00123.CR3 to burst_1.png
+2024-03-11 12:12:14.815 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00124.CR3 to burst_1.png
+2024-03-11 12:12:17.730 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00125.CR3 to burst_1.png
+2024-03-11 12:12:20.674 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00126.CR3 to burst_1.png
+2024-03-11 12:12:23.602 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00127.CR3 to burst_1.png
+2024-03-11 12:12:26.573 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00128.CR3 to burst_1.png
+2024-03-11 12:12:29.495 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00129.CR3 to burst_1.png
+2024-03-11 12:12:32.453 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00130.CR3 to burst_1.png
+2024-03-11 12:12:35.401 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00131.CR3 to burst_1.png
+2024-03-11 12:12:38.353 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00132.CR3 to burst_1.png
+2024-03-11 12:12:41.286 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00133.CR3 to burst_1.png
+2024-03-11 12:12:42.802 | DEBUG    | imageautomation.utilities:debug:130 - Created burst_1.mp4
+2024-03-11 12:12:42.802 | DEBUG    | imageautomation.utilities:debug:130 - Created MP4 from PNGs for burst_1
+2024-03-11 12:12:43.963 | DEBUG    | imageautomation.utilities:debug:130 - Stabilization analysis complete for burst_1.mp4
+2024-03-11 12:12:45.861 | DEBUG    | imageautomation.utilities:debug:130 - Stabilized burst_1.mp4
+2024-03-11 12:12:45.861 | DEBUG    | imageautomation.utilities:debug:130 - Stabilized MP4 for burst_1
+2024-03-11 12:12:47.361 | DEBUG    | imageautomation.utilities:debug:130 - Created burst_1.gif
+2024-03-11 12:12:47.361 | DEBUG    | imageautomation.utilities:debug:130 - Created GIF from MP4 for burst_1
+2024-03-11 12:12:47.364 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_1.mp4 to /home/chuckcage/gitlab/burstrender/burst_1.mp4
+2024-03-11 12:12:47.365 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_1-stabilized.mp4 to /home/chuckcage/gitlab/burstrender/burst_1-stabilized.mp4
+2024-03-11 12:12:47.366 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_1.gif to /home/chuckcage/gitlab/burstrender/burst_1.gif
+2024-03-11 12:12:47.378 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/burst_1-image_*.png
+2024-03-11 12:12:47.378 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/burst_1.trf
+2024-03-11 12:12:47.379 | SUCCESS  | imageautomation.utilities:success:134 - Completed burst 1
+2024-03-11 12:12:47.379 | DEBUG    | imageautomation.utilities:debug:130 - Processing burst 2
+2024-03-11 12:12:50.372 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00664.CR3 to burst_2.png
+2024-03-11 12:12:53.355 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00663.CR3 to burst_2.png
+2024-03-11 12:12:56.323 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00665.CR3 to burst_2.png
+2024-03-11 12:12:59.351 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00666.CR3 to burst_2.png
+2024-03-11 12:13:02.383 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00667.CR3 to burst_2.png
+2024-03-11 12:13:05.449 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00668 (2).CR3 to burst_2.png
+2024-03-11 12:13:08.534 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00668.CR3 to burst_2.png
+2024-03-11 12:13:11.573 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00669 (2).CR3 to burst_2.png
+2024-03-11 12:13:14.674 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00669.CR3 to burst_2.png
+2024-03-11 12:13:17.765 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00670 (2).CR3 to burst_2.png
+2024-03-11 12:13:20.840 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00670.CR3 to burst_2.png
+2024-03-11 12:13:23.915 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00671.CR3 to burst_2.png
+2024-03-11 12:13:27.000 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00671 (2).CR3 to burst_2.png
+2024-03-11 12:13:30.085 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00672.CR3 to burst_2.png
+2024-03-11 12:13:33.155 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00673.CR3 to burst_2.png
+2024-03-11 12:13:36.220 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00673 (2).CR3 to burst_2.png
+2024-03-11 12:13:39.293 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00674.CR3 to burst_2.png
+2024-03-11 12:13:42.352 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00674 (2).CR3 to burst_2.png
+2024-03-11 12:13:45.430 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00675.CR3 to burst_2.png
+2024-03-11 12:13:48.516 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00675 (2).CR3 to burst_2.png
+2024-03-11 12:13:51.572 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00676.CR3 to burst_2.png
+2024-03-11 12:13:54.590 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00677.CR3 to burst_2.png
+2024-03-11 12:13:57.646 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00677 (2).CR3 to burst_2.png
+2024-03-11 12:14:00.719 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00678.CR3 to burst_2.png
+2024-03-11 12:14:03.769 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00679.CR3 to burst_2.png
+2024-03-11 12:14:06.828 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00680.CR3 to burst_2.png
+2024-03-11 12:14:09.882 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00681.CR3 to burst_2.png
+2024-03-11 12:14:12.898 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00682.CR3 to burst_2.png
+2024-03-11 12:14:15.928 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00683.CR3 to burst_2.png
+2024-03-11 12:14:18.977 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00684.CR3 to burst_2.png
+2024-03-11 12:14:21.975 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00685.CR3 to burst_2.png
+2024-03-11 12:14:25.009 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00686.CR3 to burst_2.png
+2024-03-11 12:14:28.045 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00687.CR3 to burst_2.png
+2024-03-11 12:14:31.057 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00688.CR3 to burst_2.png
+2024-03-11 12:14:34.099 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00689.CR3 to burst_2.png
+2024-03-11 12:14:37.130 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00690.CR3 to burst_2.png
+2024-03-11 12:14:40.148 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00691.CR3 to burst_2.png
+2024-03-11 12:14:43.131 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00692.CR3 to burst_2.png
+2024-03-11 12:14:46.155 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00693.CR3 to burst_2.png
+2024-03-11 12:14:49.210 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00694.CR3 to burst_2.png
+2024-03-11 12:14:52.231 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00695.CR3 to burst_2.png
+2024-03-11 12:14:55.249 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00696.CR3 to burst_2.png
+2024-03-11 12:14:58.285 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00697.CR3 to burst_2.png
+2024-03-11 12:15:01.309 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00698.CR3 to burst_2.png
+2024-03-11 12:15:04.339 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00699.CR3 to burst_2.png
+2024-03-11 12:15:07.321 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00700.CR3 to burst_2.png
+2024-03-11 12:15:10.310 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00701.CR3 to burst_2.png
+2024-03-11 12:15:13.309 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00702.CR3 to burst_2.png
+2024-03-11 12:15:16.294 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00703.CR3 to burst_2.png
+2024-03-11 12:15:19.262 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00704.CR3 to burst_2.png
+2024-03-11 12:15:22.212 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00705.CR3 to burst_2.png
+2024-03-11 12:15:25.232 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00706.CR3 to burst_2.png
+2024-03-11 12:15:28.239 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00707.CR3 to burst_2.png
+2024-03-11 12:15:31.219 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00708.CR3 to burst_2.png
+2024-03-11 12:15:34.230 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00709.CR3 to burst_2.png
+2024-03-11 12:15:37.242 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00710.CR3 to burst_2.png
+2024-03-11 12:15:40.242 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00711.CR3 to burst_2.png
+2024-03-11 12:15:43.257 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00712.CR3 to burst_2.png
+2024-03-11 12:15:44.952 | DEBUG    | imageautomation.utilities:debug:130 - Created burst_2.mp4
+2024-03-11 12:15:44.952 | DEBUG    | imageautomation.utilities:debug:130 - Created MP4 from PNGs for burst_2
+2024-03-11 12:15:46.193 | DEBUG    | imageautomation.utilities:debug:130 - Stabilization analysis complete for burst_2.mp4
+2024-03-11 12:15:48.293 | DEBUG    | imageautomation.utilities:debug:130 - Stabilized burst_2.mp4
+2024-03-11 12:15:48.293 | DEBUG    | imageautomation.utilities:debug:130 - Stabilized MP4 for burst_2
+2024-03-11 12:15:50.075 | DEBUG    | imageautomation.utilities:debug:130 - Created burst_2.gif
+2024-03-11 12:15:50.075 | DEBUG    | imageautomation.utilities:debug:130 - Created GIF from MP4 for burst_2
+2024-03-11 12:15:50.077 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_2.mp4 to /home/chuckcage/gitlab/burstrender/burst_2.mp4
+2024-03-11 12:15:50.078 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_2-stabilized.mp4 to /home/chuckcage/gitlab/burstrender/burst_2-stabilized.mp4
+2024-03-11 12:15:50.079 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_2.gif to /home/chuckcage/gitlab/burstrender/burst_2.gif
+2024-03-11 12:15:50.093 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/burst_2-image_*.png
+2024-03-11 12:15:50.094 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/burst_2.trf
+2024-03-11 12:15:50.095 | SUCCESS  | imageautomation.utilities:success:134 - Completed burst 2
+2024-03-11 12:15:50.095 | DEBUG    | imageautomation.utilities:debug:130 - Processing burst 3
+2024-03-11 12:15:53.100 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00714.CR3 to burst_3.png
+2024-03-11 12:15:56.101 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00713.CR3 to burst_3.png
+2024-03-11 12:15:59.075 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00715.CR3 to burst_3.png
+2024-03-11 12:16:02.100 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00716.CR3 to burst_3.png
+2024-03-11 12:16:05.098 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00717.CR3 to burst_3.png
+2024-03-11 12:16:08.111 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00718.CR3 to burst_3.png
+2024-03-11 12:16:11.149 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00719.CR3 to burst_3.png
+2024-03-11 12:16:14.193 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00720.CR3 to burst_3.png
+2024-03-11 12:16:17.200 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00721.CR3 to burst_3.png
+2024-03-11 12:16:20.199 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00722.CR3 to burst_3.png
+2024-03-11 12:16:23.217 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00723.CR3 to burst_3.png
+2024-03-11 12:16:26.252 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00724.CR3 to burst_3.png
+2024-03-11 12:16:29.231 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00725.CR3 to burst_3.png
+2024-03-11 12:16:32.185 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00726.CR3 to burst_3.png
+2024-03-11 12:16:35.155 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00727.CR3 to burst_3.png
+2024-03-11 12:16:38.129 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00728.CR3 to burst_3.png
+2024-03-11 12:16:41.102 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00729.CR3 to burst_3.png
+2024-03-11 12:16:44.102 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00730.CR3 to burst_3.png
+2024-03-11 12:16:47.112 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00731.CR3 to burst_3.png
+2024-03-11 12:16:50.136 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00732.CR3 to burst_3.png
+2024-03-11 12:16:53.146 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00733.CR3 to burst_3.png
+2024-03-11 12:16:56.138 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00734.CR3 to burst_3.png
+2024-03-11 12:16:59.092 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00735.CR3 to burst_3.png
+2024-03-11 12:17:02.081 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00736.CR3 to burst_3.png
+2024-03-11 12:17:05.079 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00737.CR3 to burst_3.png
+2024-03-11 12:17:08.120 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00738.CR3 to burst_3.png
+2024-03-11 12:17:11.092 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00739.CR3 to burst_3.png
+2024-03-11 12:17:14.085 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00740.CR3 to burst_3.png
+2024-03-11 12:17:17.076 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00741.CR3 to burst_3.png
+2024-03-11 12:17:20.061 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00742.CR3 to burst_3.png
+2024-03-11 12:17:23.028 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00743.CR3 to burst_3.png
+2024-03-11 12:17:26.006 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00744.CR3 to burst_3.png
+2024-03-11 12:17:28.990 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00745.CR3 to burst_3.png
+2024-03-11 12:17:31.989 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00746.CR3 to burst_3.png
+2024-03-11 12:17:34.978 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00747.CR3 to burst_3.png
+2024-03-11 12:17:38.011 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00748.CR3 to burst_3.png
+2024-03-11 12:17:40.987 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00749.CR3 to burst_3.png
+2024-03-11 12:17:43.982 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00750.CR3 to burst_3.png
+2024-03-11 12:17:46.996 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00751.CR3 to burst_3.png
+2024-03-11 12:17:50.015 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00752.CR3 to burst_3.png
+2024-03-11 12:17:52.993 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00753.CR3 to burst_3.png
+2024-03-11 12:17:55.997 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00754.CR3 to burst_3.png
+2024-03-11 12:17:58.950 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00755.CR3 to burst_3.png
+2024-03-11 12:18:01.990 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00756.CR3 to burst_3.png
+2024-03-11 12:18:04.999 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00757.CR3 to burst_3.png
+2024-03-11 12:18:08.023 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00758.CR3 to burst_3.png
+2024-03-11 12:18:11.042 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00758 (2).CR3 to burst_3.png
+2024-03-11 12:18:14.069 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00759.CR3 to burst_3.png
+2024-03-11 12:18:17.109 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00759 (2).CR3 to burst_3.png
+2024-03-11 12:18:20.145 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00760 (2).CR3 to burst_3.png
+2024-03-11 12:18:23.145 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00760.CR3 to burst_3.png
+2024-03-11 12:18:26.180 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00761 (2).CR3 to burst_3.png
+2024-03-11 12:18:29.181 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00761.CR3 to burst_3.png
+2024-03-11 12:18:32.198 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00762 (2).CR3 to burst_3.png
+2024-03-11 12:18:35.180 | DEBUG    | imageautomation.utilities:debug:130 - Converted /home/chuckcage/gitlab/burstrender/testimages/Copy of G05 South Side 00762.CR3 to burst_3.png
+2024-03-11 12:18:36.728 | DEBUG    | imageautomation.utilities:debug:130 - Created burst_3.mp4
+2024-03-11 12:18:36.728 | DEBUG    | imageautomation.utilities:debug:130 - Created MP4 from PNGs for burst_3
+2024-03-11 12:18:37.955 | DEBUG    | imageautomation.utilities:debug:130 - Stabilization analysis complete for burst_3.mp4
+2024-03-11 12:18:39.961 | DEBUG    | imageautomation.utilities:debug:130 - Stabilized burst_3.mp4
+2024-03-11 12:18:39.961 | DEBUG    | imageautomation.utilities:debug:130 - Stabilized MP4 for burst_3
+2024-03-11 12:18:41.705 | DEBUG    | imageautomation.utilities:debug:130 - Created burst_3.gif
+2024-03-11 12:18:41.706 | DEBUG    | imageautomation.utilities:debug:130 - Created GIF from MP4 for burst_3
+2024-03-11 12:18:41.708 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_3.mp4 to /home/chuckcage/gitlab/burstrender/burst_3.mp4
+2024-03-11 12:18:41.709 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_3-stabilized.mp4 to /home/chuckcage/gitlab/burstrender/burst_3-stabilized.mp4
+2024-03-11 12:18:41.710 | DEBUG    | imageautomation.utilities:debug:130 - Moved /home/chuckcage/.burstrender/working/burst_3.gif to /home/chuckcage/gitlab/burstrender/burst_3.gif
+2024-03-11 12:18:41.723 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/burst_3-image_*.png
+2024-03-11 12:18:41.724 | DEBUG    | imageautomation.utilities:debug:130 - Removed files: /home/chuckcage/.burstrender/working/burst_3.trf
+2024-03-11 12:18:41.725 | SUCCESS  | imageautomation.utilities:success:134 - Completed burst 3

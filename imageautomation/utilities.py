@@ -9,7 +9,7 @@ Classes:
 
 Functions:
 
-    None
+    run_subprocess
 
 Variables:
 
@@ -20,9 +20,19 @@ Global Variables (via config):
     config.quiet : bool
         Suppress progress bar output (default False)
 
+    config.exit_code : int
+        Exit code for the application (default 0)
+
+    config.exit_reason : str
+        Reason for the exit code
+
 """
 
 # History
+# 2024-03-11  Add exit_code and exit_reason to config
+# 2024-03-11  Add critical method to PrintLog
+# 2024-03-11  Add exception for rm in run_subprocess
+# 2024-03-11  Add run_subprocess
 # 2024-03-06  Add PrintLog extension of ColorPrint
 # 2024-03-06  First version (subset fromfootball.py core 1.4)
 
@@ -37,6 +47,7 @@ Global Variables (via config):
 import yaml
 from colorama import Fore, Style
 import pathlib
+import subprocess
 
 # TUI progress bar
 
@@ -90,17 +101,29 @@ class PrintLog:
         """Prints a message in red"""
         print(f"{Fore.RED}{message}{Style.RESET_ALL}")
 
+    def critical(message):
+        """Prints a message in red and logs a critical error"""
+        if not config.quiet:
+            PrintLog.print_red(message)  
+        logger.critical(message)
+        config.exit_code = 1
+
     def error(message):
         """Prints a message in red and logs an error"""
         if not config.quiet:
             PrintLog.print_red(message)  # Fix: Remove 'self' and call PrintLog.print_red()
         logger.error(message)
+        config.exit_code = 2
 
     def warning(message):
         """Prints a message in yellow and logs a warning"""
         if not config.quiet:
             PrintLog.print_yellow(message)  # Fix: Remove 'self' and call PrintLog.print_yellow()
         logger.warning(message)
+
+    def info(message):
+        """Logs an info message"""
+        logger.info(message)
 
     def debug(message):
         """Logs a debug message"""
@@ -166,3 +189,73 @@ class Configuration:
         else:
             configuration = self.get()
             return configuration.get(section, {}).get(subsection)
+
+#
+# Define functions
+#
+        
+def run_subprocess(application, command, success_message=None, error_message=None):
+    """
+    Run a subprocess command and return the output.
+
+    Parameters:
+
+        application : str
+            The name of the application for display purposes
+
+        command : list
+            The command to run as a list of strings
+        
+        success_message : str
+            Optional message to PrintLog if the command is successful
+            default: None
+
+        error_message : str
+            Optional message to PrintLog if the command is unsuccessful
+            default: None
+
+    """
+    try:
+        _ = subprocess.run( 
+            command,
+            check=True,
+            capture_output=True,
+        )
+
+    except FileNotFoundError as exc:
+        PrintLog.error(
+            f"{error_message}\n"
+            f"The {application} executable could not be found\n{exc}\n"
+            f"Please ensure that {application} is installed and the convert executable is in your PATH.\n"
+            f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
+        )
+        return False
+
+    except subprocess.CalledProcessError as exc:
+        if application == "rm":
+            PrintLog.debug(
+                f"{error_message}\n"
+                f"{application} did not return a successful return code. "
+                f"Returned {exc.returncode}\n{exc}\n"
+                f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
+            )
+            return True
+
+        PrintLog.error(
+            f"{error_message}\n"
+            f"{application} did not return a successful return code. "
+            f"Returned {exc.returncode}\n{exc}\n"
+            f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
+        )
+        return False
+
+    except subprocess.TimeoutExpired as exc:
+        PrintLog.error(
+            f"{error_message}\n"
+            f"{application} process timed out.\n{exc}/n"
+            f"{exc.stderr.decode() if hasattr(exc, 'stderr') else ''}"
+        )
+        return False
+
+    PrintLog.debug(success_message)    
+    return True
