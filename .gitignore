@@ -1,6 +1,7 @@
 testimages/
 testoutput/
 .venv/
+logs/
 *.png
 *.mp4
 *.gif
