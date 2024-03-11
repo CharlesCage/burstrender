@@ -34,7 +34,7 @@ Global Variables (via config):
 # 2024-03-11  Add exception for rm in run_subprocess
 # 2024-03-11  Add run_subprocess
 # 2024-03-06  Add PrintLog extension of ColorPrint
-# 2024-03-06  First version (subset fromfootball.py core 1.4)
+# 2024-03-06  First version (subset from football.py core 1.4)
 
 # TODO
 # None

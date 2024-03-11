@@ -29,15 +29,7 @@
 # TODO
 # Add CLI arg for movie width (default 2000)
 # Add CLI arg for movie speed (default 2.0 / half speed
-# Update README.md
 # Add validation for modulate, crop, and gravity strings
-
-
-# FIGURE OUT DEPLOYMENT
-# Requirements?  Python 3.11.2, ImageMagick, FFmpeg, ExifTool, set up RawTherapee as helper for ImageMagick ???
-# How to install?  pip install -r requirements.txt, sudo apt install imagemagick, sudo apt install ffmpeg, sudo apt install exiftool, sudo apt install rawtherapee ???
-# How to add to path? Add to .bashrc ???
-# Create a debian package?  https://packaging.ubuntu.com/html/packaging-new-software.html ???
 
 
 #
