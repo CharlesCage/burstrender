@@ -1,0 +1,7 @@
+#! /bin/bash
+# Activate the virtual environment, run burstrender.py, and deactivate the virtual environment
+# MODIFY THIS LINE TO POINT TO YOUR BURSTRENDER DIRECTORY
+. ~/github/burstrender/.venv/bin/activate
+# MODIFY THIS LINE TO POINT TO YOUR BURSTRENDER DIRECTORY
+python3 ~/github/burstrender/burstrender.py $@
+deactivate
