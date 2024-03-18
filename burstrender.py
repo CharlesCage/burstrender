@@ -1,5 +1,7 @@
 # History
 #
+# 2024-03-18 Increment version to 1.5
+# 2024-03-18 Add -normalize beforre -auto-level
 # 2024-03-11 Validate minimum burst length
 # 2024-03-11 Validate seconds between bursts
 # 2024-03-11 Validate gravity string
@@ -31,6 +33,10 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
+# Fix quote issue in move_files
+# Add recursive folder search for CR3 files
+# Detect and handle portrait mode
+
 # Add CLI arg for movie speed (default 2.0 / half speed
 
 #
@@ -62,7 +68,7 @@ from loguru import logger
 import config
 
 # VERSION
-version = "1.4"
+version = "1.5"
 config.exit_code = 0
 config.exir_reason = ""
 
@@ -424,7 +430,7 @@ def main(args):
         config.modulate_string = args.modulate_string
         PrintLog.debug(f"Modulate string from CLI arg: {config.modulate_string}")
     else:
-        config.modulate_string = "120"
+        config.modulate_string = "100"
         PrintLog.debug(f"Default modulate string: {config.modulate_string}")
 
     # Set the crop string for ImageMagick

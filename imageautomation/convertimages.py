@@ -80,6 +80,7 @@ def render_pngs_from_cr3s(cr3_files, output_file):
         command = [
             f"convert",
             f"{cr3_file}",
+            f"-normalize",
             f"-auto-level",
             f"-modulate",
             f"{config.modulate_string}",
