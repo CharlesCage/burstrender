@@ -217,15 +217,19 @@ Finally we can:
    
 5. Deactivate the .venv virtual environment with the command `deactivate`.
 
-### Edit the burstrender Script
+### Copy and Edit the burstrender Script
 
 In order to allow execution of burstrender.py within the .venv virtual environment from anywhere and without calling the python instance, this file is a shell script designed to do all that for you. But you need to do a few things to get it working.
 
-1. Edit the `burstrender` script file provided with the repo and adjust the paths so that they reference the location in which you put the git clone of this repo. NOTE that this is not the burstrender folder, but rather the burstrender file within the burstrender folder. If you cloned the repo to `~/github/burstrender` then just change both lines in the file from `~/gitlab/burstrender` to `~/github/burstrender` or wherever you put it.
-   
-2. Make the `burstrender` script executable with the command `chmod +x burstrender` or whatever works for your distro.
+1. Make a copy of the provided `burstrender.sample` file to a file named `burstrender`. If you're still sitting in your `burstrender` folder you can use the command
+    
+    `cp burstrender.sample burstrender`
 
-3. Test the script by executing it. If you're still in the burstrender folder, try `./burstrender`. Since there are no CR3 files provied in the repo, you should get a message that no CR3 files were found in the source path. If you get other errors, troubleshoot.
+2. Edit the `burstrender` script file provided with the repo and adjust the paths so that they reference the location in which you put the git clone of this repo. NOTE that this is not the burstrender folder, but rather the burstrender file within the burstrender folder. If you cloned the repo to `~/github/burstrender` then just change both lines in the file from `~/gitlab/burstrender` to `~/github/burstrender` or wherever you put it.
+   
+3. Make the `burstrender` script executable with the command `chmod +x burstrender` or whatever works for your distro.
+
+4. Test the script by executing it. If you're still in the burstrender folder, try `./burstrender`. Since there are no CR3 files provied in the repo, you should get a message that no CR3 files were found in the source path. If you get other errors, troubleshoot.
 
 ### Add a Symlink for the burstrender Script
 
