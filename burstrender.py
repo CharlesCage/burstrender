@@ -1,5 +1,7 @@
 # History
 #
+# 2024-03-19 Increment version to 2.1
+# 2024-03-19 Adjust sample PNG correction to use ffmpeg
 # 2024-03-19 Increment version to 2.0
 # 2024-03-19 Add CLI arg for custom -vf string
 # 2024-03-19 Remove CLI arg for modulate string
@@ -64,6 +66,7 @@ from imageautomation.combineimages import create_mp4
 from imageautomation.combineimages import stabilize_mp4
 from imageautomation.combineimages import create_gif_from_mp4
 from imageautomation.convertimages import render_pngs_from_cr3s
+from imageautomation.convertimages import correct_sample_png
 from imageautomation.utilities import PrintLog, Configuration, run_subprocess
 
 # TUI progress bar
@@ -76,7 +79,7 @@ from loguru import logger
 import config
 
 # VERSION
-version = "2.0"
+version = "2.1"
 config.exit_code = 0
 config.exir_reason = ""
 
@@ -538,6 +541,17 @@ def main(args):
             # Render PNGs from CR3 files
             if not render_pngs_from_cr3s([cr3_files[0]], output_file):
                 continue
+            
+            # Apply correction to PNG and move to destination path
+            if not correct_sample_png(output_file):
+                PrintLog.warning(f"Failed to correct sample PNG for {output_file}")
+                continue
+
+        # Clean up working directory
+        if not clear_working_directory():
+            PrintLog.warning(f"Failed to clear the working directory")
+        else:
+            PrintLog.debug(f"Cleaned up the working directory")
 
         # Done
         sys.exit(config.exit_code)
@@ -716,7 +730,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--sample-images-only",
         action="store_true",
-        help="Render the PNG for first image of each burst only",
+        help="Render the PNG for first image of each burst only, apply any ffmpeg corrections, and move to destination path",
     )
 
     parser.add_argument(

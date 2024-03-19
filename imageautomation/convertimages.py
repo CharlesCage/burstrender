@@ -7,6 +7,7 @@ Classes:
 Functions:
 
     render_pngs_from_cr3s
+    correct_sample_png
 
 Variables:
 
@@ -20,6 +21,8 @@ Global Variables (via config):
 """
 
 # History
+#
+# 2024-03-19 Add correct_sample_png to apply ffmpeg correction to single PNG
 # 2024-03-11 Remove auto-level, normalize, and modulate from initial PNG conversion
 # 2024-03-11 Refactor render_pngs_from_cr3s to use run_subprocess
 # 2024-03-11 Fix error handling in render_pngs_from_cr3s
@@ -87,7 +90,7 @@ def render_pngs_from_cr3s(cr3_files, output_file):
             f"{config.crop_string}",
             f"-resize",
             f"2000",
-            f"{config.destination_path if len(cr3_files) == 1 else config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
+            f"{config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
         ]
 
         result = run_subprocess(
@@ -99,14 +102,14 @@ def render_pngs_from_cr3s(cr3_files, output_file):
 
     return result
 
-def apply_correction_to_gif(output_file):
+def correct_sample_png(output_file):
     """
-    Apply a correction to the GIF file using ImageMagick.
+    Apply a correction to a single PNG using ffmpeg with user-requested settings.
 
     Parameters:
 
         output_file : str
-            The base file name for the input PNG and output GIF files
+            The base file name for the input PNG and output PNG files
 
     Returns:
 
@@ -116,20 +119,19 @@ def apply_correction_to_gif(output_file):
 
     # Execute command to apply a correction to the GIF file
     command = [
-        f"convert",
-        f"{config.working_directory}/{output_file}-uncorrected.gif",
-        f"-auto-level",
-        f"-normalize",
-        f"-modulate",
-        f"{config.modulate_string}",
-        f"{config.working_directory}/{output_file}.gif",
-    ]
+        f"ffmpeg",
+        f"-i",
+        f"{config.working_directory}/{output_file}-image_001.png",
+        f"-vf",
+        f"scale=2000:-2{config.normalize_string}{config.custom_vf_string}",
+        f"{config.destination_path}/{output_file}-testimage.png",
+        ]
 
     result = run_subprocess(
         "convert",
         command,
-        f"Applied correction to {output_file}.gif",
-        f"Failed to apply correction to {output_file}.gif",
+        f"Applied correction to {output_file}.png",
+        f"Failed to apply correction to {output_file}.png",
     )
 
     return result

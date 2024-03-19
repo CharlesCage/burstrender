@@ -30,7 +30,7 @@ Need to install 5.9 or later. This is in Debian 12 ("Bookworm"). Check with `apt
    
 3. Repeat #1 above to make sure `rawtherapee-cli` responds.
 
-If you're installing to Debian WSL under Windows, you're probably stuck with Debian 11 ("Bullseye"). Sadly this is oldstable as of March 2024, and it only provides version 5.8. If so, you have a couple of options.
+If you're installing to Debian WSL under Windows, you MIGHT be stuck with Debian 11 ("Bullseye"). If so, or for any reason you find yourself with an older version of  RawTherapee, your goal is to install v5.9 or later. Here are some options if you're on Debian. Feel free to search for other possibilities.
 
 #### Option 1: Install from Unstable
 
@@ -117,7 +117,7 @@ ImageMagick can't handle RAW files out of the box, at least not in most availabl
 
 1. Find ImageMagick's `delegates.xml` file.
 
-   On both Debian 12 and a Debian WSL install I found mine in `/etc/ImageMagick-6/delegates.xml`, so you might check thereabouts and get lucky.
+   On both Debian 12 and a Debian WSL ("Buster") install I found mine in `/etc/ImageMagick-6/delegates.xml`, so you might check thereabouts and get lucky.
 
    If not, you can try the command `find / -name delegates.xml`, but it can take a long time. You can always try `/etc` instead of `/` first, too. Or try the method below.
    
@@ -159,7 +159,7 @@ If this doesn't work, [this is a great resource](https://www.isoftstoneinc.com/i
 
 1. If you don't already have git installed, install it with `sudo apt install git`.
    
-2. Clone this repo into somewhere safe, like maybe underneath `~/github` in your home folder. It doesn't matter where you put it, but this is probably the easiest. If you're sitting in the location you want to clone, issue the command `git clone https://github.com/CharlesCage/burstrender`.
+2. Clone this repo into somewhere safe, like maybe underneath `~/github` in your home folder. It doesn't matter where you put it, but the instructions here are based on this assumption. If you're sitting in the location you want to clone, issue the command `git clone https://github.com/CharlesCage/burstrender`.
 
 ### Check config.yaml
 
@@ -171,13 +171,13 @@ Burstrender reads some basic parameters from a config.yaml file. Check the inclu
 
 ### Make Sure You Have Python3.11.x
 
-1. Execute the command `python3 --version`. If you're on Debian 12, you're fine. If you're installing to Debian WSL, you'll have something older.
+1. Execute the command `python3 --version`. If you see 3.11 or later, you can move on to creating and activating the virtual environment.
    
-2. As of now, Python3.11 is in unstable, so if you followed the pinning instructions above successfully, you should be able to install it with:
+2. If older, you need to install version 3.11 or newer. Use any method you like to do this. For those insttalling on Debain WSL ("Buster"), I was able to install it from unstable after adding the unstable repo as noted above. 
 
    `sudo apt install -t unstable python3`
 
-   Check it again if needed and confirm that it's installed. And yes, this might break things. It didn't for me, but pay attention.
+   However you go about it, be sure to check it again afterward to confirm that it's installed. And yes, this might break things if you're using Python. It didn't for me, but pay attention.
 
 ### Create/Activate .venv Virtual Environment
 
@@ -203,13 +203,17 @@ Ok. If you're on Debian WSL this gets just super fun and complicated. If you're 
 
    `sudo apt-get install build-essential python-all-dev libexiv2-dev`
 
-3. Install the remaining build requirement for py3exiv2, libboost-python-dev. BUT, this one needs to come from unstable. And it conflicts with other packages. I was able to make it work by using aptitude and letting it figure out how to solve the dependency problem.
+   If you're on Debian WSL ("Bookworm") you might get an error indicating that `python-all-dev` doesn't exist, and if so just omit it and install the rest. I had luck with this, though YMMV.
+
+3. Install the remaining build requirement for py3exiv2, libboost-python-dev. If you're on Debian WSL ("Bookworm") you might be able to get away with just `sudo apt install libboost-python-dev`. Or you may need to use aptitude as mentioned below. BUT, my experience with Debian WSL ("Buster") required installing from unstable. I was able to make it work by using aptitude and letting it figure out how to solve the dependency problem as follows:
 
    Start with `sudo apt install aptitude`.
 
    Then `sudo aptitude install -t unstable libboost-python-dev`. You SHOULD be able to accept the default solutions it provides. If all goes well, you end up with the package installed.
 
-Finally we can:
+If none of that works, DuckDuckGo is your friend.
+
+Once you have libboost-python-dev installed we can finally:
 
 4. Install the requirements with the command `pip3 install -r requirements.txt`.
 
@@ -249,10 +253,7 @@ And you're ready to go!
 
 ## Usage
 ```
-usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH]
-                   [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH]
-                   [--detect-only] [--sample-images-only] [--no-stabilization] [--gif-only] [--modulate-string MODULATE_STRING]
-                   [--crop-string CROP_STRING] [--gravity-string GRAVITY_STRING] [-q] [-v]
+usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH] [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH] [--detect-only] [--sample-images-only] [--no-stabilization] [--gif-only] [--no-normalize] [--custom-vf-string CUSTOM_VF_STRING] [--crop-string CROP_STRING] [--gravity-string GRAVITY_STRING] [-q] [-v]
 
 Render MP4s, Stabilized MP4s, and GIFs from burst CR3 RAW photos.
 
@@ -261,8 +262,7 @@ options:
   --source-path SOURCE_PATH
                         Specify a source path for the input CR3 files. (If omitted, the current working directory is used.)
   --destination-path DESTINATION_PATH
-                        Specify a destination path for rendered videos and/or gifs. (If omitted, the current working directory is
-                        used.)
+                        Specify a destination path for rendered videos and/or gifs. (If omitted, the current working directory is used.)
   --seconds-between-bursts SECONDS_BETWEEN_BURSTS
                         Specify minimum time between detected bursts in seconds. (Default is 2.)
   --minimum-burst-length MINIMUM_BURST_LENGTH
@@ -271,8 +271,9 @@ options:
   --sample-images-only  Render the PNG for first image of each burst only
   --no-stabilization    Do not stabilize the images
   --gif-only            Keep only final GIF and remove prelim MP4 files
-  --modulate-string MODULATE_STRING
-                        Specify a modulate string for ImageMagick. (Default is 120.)
+  --no-normalize        Disable automatic normalization of the MP4 files via ffmpeg
+  --custom-vf-string CUSTOM_VF_STRING
+                        Specify a custom -vf string for ffmpeg. (Will come after scaling, speed, and normalization if not disabled. A preceding comma is not required.)
   --crop-string CROP_STRING
                         Specify a crop string for ImageMagick. (Default is 6000x4000+0+0.)
   --gravity-string GRAVITY_STRING
@@ -331,11 +332,21 @@ Note that these strings should not include spaces and therefore also do not requ
 
 ### Image Brightness, etc.
 
-During the conversion from CR3 RAW to PNG, burstrender applies the [auto-level](https://imagemagick.org/script/command-line-options.php?#auto-level) parameter to ImageMagick, which essentially stretches the minimum and maximum color values in teh image to 0% and 100%, and sets a modulation of 120, which adds 20% bringness to the image.. This seems to do a pretty decent job of bringing the RAW to a viewable state.
+Burstrender uses `ffmpeg` to assemble the generated PNGs into an initial MP4 using `ffmpeg`. During this process it applies an internal [ffmpeg simple filtergraph](https://ffmpeg.org/ffmpeg.html#Filtering) ("`-vf`") of:
 
-However, you can tweak with the follwoing arugments/parameters:
+`scale=2000:-2,setpts2.0*PTS`
 
-`--modulate-string` allows you to specify an [ImageMagick modulate string](https://imagemagick.org/Usage/color_mods/#modulate) for the conversion. The defailt is *120*. Improperly formatted modulate-string parameters may lead to errors in RAW conversion.
+..which scales the large PNGs down to a more reasonable 2000px wide (while keeping aspect ratio) and slows the resulting video speed by half.
+
+Burstrender also applies by default an [ffmpeg normalization string](https://ffmpeg.org/ffmpeg-filters.html#normalize) to the end of the filter above:
+
+`,normalize=blackpt=black:whitept=white:smoothing=50`
+
+However:
+
+`--no-normalization` allows you to exclude the above normalization string, and
+
+`--custom-vf-string` allows you to include your own customized [simple filter string](https://ffmpeg.org/ffmpeg-filters.html), which will be appended to the end of the initial one above (and following the normalization string, if you haven't disabled it with `--no-normalization`.) Note that you do not need to add a leading comma as burstrender will add it for you. You also should not include any spaces in your custom filter string, nor should you enclose it in quotes.
 
 ### Specifying Desired Output
 
@@ -377,7 +388,7 @@ If you call burstrender from a folder containing CR3 files, it'll automatically
 
 * read the EXIF data from all the CR3s
 * try to break them into bursts by looking for gaps of >2 seconds and eliminating bursts of less than 10 images
-* produce a half-speed, 2000px-wide MP4
+* produce a half-speed, 2000px-wide, normalized MP4
 * produce a slightly-less-than-2000px-wide shake-stabilized MP4
 * and produce a 1000px-wide looping GIF
 * all for each detected burst
@@ -385,9 +396,13 @@ If you call burstrender from a folder containing CR3 files, it'll automatically
 However, if you want more control, you can try this process:
 
 1. Execute burstrender with the `--detect-only` argument, along with any `--source-path `and `--destination-path` you need.
+   
 2. Look at the burst data returned. If you like it, go on to the next step. If not, add `--seconds-between-bursts` and/or `--minimum-burst-length` parameters to your command and run it again until you like the results.
+
 3. Remove the `--detect-only` argument from your command (keeping any other changes) and add the `--sample-images-only` argument. Run the command again. This will generate PNGs from the first CR3 file in each burst.
-4. Take a look at the generated PNGs. If you like them, move on to the next step. Otherwise, add the `--modulate-string`, `--crop-string`, and/or `--gravity-string` arguments with parameters and run it again until you like the results.
+
+4. Take a look at the generated PNGs. If you like them, move on to the next step. Otherwise, add the `--crop-string`, `--gravity-string`, `--custom-vf-string`, and/or `--no-normalization` arguments with parameters and run it again until you like the results.
+
 5. Now remove the `--sample-images-only` argument and run the command to generate GIFs and/or MP4(s) for all the bursts.
 
 ## TODO
