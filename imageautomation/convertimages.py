@@ -20,6 +20,7 @@ Global Variables (via config):
 """
 
 # History
+# 2024-03-11 Remove auto-level, normalize, and modulate from initial PNG conversion
 # 2024-03-11 Refactor render_pngs_from_cr3s to use run_subprocess
 # 2024-03-11 Fix error handling in render_pngs_from_cr3s
 # 2024-03-07 Add gravity_string to config
@@ -80,10 +81,6 @@ def render_pngs_from_cr3s(cr3_files, output_file):
         command = [
             f"convert",
             f"{cr3_file}",
-            f"-normalize",
-            f"-auto-level",
-            f"-modulate",
-            f"{config.modulate_string}",
             f"-gravity",
             f"{config.gravity_string}",
             f"-crop",
@@ -99,5 +96,40 @@ def render_pngs_from_cr3s(cr3_files, output_file):
             f"Converted {cr3_file} to {output_file}.png",
             f"Failed to convert {cr3_file} to {output_file}.png",
         )
+
+    return result
+
+def apply_correction_to_gif(output_file):
+    """
+    Apply a correction to the GIF file using ImageMagick.
+
+    Parameters:
+
+        output_file : str
+            The base file name for the input PNG and output GIF files
+
+    Returns:
+
+        bool
+            True if the process was successful, False otherwise
+    """
+
+    # Execute command to apply a correction to the GIF file
+    command = [
+        f"convert",
+        f"{config.working_directory}/{output_file}-uncorrected.gif",
+        f"-auto-level",
+        f"-normalize",
+        f"-modulate",
+        f"{config.modulate_string}",
+        f"{config.working_directory}/{output_file}.gif",
+    ]
+
+    result = run_subprocess(
+        "convert",
+        command,
+        f"Applied correction to {output_file}.gif",
+        f"Failed to apply correction to {output_file}.gif",
+    )
 
     return result

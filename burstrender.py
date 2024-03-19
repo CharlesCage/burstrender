@@ -1,5 +1,12 @@
 # History
 #
+# 2024-03-19 Increment version to 2.0
+# 2024-03-19 Add CLI arg for custom -vf string
+# 2024-03-19 Remove CLI arg for modulate string
+# 2024-03-19 Add CLI arg for disabling ffmpeg normalization
+# 2024-03-19 Add default ffmpeg normalization
+# 2024-03-19 Remove final ImageMagick pass
+# 2024-03-18 Move correction to final ImageMagick pass
 # 2024-03-18 Increment version to 1.5
 # 2024-03-18 Add -normalize beforre -auto-level
 # 2024-03-11 Validate minimum burst length
@@ -33,6 +40,7 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
+# Update README.md to document new features
 # Fix quote issue in move_files
 # Add recursive folder search for CR3 files
 # Detect and handle portrait mode
@@ -68,7 +76,7 @@ from loguru import logger
 import config
 
 # VERSION
-version = "1.5"
+version = "2.0"
 config.exit_code = 0
 config.exir_reason = ""
 
@@ -425,13 +433,20 @@ def main(args):
         config.min_burst_length = 10
         PrintLog.debug(f"Default minimum burst length: {config.min_burst_length}")
 
-    # Set the modulate string for ImageMagick
-    if args.modulate_string:
-        config.modulate_string = args.modulate_string
-        PrintLog.debug(f"Modulate string from CLI arg: {config.modulate_string}")
+    # Set the normalizattion string for ffmpeg based on CLI arg
+    if args.no_normalize:
+        config.normalize_string = ""
+        PrintLog.debug(f"Normalization disabled from CLI arg")
     else:
-        config.modulate_string = "100"
-        PrintLog.debug(f"Default modulate string: {config.modulate_string}")
+        config.normalize_string = ",normalize=blackpt=black:whitept=white:smoothing=50"
+        PrintLog.debug(f"Default normalization string: {config.normalize_string}")
+
+    # Set the custom -vf string for ffmpeg based on CLI arg
+    if args.custom_vf_string:
+        config.custom_vf_string = f",{args.custom_vf_string}"
+        PrintLog.debug(f"Custom -vf string from CLI arg: {config.custom_vf_string}")
+    else:
+        config.custom_vf_string = ""
 
     # Set the crop string for ImageMagick
     if args.crop_string:
@@ -717,9 +732,14 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "--modulate-string",
+        "--no-normalize",
+        action="store_true",
+        help="Disable automatic normalization of the MP4 files via ffmpeg",
+    )
+    parser.add_argument(
+        "--custom-vf-string",
         action="store",
-        help="Specify a modulate string for ImageMagick. (Default is 120.)",
+        help="Specify a custom -vf string for ffmpeg. (Will come after scaling, speed, and normalization if not disabled. A preceding comma is not required.)",
     )
 
     parser.add_argument(

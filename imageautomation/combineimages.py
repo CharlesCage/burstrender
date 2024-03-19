@@ -25,6 +25,8 @@ Global Variables (via config):
 """
 
 # History
+#
+# 2024-03-18 Remove support for final ImageMagick correction of GIF
 # 2024-03-11 Update documentation
 # 2024-03-11 Refactor to use run_subprocess
 # 2024-03-06 Add logging and quiet option, fix misplaced return statements
@@ -69,7 +71,7 @@ def create_mp4(output_file):
         f"-i",
         f"{config.working_directory}/{output_file}-image_%03d.png",
         f"-vf",
-        f"scale=2000:-2,setpts=2.0*PTS",
+        f"scale=2000:-2,setpts=2.0*PTS{config.normalize_string}{config.custom_vf_string}",
         f"-c:v",
         f"libx264",
         f"-pix_fmt",
