@@ -74,10 +74,12 @@ By default, burstrender will scan and detect bursts from all CR3s in the source 
 
 ```
 Detected 3 burst(s):
-  Burst 1: 2024-02-16 14:14:19.280000 to 2024-02-16 14:14:19.760000 (50 photos)
-  Burst 2: 2024-02-16 14:27:09.850000 to 2024-02-16 14:27:10.330000 (58 photos)
-  Burst 3: 2024-02-16 14:28:24.710000 to 2024-02-16 14:28:25.190000 (55 photos)
+  Burst 1: 2024-02-16 14:14:19.280000 to 2024-02-16 14:14:19.760000 (50 photos, landscape)
+  Burst 2: 2024-02-16 14:27:09.850000 to 2024-02-16 14:27:10.330000 (58 photos, landscape)
+  Burst 3: 2024-02-16 14:28:24.710000 to 2024-02-16 14:28:25.190000 (55 photos, portrait)
 ```
+
+Note that as of v3.0, burstrender also detects portrait or landscape photos based on the `EXIF:Orientation` EXIF data field. This was based on Canon R3 test images in which a value of `8` indicated landscape.
 
 `--sample-images-only` tells burstrender to perform the EXIF data extraction and burst detection processes and then render *only the first image in each burst* directly to the output folder. 
 
@@ -87,9 +89,9 @@ Currently burstrender expects CR3s shot on a Canon R3. These Canon RAW files inc
 
 If you are using a different camera and/or different settings and this doesn't work for you, OR you want to crop the image differently, you can use the following arguemnts/parameters to adjust ImageMagick's cropping of the CR3 file during conversion to PNG:
 
-`--crop-string` allows you to directly specify an [ImageMagick crop string](https://www.imagemagick.org/Usage/crop/#crop_gravity) for the conversion. The default is *6000x4000+0+0*. Improperly formatted crop-string parameters may lead to errors in RAW converstion.
+`--crop-string` allows you to directly specify an [ImageMagick crop string](https://www.imagemagick.org/Usage/crop/#crop_gravity) for the conversion. The default is *6000x4000+0+0* for landscape images or *4000x6000+0+0* for portrait images. Improperly formatted crop-string parameters may lead to errors in RAW converstion.
 
-`--gravity-string` allows you to specify an [ImageMagick gravity setting](https://www.imagemagick.org/Usage/crop/#crop_gravity). The default is *SouthEast*.
+`--gravity-string` allows you to specify an [ImageMagick gravity setting](https://www.imagemagick.org/Usage/crop/#crop_gravity). The default is *SouthEast* for landscape images and *NorthEast* for portrait images.
 
 Note that these strings should not include spaces and therefore also do not require quotes of any kind.
 
@@ -97,9 +99,10 @@ Note that these strings should not include spaces and therefore also do not requ
 
 Burstrender uses `ffmpeg` to assemble the generated PNGs into an initial MP4 using `ffmpeg`. During this process it applies an internal [ffmpeg simple filtergraph](https://ffmpeg.org/ffmpeg.html#Filtering) ("`-vf`") of:
 
-`scale=2000:-2,setpts2.0*PTS`
+`scale=2000:-2,setpts2.0*PTS` for landscape images or `scale=-2:2000,setpts2.0*PTS` for portrait images.
 
-..which scales the large PNGs down to a more reasonable 2000px wide (while keeping aspect ratio) and slows the resulting video speed by half.
+
+..which scales the large PNGs down to a more reasonable 2000px largest side (while keeping aspect ratio) and slows the resulting video speed by half.
 
 Burstrender also applies by default an [ffmpeg normalization string](https://ffmpeg.org/ffmpeg-filters.html#normalize) to the end of the filter above:
 
@@ -151,9 +154,9 @@ If you call burstrender from a folder containing CR3 files, it'll automatically
 
 * read the EXIF data from all the CR3s
 * try to break them into bursts by looking for gaps of >2 seconds and eliminating bursts of less than 10 images
-* produce a half-speed, 2000px-wide, normalized MP4
-* produce a slightly-less-than-2000px-wide shake-stabilized MP4
-* and produce a 1000px-wide looping GIF
+* produce a half-speed, 2000px-largest-size, normalized MP4
+* produce a slightly-less-than-2000px-largest-size shake-stabilized MP4
+* and produce a 1000px-largest-side looping GIF
 * all for each detected burst
 
 However, if you want more control, you can try this process:

@@ -1,5 +1,11 @@
 # History
 #
+# 2024-03-29 Update README.md to document new features, increment version to 3.0
+# 2024-03-29 Handle portrait mode
+# 2024-03-29 Fix issue with files existing in move files
+# 2024-03-29 Add long side detection to detect_bursts
+# 2024-03-29 Adjust code to handle individual image crop/gravity strings
+# 2024-03-19 # Update README.md to document new featuresw
 # 2024-03-19 Increment version to 2.1
 # 2024-03-19 Adjust sample PNG correction to use ffmpeg
 # 2024-03-19 Increment version to 2.0
@@ -42,7 +48,6 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
-# Update README.md to document new features
 # Fix quote issue in move_files
 # Add recursive folder search for CR3 files
 # Detect and handle portrait mode
@@ -79,7 +84,7 @@ from loguru import logger
 import config
 
 # VERSION
-version = "2.1"
+version = "3.0"
 config.exit_code = 0
 config.exir_reason = ""
 
@@ -456,8 +461,8 @@ def main(args):
         config.crop_string = args.crop_string
         PrintLog.debug(f"Crop string from CLI arg: {config.crop_string}")
     else:
-        config.crop_string = "6000x4000+0+0"
-        PrintLog.debug(f"Default crop string: {config.crop_string}")
+        config.crop_string = None
+        PrintLog.debug(f"Default crop string: 6000x4000+0+0 or 4000x6000+0+0 based on orientation")
 
     # Set the gravity string for ImageMagick
     if args.gravity_string:
@@ -482,8 +487,8 @@ def main(args):
             sys.exit(config.exit_code)
         PrintLog.debug(f"Gravity string from CLI arg: {config.gravity_string}")
     else:
-        config.gravity_string = "SouthEast"
-        PrintLog.debug(f"Default gravity string: {config.gravity_string}")
+        config.gravity_string = None
+        PrintLog.debug(f"Default gravity string: SouthEast or NorthEast based on orientation")
 
     # Set the quiet mode
     config.quiet = args.quiet
@@ -517,7 +522,9 @@ def main(args):
         print(f"Detected {len(burst_info)} burst(s):")
         for burst in burst_info:
             print(
-                f"  Burst {burst_info.index(burst) + 1}: {burst['start']} to {burst['end']} ({burst['frames']} photos)"
+                f"  Burst {burst_info.index(burst) + 1}: "
+                f"{burst['start']} to {burst['end']} ({burst['frames']} photos, "
+                 f"{'landscape' if burst['long_side'] == 'width' else 'portrait'})"
             )
         sys, exit(config.exit_code)
     else:
@@ -543,7 +550,7 @@ def main(args):
                 continue
             
             # Apply correction to PNG and move to destination path
-            if not correct_sample_png(output_file):
+            if not correct_sample_png(output_file, cr3_files[0][1]):
                 PrintLog.warning(f"Failed to correct sample PNG for {output_file}")
                 continue
 
@@ -605,7 +612,7 @@ def main(args):
         )
 
         # Create MP4 from PNGs
-        if not create_mp4(output_file):
+        if not create_mp4(output_file, cr3_files_list[0][0][1]):
             PrintLog.error(
                 f"Failed to create MP4 from PNGs for {output_file}. Skipping."
             )
@@ -638,7 +645,7 @@ def main(args):
         render_progress_bar.set_description("Creating GIF")
         render_progress_bar.refresh()
 
-        if not create_gif_from_mp4(output_file, args.no_stabilization):
+        if not create_gif_from_mp4(output_file, cr3_files_list[0][0][1], args.no_stabilization):
             PrintLog.error(
                 f"Failed to create GIF from MP4 for {output_file}. Skipping."
             )

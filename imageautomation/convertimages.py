@@ -22,6 +22,10 @@ Global Variables (via config):
 
 # History
 #
+# 2024-03-29 Handle crop and gravity strings by orientation in render_pngs_from_cr3s
+# 2024-03-29 Add -y parameter to ffmpeg command to overwrite existing files
+# 2024-03-29 Add long_side parameter to correct_sample_png
+# 2024-03-29 Fix render_from_pngs to handle tuplex in cr3_files (filename, long_side)
 # 2024-03-19 Add correct_sample_png to apply ffmpeg correction to single PNG
 # 2024-03-11 Remove auto-level, normalize, and modulate from initial PNG conversion
 # 2024-03-11 Refactor render_pngs_from_cr3s to use run_subprocess
@@ -67,7 +71,7 @@ def render_pngs_from_cr3s(cr3_files, output_file):
 
         output_file : str
             The output file name for the PNG files
-
+        
     Returns:
 
         bool
@@ -81,15 +85,39 @@ def render_pngs_from_cr3s(cr3_files, output_file):
         leave=False,
         disable=True if len(cr3_files) == 1 else config.quiet,
     ):
+        # Set width or height for resize based on long_side
+        if cr3_file[1] == "width": # long_side is width
+            resize_string = "2000"
+        else:
+            resize_string = "x2000"
+
+        # Set crop string if not specified by user
+        if not config.crop_string:
+            if cr3_file[1] == "width":
+                im_crop_string = "6000x4000+0+0"
+            else:
+                im_crop_string = "4000x6000+0+0"
+        else:
+            im_crop_string = config.crop_string
+
+        # Set gravity string if not specified by user
+        if not config.gravity_string:
+            if cr3_file[1] == "width":
+                im_gravity_string = "SouthEast"
+            else:
+                im_gravity_string = "NorthEast"
+        else:
+            im_gravity_string = config.gravity_string
+        
         command = [
             f"convert",
-            f"{cr3_file}",
+            f"{cr3_file[0]}",
             f"-gravity",
-            f"{config.gravity_string}",
+            f"{im_gravity_string}",
             f"-crop",
-            f"{config.crop_string}",
+            f"{im_crop_string}",
             f"-resize",
-            f"2000",
+            f"{resize_string}",
             f"{config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
         ]
 
@@ -102,7 +130,7 @@ def render_pngs_from_cr3s(cr3_files, output_file):
 
     return result
 
-def correct_sample_png(output_file):
+def correct_sample_png(output_file, long_side="width"):
     """
     Apply a correction to a single PNG using ffmpeg with user-requested settings.
 
@@ -111,19 +139,29 @@ def correct_sample_png(output_file):
         output_file : str
             The base file name for the input PNG and output PNG files
 
+        long_side : str
+            The long side of the image for the resize operation
+            (default "width")
+    
     Returns:
 
         bool
             True if the process was successful, False otherwise
     """
-
+    # Set width or height for resize based on long_side
+    if long_side == "width":
+        scale_string = "2000:-2"
+    else:
+        scale_string = "-2:2000"
+    
     # Execute command to apply a correction to the GIF file
     command = [
         f"ffmpeg",
+        f"-y",
         f"-i",
         f"{config.working_directory}/{output_file}-image_001.png",
         f"-vf",
-        f"scale=2000:-2{config.normalize_string}{config.custom_vf_string}",
+        f"scale={scale_string}{config.normalize_string}{config.custom_vf_string}",
         f"{config.destination_path}/{output_file}-testimage.png",
         ]
 

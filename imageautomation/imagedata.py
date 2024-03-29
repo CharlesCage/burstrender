@@ -21,6 +21,7 @@ Global Variables (via config):
 """
 
 # History
+# 2024-03-29 Add long side detection to detect_bursts
 # 2024-03-11 Update documentation
 # 2024-03-06 Add logging and quiet option
 # 2024-03-05 Added detect-only functionality and tqdm progress bar
@@ -117,8 +118,9 @@ def detect_bursts(df, detect_only=False, seconds_between_bursts=2, min_burst_len
 
     Returns:
 
-        output_list : list
-            A list of CR3 files in each burst or a list of burst_info dictionaries
+        output_list : list of tuples
+            A list of tuples (path/filename and long_side) for CR3 files in each burst
+            or a list of burst_info dictionaries if detect_only is True
     """
 
     # Combine the columns EXIF:DateTimeOriginal and EXIF:SubSecTimeOriginal into a new column
@@ -128,6 +130,12 @@ def detect_bursts(df, detect_only=False, seconds_between_bursts=2, min_burst_len
             format="%Y:%m:%d %H:%M:%S.%f",
         ),
         axis=1,
+    )
+
+    # Combine the columns EXIF:DateTimeOriginal and EXIF:SubSecTimeOriginal into a new column
+    df["LongSide"] = df.apply(
+        lambda row: "width" if row["EXIF:Orientation"] == 1 else "height",
+        axis=1
     )
 
     # Sort the dataframe by the 'Timestamp' column in increasing order
@@ -161,11 +169,15 @@ def detect_bursts(df, detect_only=False, seconds_between_bursts=2, min_burst_len
                 "frames": len(group_df),
                 "start": group_df["Timestamp"].iloc[0],
                 "end": group_df["Timestamp"].iloc[-1],
+                "long_side": group_df["LongSide"].iloc[0],
             }
             output_list.append(burst_info)
         else:
             # Get the CR3 files in the group
             cr3_files = group_df["SourceFile"].tolist()
+
+            # Get the long side of the files in the group
+            cr3_long_side = group_df["LongSide"].tolist()
 
             # Get the directory of the CR3 files
             cr3_directory = os.path.dirname(cr3_files[0])
@@ -173,8 +185,11 @@ def detect_bursts(df, detect_only=False, seconds_between_bursts=2, min_burst_len
             # Concatenate the directory and filename to create the full path filename
             cr3_files = [os.path.join(cr3_directory, filename) for filename in cr3_files]
 
+            # Combine the CR3 files and long side into a list of tuples
+            cr3_list = list(zip(cr3_files, cr3_long_side))
+            
             # Append the list of full path filenames to the cr3_files_list
-            output_list.append(cr3_files)
+            output_list.append(cr3_list)
 
     PrintLog.debug(f"Detected {len(output_list)} burst(s)")
 

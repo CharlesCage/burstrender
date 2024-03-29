@@ -26,6 +26,8 @@ Global Variables (via config):
 
 # History
 #
+# 2024-03-29 Add long_side parameter to create_mp4
+# 2024-03-29 Add long_side parameter to create_gif_from_mp4
 # 2024-03-18 Remove support for final ImageMagick correction of GIF
 # 2024-03-11 Update documentation
 # 2024-03-11 Refactor to use run_subprocess
@@ -50,7 +52,7 @@ from loguru import logger
 # Config for global variables
 import config
 
-def create_mp4(output_file):
+def create_mp4(output_file, long_side="width"):
     """
     Create an MP4 file from the PNG files using FFmpeg.
 
@@ -59,11 +61,21 @@ def create_mp4(output_file):
         output_file : str
             The base file name for the input PNG and output MP4 files
 
+        long_side : str
+            The long side of the video (width or height)
+            Default is width
+
     Returns:
 
         bool
             True if the process was successful, False otherwise
     """
+
+    # Determine the scale string based on the long side
+    if long_side == "width":
+        scale_string = "2000:-2"
+    else:
+        scale_string = "-2:2000"
 
     # Execute command to create an MP4 file from the PNG files
     command = [
@@ -71,7 +83,7 @@ def create_mp4(output_file):
         f"-i",
         f"{config.working_directory}/{output_file}-image_%03d.png",
         f"-vf",
-        f"scale=2000:-2,setpts=2.0*PTS{config.normalize_string}{config.custom_vf_string}",
+        f"scale={scale_string},setpts=2.0*PTS{config.normalize_string}{config.custom_vf_string}",
         f"-c:v",
         f"libx264",
         f"-pix_fmt",
@@ -153,7 +165,7 @@ def stabilize_mp4(output_file):
 
     return result
 
-def create_gif_from_mp4(output_file, no_stabilization=False):
+def create_gif_from_mp4(output_file, long_side="width", no_stabilization=False):
     """
     Create a GIF file from the MP4 file using FFmpeg.
 
@@ -161,6 +173,10 @@ def create_gif_from_mp4(output_file, no_stabilization=False):
 
             output_file : str
                 The base file name (no ext) for the MP4 input and output files
+
+            long_side : str
+                The long side of the video (width or height)
+                Default is width
 
             no_stabilization : bool
                 True if the MP4 file is not stabilized, False otherwise
@@ -171,13 +187,19 @@ def create_gif_from_mp4(output_file, no_stabilization=False):
             bool
                 True if the process was successful, False otherwise
     """
+    # Determine the scale string based on the long side
+    if long_side == "width":
+        scale_string = "480:-1"
+    else:
+        scale_string = "-1:480"
+
     # Execute command to create a GIF file from the MP4 file
     command = [
         f"ffmpeg",
         f"-i",
         f"{config.working_directory}/{output_file}{'' if no_stabilization else'-stabilized'}.mp4",
         f"-filter_complex",
-        f"[0:v] fps=30,scale=480:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse",
+        f"[0:v] fps=30,scale={scale_string},split [a][b];[a] palettegen [p];[b][p] paletteuse",
         f"{config.working_directory}/{output_file}.gif",
     ]
 
