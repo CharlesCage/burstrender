@@ -1,5 +1,7 @@
 # History
 #
+# 2024-05-10 Increment version to 4.0
+# 2024-05-10 Move move_files function to imageautomation.utilities
 # 2024-03-29 Update README.md to document new features, increment version to 3.0
 # 2024-03-29 Handle portrait mode
 # 2024-03-29 Fix issue with files existing in move files
@@ -72,7 +74,12 @@ from imageautomation.combineimages import stabilize_mp4
 from imageautomation.combineimages import create_gif_from_mp4
 from imageautomation.convertimages import render_pngs_from_cr3s
 from imageautomation.convertimages import correct_sample_png
-from imageautomation.utilities import PrintLog, Configuration, run_subprocess
+from imageautomation.utilities import (
+    PrintLog,
+    Configuration,
+    run_subprocess,
+    move_files,
+)
 
 # TUI progress bar
 from tqdm import tqdm
@@ -84,7 +91,7 @@ from loguru import logger
 import config
 
 # VERSION
-version = "3.0"
+version = "4.0"
 config.exit_code = 0
 config.exir_reason = ""
 
@@ -124,41 +131,6 @@ logger.add(
 #
 # Functions
 #
-
-
-def move_files(target_file, destination_file):
-    """
-    Move a file to a new location.
-
-    Parameters:
-
-        target_file : str
-            The full path filename of the file to be moved
-
-        destination_file : str
-            The full path filename of the destination file
-
-    Returns:
-
-        result : bool
-            True if the process was successful, False otherwise
-    """
-
-    # Execute the mv command to remove files
-    command = [
-        f"sh",
-        f"-c",
-        f"mv {target_file} {destination_file}",
-    ]
-
-    result = run_subprocess(
-        "mv",
-        command,
-        f"Moved {target_file} to {destination_file}",
-        f"Failed to move {target_file} to {destination_file}",
-    )
-
-    return result
 
 
 def delete_files(filespec):
@@ -375,7 +347,7 @@ def main(args):
     # Set global variables
     #
 
-    # Set the source path for the input CR3 files
+    # Set the source path for the input files
     if args.source_path:
         config.source_path = os.path.abspath(args.source_path)
         PrintLog.debug(f"Source path from CLI arg: {config.source_path}")
@@ -462,7 +434,9 @@ def main(args):
         PrintLog.debug(f"Crop string from CLI arg: {config.crop_string}")
     else:
         config.crop_string = None
-        PrintLog.debug(f"Default crop string: 6000x4000+0+0 or 4000x6000+0+0 based on orientation")
+        PrintLog.debug(
+            f"Default crop string: 6000x4000+0+0 or 4000x6000+0+0 based on orientation"
+        )
 
     # Set the gravity string for ImageMagick
     if args.gravity_string:
@@ -488,7 +462,17 @@ def main(args):
         PrintLog.debug(f"Gravity string from CLI arg: {config.gravity_string}")
     else:
         config.gravity_string = None
-        PrintLog.debug(f"Default gravity string: SouthEast or NorthEast based on orientation")
+        PrintLog.debug(
+            f"Default gravity string: SouthEast or NorthEast based on orientation"
+        )
+
+    # Set the file extension for the source files
+    if args.accept_jpg:
+        config.file_extension = ".jpg"
+        PrintLog.debug(f"File extension from CLI arg: {config.file_extension}")
+    else:
+        config.file_extension = ".cr3"
+        PrintLog.debug(f"Default file extension: {config.file_extension}")
 
     # Set the quiet mode
     config.quiet = args.quiet
@@ -498,12 +482,12 @@ def main(args):
     #
 
     # Call the extractEXIF function to extract EXIF data from the images
-    df = extractEXIF(config.source_path)
+    df = extractEXIF(config.source_path, config.file_extension)
 
-    # Exit if no CR3 files are found
+    # Exit if no input files are found
     if df.empty:
         PrintLog.warning(
-            f"No CR3 files found in the source path: {config.source_path}/ "
+            f"No {config.file_extension} files found in the source path: {config.source_path}/ "
             f"Use the --source-path argument to specify a different source path"
         )
         sys.exit(config.exit_code)
@@ -524,7 +508,7 @@ def main(args):
             print(
                 f"  Burst {burst_info.index(burst) + 1}: "
                 f"{burst['start']} to {burst['end']} ({burst['frames']} photos, "
-                 f"{'landscape' if burst['long_side'] == 'width' else 'portrait'})"
+                f"{'landscape' if burst['long_side'] == 'width' else 'portrait'})"
             )
         sys, exit(config.exit_code)
     else:
@@ -538,7 +522,7 @@ def main(args):
     # Output sample images and exit if requested
     if args.sample_images_only:
 
-        # Iterate over each group of CR3 files and output the first image of each burst
+        # Iterate over each group of input files and output the first image of each burst
         for cr3_files in tqdm(
             cr3_files_list, desc="Rendering PNGs", unit="burst", disable=config.quiet
         ):
@@ -548,7 +532,7 @@ def main(args):
             # Render PNGs from CR3 files
             if not render_pngs_from_cr3s([cr3_files[0]], output_file):
                 continue
-            
+
             # Apply correction to PNG and move to destination path
             if not correct_sample_png(output_file, cr3_files[0][1]):
                 PrintLog.warning(f"Failed to correct sample PNG for {output_file}")
@@ -645,7 +629,9 @@ def main(args):
         render_progress_bar.set_description("Creating GIF")
         render_progress_bar.refresh()
 
-        if not create_gif_from_mp4(output_file, cr3_files_list[0][0][1], args.no_stabilization):
+        if not create_gif_from_mp4(
+            output_file, cr3_files_list[0][0][1], args.no_stabilization
+        ):
             PrintLog.error(
                 f"Failed to create GIF from MP4 for {output_file}. Skipping."
             )
@@ -726,6 +712,12 @@ if __name__ == "__main__":
         "--minimum-burst-length",
         action="store",
         help="Specify minimum number of photos in burst. (Default is 10.)",
+    )
+
+    parser.add_argument(
+        "--accept-jpg",
+        action="store_true",
+        help="Tell burtrender to look for bursts in JPG files. (Default is CR3.)",
     )
 
     parser.add_argument(

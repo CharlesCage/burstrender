@@ -22,6 +22,7 @@ Global Variables (via config):
 
 # History
 #
+# 2024-05-10 Add handling for jpeg input files, auto-orient on convert
 # 2024-03-29 Handle crop and gravity strings by orientation in render_pngs_from_cr3s
 # 2024-03-29 Add -y parameter to ffmpeg command to overwrite existing files
 # 2024-03-29 Add long_side parameter to correct_sample_png
@@ -35,7 +36,7 @@ Global Variables (via config):
 # 2024-03-07 Add modulate_string to config
 # 2024-03-06 Add logging and quiet option
 # 2024-03-06 Add tqdm progress bar, single-file processing, and working directory
-# 2024-03-05 Firsts version
+# 2024-03-05 First version
 
 # TODO
 # None
@@ -71,7 +72,7 @@ def render_pngs_from_cr3s(cr3_files, output_file):
 
         output_file : str
             The output file name for the PNG files
-        
+
     Returns:
 
         bool
@@ -81,46 +82,69 @@ def render_pngs_from_cr3s(cr3_files, output_file):
     # Loop through cr3_files and execute command to convert each CR3 file to a PNG file
     for cr3_file in tqdm(
         cr3_files,
-        desc="Converting CR3s to PNGs",
+        desc=f"Converting {config.file_extension.upper().replace('.', '')}s to PNGs",
         leave=False,
         disable=True if len(cr3_files) == 1 else config.quiet,
     ):
+
         # Set width or height for resize based on long_side
-        if cr3_file[1] == "width": # long_side is width
+        if cr3_file[1] == "width":  # long_side is width
             resize_string = "2000"
         else:
             resize_string = "x2000"
 
         # Set crop string if not specified by user
         if not config.crop_string:
-            if cr3_file[1] == "width":
-                im_crop_string = "6000x4000+0+0"
+            # No default crop for jpg
+            if cr3_file[0].upper().endswith("JPG"):
+                im_crop_string = None
             else:
-                im_crop_string = "4000x6000+0+0"
+                if cr3_file[1] == "width":
+                    im_crop_string = "6000x4000+0+0"
+                else:
+                    im_crop_string = "4000x6000+0+0"
         else:
             im_crop_string = config.crop_string
 
         # Set gravity string if not specified by user
         if not config.gravity_string:
-            if cr3_file[1] == "width":
-                im_gravity_string = "SouthEast"
+            # No default gravity for jpg
+            if cr3_file[0].upper().endswith("JPG"):
+                im_gravity_string = None
             else:
-                im_gravity_string = "NorthEast"
+                if cr3_file[1] == "width":
+                    im_gravity_string = "SouthEast"
+                else:
+                    im_gravity_string = "NorthEast"
         else:
             im_gravity_string = config.gravity_string
-        
+
         command = [
             f"convert",
             f"{cr3_file[0]}",
-            f"-gravity",
-            f"{im_gravity_string}",
-            f"-crop",
-            f"{im_crop_string}",
-            f"-resize",
-            f"{resize_string}",
-            f"{config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png",
         ]
 
+        # Add gravity and crop strings if specified
+        if im_gravity_string:
+            command.append("-gravity")
+            command.append(f"{im_gravity_string}")
+        if im_crop_string:
+            command.append("-crop")
+            command.append(f"{im_crop_string}")
+
+        # Add resize string
+        command.append("-resize")
+        command.append(f"{resize_string}")
+
+        # Add auto-orient
+        command.append("-auto-orient")
+
+        # Add output file name
+        command.append(
+            f"{config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png"
+        )
+
+        # print(command)
         result = run_subprocess(
             "convert",
             command,
@@ -129,6 +153,7 @@ def render_pngs_from_cr3s(cr3_files, output_file):
         )
 
     return result
+
 
 def correct_sample_png(output_file, long_side="width"):
     """
@@ -142,7 +167,7 @@ def correct_sample_png(output_file, long_side="width"):
         long_side : str
             The long side of the image for the resize operation
             (default "width")
-    
+
     Returns:
 
         bool
@@ -153,7 +178,7 @@ def correct_sample_png(output_file, long_side="width"):
         scale_string = "2000:-2"
     else:
         scale_string = "-2:2000"
-    
+
     # Execute command to apply a correction to the GIF file
     command = [
         f"ffmpeg",
@@ -163,7 +188,7 @@ def correct_sample_png(output_file, long_side="width"):
         f"-vf",
         f"scale={scale_string}{config.normalize_string}{config.custom_vf_string}",
         f"{config.destination_path}/{output_file}-testimage.png",
-        ]
+    ]
 
     result = run_subprocess(
         "convert",

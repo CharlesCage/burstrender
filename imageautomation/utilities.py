@@ -29,6 +29,7 @@ Global Variables (via config):
 """
 
 # History
+# 2024-05-10  Include move_files function
 # 2024-03-11  Add exit_code and exit_reason to config
 # 2024-03-11  Add critical method to PrintLog
 # 2024-03-11  Add exception for rm in run_subprocess
@@ -68,7 +69,7 @@ class PrintLog:
     A class to print messages in different colors and log them.
 
     Attributes:
-    
+
             None
 
     Methods:
@@ -91,6 +92,7 @@ class PrintLog:
         success(message):
             Logs a success message
     """
+
     @staticmethod
     def print_yellow(message):
         """Prints a message in yellow"""
@@ -104,21 +106,25 @@ class PrintLog:
     def critical(message):
         """Prints a message in red and logs a critical error"""
         if not config.quiet:
-            PrintLog.print_red(message)  
+            PrintLog.print_red(message)
         logger.critical(message)
         config.exit_code = 1
 
     def error(message):
         """Prints a message in red and logs an error"""
         if not config.quiet:
-            PrintLog.print_red(message)  # Fix: Remove 'self' and call PrintLog.print_red()
+            PrintLog.print_red(
+                message
+            )  # Fix: Remove 'self' and call PrintLog.print_red()
         logger.error(message)
         config.exit_code = 2
 
     def warning(message):
         """Prints a message in yellow and logs a warning"""
         if not config.quiet:
-            PrintLog.print_yellow(message)  # Fix: Remove 'self' and call PrintLog.print_yellow()
+            PrintLog.print_yellow(
+                message
+            )  # Fix: Remove 'self' and call PrintLog.print_yellow()
         logger.warning(message)
 
     def info(message):
@@ -159,7 +165,9 @@ class Configuration:
     @logger.catch
     def __init__(self):
         """Constructs all necessary attributes for the Config object."""
-        self.source = f"{pathlib.Path(__file__).parent.parent.absolute() / 'config.yaml'}"
+        self.source = (
+            f"{pathlib.Path(__file__).parent.parent.absolute() / 'config.yaml'}"
+        )
 
     @logger.catch
     def get(self):
@@ -190,10 +198,12 @@ class Configuration:
             configuration = self.get()
             return configuration.get(section, {}).get(subsection)
 
+
 #
 # Define functions
 #
-        
+
+
 def run_subprocess(application, command, success_message=None, error_message=None):
     """
     Run a subprocess command and return the output.
@@ -205,7 +215,7 @@ def run_subprocess(application, command, success_message=None, error_message=Non
 
         command : list
             The command to run as a list of strings
-        
+
         success_message : str
             Optional message to PrintLog if the command is successful
             default: None
@@ -216,7 +226,7 @@ def run_subprocess(application, command, success_message=None, error_message=Non
 
     """
     try:
-        _ = subprocess.run( 
+        _ = subprocess.run(
             command,
             check=True,
             capture_output=True,
@@ -257,5 +267,44 @@ def run_subprocess(application, command, success_message=None, error_message=Non
         )
         return False
 
-    PrintLog.debug(success_message)    
+    PrintLog.debug(success_message)
     return True
+
+
+def move_files(target_file, destination_file, copy=True):
+    """
+    Move a file to a new location.
+
+    Parameters:
+
+        target_file : str
+            The full path filename of the file to be moved
+
+        destination_file : str
+            The full path filename of the destination file
+
+    Returns:
+
+        result : bool
+            True if the process was successful, False otherwise
+    """
+
+    # Execute the mv command to remove files
+    command = [
+        f"sh",
+        f"-c",
+        (
+            f"mv {target_file} {destination_file}"
+            if not copy
+            else f"cp {target_file} {destination_file}"
+        ),
+    ]
+
+    result = run_subprocess(
+        "mv",
+        command,
+        f"Moved {target_file} to {destination_file}",
+        f"Failed to move {target_file} to {destination_file}",
+    )
+
+    return result

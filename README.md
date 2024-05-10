@@ -16,7 +16,8 @@ BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3), identif
 
 ## Usage
 ```
-usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH] [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH] [--detect-only] [--sample-images-only] [--no-stabilization] [--gif-only] [--no-normalize] [--custom-vf-string CUSTOM_VF_STRING] [--crop-string CROP_STRING] [--gravity-string GRAVITY_STRING] [-q] [-v]
+usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH] [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH] [--accept-jpg] [--detect-only] [--sample-images-only] [--no-stabilization] [--gif-only] [--no-normalize]
+                   [--custom-vf-string CUSTOM_VF_STRING] [--crop-string CROP_STRING] [--gravity-string GRAVITY_STRING] [-q] [-v]
 
 Render MP4s, Stabilized MP4s, and GIFs from burst CR3 RAW photos.
 
@@ -30,8 +31,9 @@ options:
                         Specify minimum time between detected bursts in seconds. (Default is 2.)
   --minimum-burst-length MINIMUM_BURST_LENGTH
                         Specify minimum number of photos in burst. (Default is 10.)
+  --accept-jpg          Tell burtrender to look for bursts in JPG files. (Default is CR3.)
   --detect-only         Detect burst photos and display information only
-  --sample-images-only  Render the PNG for first image of each burst only
+  --sample-images-only  Render the PNG for first image of each burst only, apply any ffmpeg corrections, and move to destination path
   --no-stabilization    Do not stabilize the images
   --gif-only            Keep only final GIF and remove prelim MP4 files
   --no-normalize        Disable automatic normalization of the MP4 files via ffmpeg
@@ -65,6 +67,10 @@ Howevver, you can tweak these knobs with the following arguments/parameters:
 `--seconds-between-bursts` allows you to define the minimum gap between bursts in seconds. The default is *2*.
 
 `--minimum-burst-length` allows you to specify the minimum number of images to qualify an image grouping as a "burst." The defaults is *10*.
+
+### Accept JPG Files as Input
+
+By default, bursrender will look for CR3 files. However, you can tell it to look for JPG files instead using the `--accept-jpg` flag. *Note: I only tested this with some images that came from a Nikon R8, so there might be issues if the files are small, differently-configured, etc.*
 
 ### Assistance in Preparing Batches
 

@@ -21,6 +21,8 @@ Global Variables (via config):
 """
 
 # History
+#
+# 2024-05-10 Add handling for jpeg input files
 # 2024-03-29 Add long side detection to detect_bursts
 # 2024-03-11 Update documentation
 # 2024-03-06 Add logging and quiet option
@@ -53,16 +55,19 @@ from loguru import logger
 import config
 
 # Ignore pandas warnings
-warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
+warnings.simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
-def extractEXIF(directory):
+
+def extractEXIF(directory, file_extension=".cr3"):
     """
-    Extract EXIF data from CR3 files in a directory and return as a pandas dataframe.
+    Extract EXIF data from specifiedx files in a directory and return as a pandas dataframe.
 
     Parameters:
 
         directory : str
             The directory containing the CR3 files
+        file_extension : str
+            The file extension of the desired files (default ".cr3")
 
     Returns:
 
@@ -75,14 +80,18 @@ def extractEXIF(directory):
     with exiftool.ExifTool() as et:
         # Get a list of all image files in the directory
         image_files = [
-            file for file in os.listdir(directory) if file.lower().endswith((".cr3"))
+            file
+            for file in os.listdir(directory)
+            if file.lower().endswith((file_extension))
         ]
 
         # Create an empty pandas dataframe to store the EXIF data
         df = pd.DataFrame()
 
         # Iterate over each image file
-        for image_file in tqdm(image_files, desc="Extracting EXIF data", unit="file", disable=config.quiet):
+        for image_file in tqdm(
+            image_files, desc="Extracting EXIF data", unit="file", disable=config.quiet
+        ):
             # Get the full path of the image file
             image_path = os.path.join(directory, image_file)
 
@@ -134,8 +143,7 @@ def detect_bursts(df, detect_only=False, seconds_between_bursts=2, min_burst_len
 
     # Combine the columns EXIF:DateTimeOriginal and EXIF:SubSecTimeOriginal into a new column
     df["LongSide"] = df.apply(
-        lambda row: "width" if row["EXIF:Orientation"] == 1 else "height",
-        axis=1
+        lambda row: "width" if row["EXIF:Orientation"] == 1 else "height", axis=1
     )
 
     # Sort the dataframe by the 'Timestamp' column in increasing order
@@ -183,11 +191,13 @@ def detect_bursts(df, detect_only=False, seconds_between_bursts=2, min_burst_len
             cr3_directory = os.path.dirname(cr3_files[0])
 
             # Concatenate the directory and filename to create the full path filename
-            cr3_files = [os.path.join(cr3_directory, filename) for filename in cr3_files]
+            cr3_files = [
+                os.path.join(cr3_directory, filename) for filename in cr3_files
+            ]
 
             # Combine the CR3 files and long side into a list of tuples
             cr3_list = list(zip(cr3_files, cr3_long_side))
-            
+
             # Append the list of full path filenames to the cr3_files_list
             output_list.append(cr3_list)
 

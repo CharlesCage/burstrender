@@ -1,0 +1,225 @@
+ExifTool Version Number         : 12.57
+File Name                       : Copy of Copy of ARC_5553.JPG
+Directory                       : /home/chuckcage/gitlab/burstrender/testimages
+File Size                       : 11 MB
+File Modification Date/Time     : 2024:05:10 11:16:58-05:00
+File Access Date/Time           : 2024:05:10 11:21:35-05:00
+File Inode Change Date/Time     : 2024:05:10 11:21:35-05:00
+File Permissions                : -rw-r--r--
+File Type                       : JPEG
+File Type Extension             : jpg
+MIME Type                       : image/jpeg
+Exif Byte Order                 : Little-endian (Intel, II)
+Make                            : NIKON CORPORATION
+Camera Model Name               : NIKON Z 8
+Orientation                     : Rotate 270 CW
+X Resolution                    : 300
+Y Resolution                    : 300
+Resolution Unit                 : inches
+Software                        : Ver.01.01
+Modify Date                     : 2024:04:27 13:37:15
+Artist                          : 
+Y Cb Cr Positioning             : Co-sited
+Copyright                       : 
+Exposure Time                   : 1/2500
+F Number                        : 2.8
+Exposure Program                : Manual
+ISO                             : 200
+Sensitivity Type                : Recommended Exposure Index
+Recommended Exposure Index      : 200
+Exif Version                    : 0232
+Date/Time Original              : 2024:04:27 13:37:15
+Create Date                     : 2024:04:27 13:37:15
+Offset Time                     : -05:00
+Offset Time Original            : -05:00
+Offset Time Digitized           : -05:00
+Components Configuration        : Y, Cb, Cr, -
+Compressed Bits Per Pixel       : 2
+Exposure Compensation           : 0
+Metering Mode                   : Multi-segment
+Light Source                    : Fine Weather
+Flash                           : No Flash
+Focal Length                    : 300.0 mm
+Maker Note Version              : 2.11
+Quality                         : Normal
+White Balance                   : Sunny
+Focus Mode                      : AF-C
+Flash Setting                   : Normal
+Flash Type                      : 
+WB RB Levels                    : 1.8515625 1.42578125 1 1
+Program Shift                   : 0
+Exposure Difference             : 0
+Image Boundary                  : 0 0 8256 5504
+External Flash Exposure Comp    : 0
+Flash Exposure Bracket Value    : 0.0
+Exposure Bracket Value          : n/a
+Crop Hi Speed                   : FX Uncropped (8280x5520 cropped to 8280x5520 at pixel 0,0)
+Exposure Tuning                 : 0
+VR Info Version                 : 0200
+Vibration Reduction             : On
+VR Mode                         : Normal
+VR Type                         : In-body + Lens
+Active D-Lighting               : Off
+Picture Control Version         : 0302
+Picture Control Name            : Auto
+Picture Control Base            : Auto
+Picture Control Adjust          : Quick Adjust
+Picture Control Quick Adjust    : n/a
+Mid Range Sharpness             : n/a
+Clarity                         : n/a
+Brightness                      : n/a
+Hue                             : n/a
+Filter Effect                   : n/a
+Toning Effect                   : n/a
+Toning Saturation               : n/a
+Time Zone                       : -06:00
+Daylight Savings                : Yes
+Date Display Format             : D/M/Y
+ISO Expansion                   : Off
+ISO2                            : 200
+ISO Expansion 2                 : Off
+Vignette Control                : Normal
+Auto Distortion Control         : On
+Shutter Mode                    : Electronic (High Speed)
+HDR Info Version                : 0200
+HDR                             : Off
+HDR Level                       : n/a
+Mechanical Shutter Count        : 0
+Image Size RAW                  : Large
+White Balance Fine Tune         : 0 0
+Color Temperature Auto          : 0
+Firmware Version                : 0100
+Burst Group ID                  : 44928
+Lens Type                       : G VR
+Lens                            : 300mm f/2.8
+Flash Mode                      : Did Not Fire
+Shooting Mode                   : Continuous
+Shot Info Version               : 0806
+Noise Reduction                 : Off
+Color Balance Version           : 0803
+Lens Data Version               : 0802
+Exit Pupil Position             : 136.5 mm
+AF Aperture                     : 2.8
+Focus Distance                  : 19.95 m
+Lens ID Number                  : 166
+Lens F Stops                    : 6.00
+Min Focal Length                : 302.0 mm
+Max Focal Length                : 302.0 mm
+Max Aperture At Min Focal       : 2.8
+Max Aperture At Max Focal       : 2.8
+MCU Version                     : 168
+Effective Max Aperture          : 2.8
+Retouch History                 : None
+Image Data Size                 : 9974946
+Shutter Count                   : 35550
+Flash Info Version              : 0301
+Flash Source                    : None
+External Flash Firmware         : n/a
+External Flash Flags            : (none)
+Flash Commander Mode            : Off
+Flash Control Mode              : Off
+Flash GN Distance               : 0
+Flash Color Filter              : None
+Flash Group A Control Mode      : Off
+Flash Group B Control Mode      : Off
+Flash Group C Control Mode      : Off
+Flash Illumination Pattern      : Standard
+Flash Group A Compensation      : +0.3
+Flash Group B Compensation      : +0.3
+Flash Group C Compensation      : +0.3
+Vari Program                    : 
+Multi Exposure Version          : 0103
+Multi Exposure Mode             : Off
+Multi Exposure Shots            : 0
+Multi Exposure Overlay Mode     : Add
+High ISO Noise Reduction        : High
+Power Up Time                   : 2024:04:27 13:02:02
+AF Info 2 Version               : 0400
+Contrast Detect AF              : On (2)
+AF Area Mode                    : Single
+Phase Detect AF                 : Off
+Primary AF Point                : C6 (Center)
+AF Points Used                  : (none)
+File Info Version               : 0100
+Memory Card Number              : 0
+Directory Number                : 104
+File Number                     : 5553
+AF Fine Tune                    : Off
+AF Fine Tune Index              : n/a
+AF Fine Tune Adj                : 0
+AF Fine Tune Adj Tele           : 0
+Retouch Info Version            : 0200
+Retouch NEF Processing          : Off
+Silent Photography              : Off
+User Comment                    : 
+Sub Sec Time                    : 29
+Sub Sec Time Original           : 29
+Sub Sec Time Digitized          : 29
+Flashpix Version                : 0100
+Color Space                     : sRGB
+Exif Image Width                : 8256
+Exif Image Height               : 5504
+Interoperability Index          : R98 - DCF basic file (sRGB)
+Interoperability Version        : 0100
+Sensing Method                  : One-chip color area
+File Source                     : Digital Camera
+Scene Type                      : Directly photographed
+CFA Pattern                     : [Red,Green][Green,Blue]
+Custom Rendered                 : Custom
+Exposure Mode                   : Manual
+Focal Length In 35mm Format     : 300 mm
+Scene Capture Type              : Standard
+Gain Control                    : None
+Contrast                        : Normal
+Saturation                      : Normal
+Sharpness                       : Normal
+Subject Distance Range          : Unknown
+Serial Number                   : 3027041
+Lens Info                       : 300mm f/2.8
+Lens Make                       : 
+Lens Model                      : VR 300mm f/2.8G
+Lens Serial Number              : 
+Composite Image                 : Not a Composite Image
+GPS Version ID                  : 2.3.0.0
+Compression                     : JPEG (old-style)
+Thumbnail Offset                : 23460
+Thumbnail Length                : 9390
+Creator Tool                    : NIKON Z 8 Ver.01.01
+Rating                          : 0
+MPF Version                     : 0100
+Number Of Images                : 3
+MP Image Flags                  : Dependent child image
+MP Image Format                 : JPEG
+MP Image Type                   : Large Thumbnail (full HD equivalent)
+MP Image Length                 : 483933
+MP Image Start                  : 10210816
+Dependent Image 1 Entry Number  : 0
+Dependent Image 2 Entry Number  : 0
+Image Width                     : 8256
+Image Height                    : 5504
+Encoding Process                : Baseline DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:2:2 (2 1)
+Aperture                        : 2.8
+Blue Balance                    : 1.425781
+Image Size                      : 8256x5504
+Megapixels                      : 45.4
+Red Balance                     : 1.851563
+Scale Factor To 35 mm Equivalent: 1.0
+Shutter Speed                   : 1/2500
+Create Date                     : 2024:04:27 13:37:15.29-05:00
+Date/Time Original              : 2024:04:27 13:37:15.29-05:00
+Modify Date                     : 2024:04:27 13:37:15.29-05:00
+Thumbnail Image                 : (Binary data 9390 bytes, use -b option to extract)
+Preview Image                   : (Binary data 131225 bytes, use -b option to extract)
+MP Image 3                      : (Binary data 483933 bytes, use -b option to extract)
+Auto Focus                      : On
+Lens ID                         : AF-S Nikkor 300mm f/2.8G IF-ED VR II
+Lens Spec                       : 300mm f/2.8 G VR
+Circle Of Confusion             : 0.030 mm
+Depth Of Field                  : 0.73 m (19.59 - 20.33 m)
+Field Of View                   : 6.8 deg (2.36 m)
+Focal Length                    : 300.0 mm (35 mm equivalent: 300.0 mm)
+Hyperfocal Distance             : 1069.78 m
+Light Value                     : 13.3
