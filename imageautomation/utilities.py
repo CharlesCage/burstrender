@@ -235,7 +235,7 @@ class Configuration:
 #
 
 
-def run_subprocess(application, command, success_message=None, error_message=None):
+def run_subprocess(application, command, success_message=None, error_message=None, cwd=None):
     """
     Run a subprocess command and return the output.
 
@@ -255,6 +255,12 @@ def run_subprocess(application, command, success_message=None, error_message=Non
             Optional message to PrintLog if the command is unsuccessful
             default: None
 
+        cwd : str or Path, optional
+            Working directory for the subprocess.  Useful when passing relative
+            file paths in filter strings to avoid OS-specific path issues
+            (e.g. Windows drive-letter colons in ffmpeg filtergraph options).
+            default: None (inherit current working directory)
+
     """
     if not command or command[0] is None:
         PrintLog.error(
@@ -269,6 +275,7 @@ def run_subprocess(application, command, success_message=None, error_message=Non
             command,
             check=True,
             capture_output=True,
+            cwd=cwd,
         )
 
     except FileNotFoundError as exc:

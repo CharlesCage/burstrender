@@ -126,16 +126,12 @@ def stabilize_mp4(output_file):
     """
 
     # FFmpeg's libavfilter uses ':' as an option separator.  On Windows,
-    # drive-letter paths (e.g. C:\...) contain a bare ':' that the filter-graph
-    # parser mis-reads as an option separator, even inside single-quoted values.
-    # Fix: convert backslashes to forward-slashes and escape the drive-letter
-    # colon as '\:' so the ffmpeg filtergraph parser treats it as a literal colon.
-    # Example: C:\Users\foo\burst_1.trf → C\:/Users/foo/burst_1.trf
-    # The path is used without surrounding quotes so that the '\:' escape applies.
-    import re as _re
-    raw_trf = f"{config.working_directory}/{output_file}.trf"
-    trf_path = raw_trf.replace("\\", "/")
-    trf_path = _re.sub(r"^([A-Za-z])(:/)", r"\1\\:/", trf_path)
+    # any path containing a drive-letter colon (e.g. C:\...) breaks the
+    # filtergraph parser even with single-quote quoting or '\:' escaping.
+    # Fix: use a bare filename (no directory path) for the trf file and pass
+    # cwd=config.working_directory so ffmpeg resolves it relative to the
+    # working directory — no colon in the filter string at all.
+    trf_name = f"{output_file}.trf"
 
     # Execute command to perform stabilization analysis on the MP4 file
     command = [
@@ -143,7 +139,7 @@ def stabilize_mp4(output_file):
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabdetect=shakiness=10:accuracy=15:result={trf_path}",
+                f"vidstabdetect=shakiness=10:accuracy=15:result={trf_name}",
                 f"-f",
                 f"null",
                 f"-",
@@ -153,7 +149,8 @@ def stabilize_mp4(output_file):
         "ffmpeg",
         command,
         success_message=f"Stabilization analysis complete for {output_file}.mp4",
-        error_message=f"Failed to process stabilization analysis for {output_file}.mp4"
+        error_message=f"Failed to process stabilization analysis for {output_file}.mp4",
+        cwd=config.working_directory,
     )
 
     if not result:
@@ -165,7 +162,7 @@ def stabilize_mp4(output_file):
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabtransform=smoothing=30:input={trf_path}",
+                f"vidstabtransform=smoothing=30:input={trf_name}",
                 f"{config.working_directory}/{output_file}-stabilized.mp4",
     ]
 
@@ -173,7 +170,8 @@ def stabilize_mp4(output_file):
         "ffmpeg",
         command,
         success_message=f"Stabilized {output_file}.mp4",
-        error_message=f"Failed to stabilize {output_file}.mp4"
+        error_message=f"Failed to stabilize {output_file}.mp4",
+        cwd=config.working_directory,
     )
 
     return result

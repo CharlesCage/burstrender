@@ -37,7 +37,7 @@ def captured_commands(monkeypatch):
     """
     calls = []
 
-    def fake_run_subprocess(application, command, success_message=None, error_message=None):
+    def fake_run_subprocess(application, command, success_message=None, error_message=None, cwd=None):
         calls.append((application, list(command)))
         return True
 
