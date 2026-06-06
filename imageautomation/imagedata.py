@@ -44,9 +44,7 @@ import exiftool
 
 # Modules
 from .utilities import PrintLog
-
-# TUI progress bar
-from tqdm import tqdm
+from imageautomation.binaries import resolve
 
 # Logging
 from loguru import logger
@@ -60,50 +58,35 @@ warnings.simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
 def extractEXIF(directory, file_extension=".cr3"):
     """
-    Extract EXIF data from specifiedx files in a directory and return as a pandas dataframe.
+    Extract EXIF data from matching files in a directory.
 
-    Parameters:
+    Uses a single batched exiftool invocation (PyExifTool >= 0.5 API).
+    The exiftool binary is resolved via imageautomation.binaries so the
+    bundled copy wins when present.
 
-        directory : str
-            The directory containing the CR3 files
-        file_extension : str
-            The file extension of the desired files (default ".cr3")
-
-    Returns:
-
-        df : pandas.DataFrame
-            A pandas dataframe containing the EXIF data from the CR3 files
-
+    Returns a pandas DataFrame (empty if no files matched).
     """
+    image_files = sorted(
+        os.path.join(directory, f)
+        for f in os.listdir(directory)
+        if f.lower().endswith(file_extension)
+    )
 
-    # Create an instance of the ExifTool class
-    with exiftool.ExifTool() as et:
-        # Get a list of all image files in the directory
-        image_files = [
-            file
-            for file in os.listdir(directory)
-            if file.lower().endswith((file_extension))
-        ]
+    if not image_files:
+        return pd.DataFrame()
 
-        # Create an empty pandas dataframe to store the EXIF data
-        df = pd.DataFrame()
+    exiftool_path = resolve("exiftool")
+    if exiftool_path is None:
+        PrintLog.critical(
+            "exiftool not found (bundle or PATH). Run with --doctor for details."
+        )
+        return pd.DataFrame()
 
-        # Iterate over each image file
-        for image_file in tqdm(
-            image_files, desc="Extracting EXIF data", unit="file", disable=config.quiet
-        ):
-            # Get the full path of the image file
-            image_path = os.path.join(directory, image_file)
+    with exiftool.ExifToolHelper(executable=exiftool_path) as et:
+        metadata = et.get_metadata(image_files)
 
-            # Extract the EXIF data using ExifTool
-            exif_data = et.get_metadata(image_path)
-
-            # Append the EXIF data to the dataframe
-            df = pd.concat([df, pd.DataFrame([exif_data])], ignore_index=True)
-
-    PrintLog.debug(f"Extracted EXIF data from {len(df)} CR3 files")
-
-    # Return the Da the dataframe
+    df = pd.DataFrame(metadata)
+    PrintLog.debug(f"Extracted EXIF data from {len(df)} files")
     return df
 
 
