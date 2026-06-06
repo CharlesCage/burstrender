@@ -125,10 +125,17 @@ def stabilize_mp4(output_file):
             True if the process was successful, False otherwise
     """
 
-    # FFmpeg's libavfilter uses ':' as an option separator, so Windows paths
-    # with drive letters (e.g. C:\...) must use forward slashes to avoid
-    # breaking the filter-graph parser.
-    trf_path = f"{config.working_directory}/{output_file}.trf".replace("\\", "/")
+    # FFmpeg's libavfilter uses ':' as an option separator.  On Windows,
+    # drive-letter paths (e.g. C:\...) contain a bare ':' that the filter-graph
+    # parser mis-reads as an option separator, even inside single-quoted values.
+    # Fix: convert backslashes to forward-slashes and escape the drive-letter
+    # colon as '\:' so the ffmpeg filtergraph parser treats it as a literal colon.
+    # Example: C:\Users\foo\burst_1.trf → C\:/Users/foo/burst_1.trf
+    # The path is used without surrounding quotes so that the '\:' escape applies.
+    import re as _re
+    raw_trf = f"{config.working_directory}/{output_file}.trf"
+    trf_path = raw_trf.replace("\\", "/")
+    trf_path = _re.sub(r"^([A-Za-z])(:/)", r"\1\\:/", trf_path)
 
     # Execute command to perform stabilization analysis on the MP4 file
     command = [
@@ -136,7 +143,7 @@ def stabilize_mp4(output_file):
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabdetect=shakiness=10:accuracy=15:result='{trf_path}'",
+                f"vidstabdetect=shakiness=10:accuracy=15:result={trf_path}",
                 f"-f",
                 f"null",
                 f"-",
@@ -158,7 +165,7 @@ def stabilize_mp4(output_file):
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabtransform=smoothing=30:input='{trf_path}'",
+                f"vidstabtransform=smoothing=30:input={trf_path}",
                 f"{config.working_directory}/{output_file}-stabilized.mp4",
     ]
 
