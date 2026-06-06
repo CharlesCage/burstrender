@@ -42,9 +42,19 @@ _EXE_SUFFIX = ".exe" if sys.platform == "win32" else ""
 
 
 def bundle_bin_dir():
-    """Directory holding vendored binaries (frozen: next to the exe)."""
+    """Directory holding vendored binaries.
+
+    Frozen layout (PyInstaller ≥6 one-dir):
+      Primary:   <exe-dir>/bin/            (user-placed override or legacy layout)
+      Fallback:  <exe-dir>/_internal/bin/  (PI6 places Tree() datas under _internal/)
+    Source layout: <repo-root>/bin/
+    """
     if getattr(sys, "frozen", False):
-        return Path(sys.executable).resolve().parent / "bin"
+        exe_dir = Path(sys.executable).resolve().parent
+        primary = exe_dir / "bin"
+        if primary.exists():
+            return primary
+        return exe_dir / "_internal" / "bin"
     return Path(__file__).resolve().parent.parent / "bin"
 
 

@@ -167,11 +167,22 @@ class Configuration:
 
     @logger.catch
     def __init__(self):
-        """Locate config.yaml: next to the exe when frozen, repo root otherwise."""
+        """Locate config.yaml: next to the exe when frozen, repo root otherwise.
+
+        Frozen layout (PyInstaller ≥6 one-dir):
+          Primary:   <exe-dir>/config.yaml            (user-editable override or legacy)
+          Fallback:  <exe-dir>/_internal/config.yaml  (PI6 places datas under _internal/)
+        Source layout: <repo-root>/config.yaml
+        """
         import sys as _sys
 
         if getattr(_sys, "frozen", False):
-            base = pathlib.Path(_sys.executable).resolve().parent
+            exe_dir = pathlib.Path(_sys.executable).resolve().parent
+            primary = exe_dir / "config.yaml"
+            if primary.exists():
+                base = exe_dir
+            else:
+                base = exe_dir / "_internal"
         else:
             base = pathlib.Path(__file__).parent.parent.absolute()
         self.source = f"{base / 'config.yaml'}"
