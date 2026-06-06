@@ -1,0 +1,70 @@
+name: build-windows
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python deps
+        run: pip install -r requirements-dev.txt
+
+      - name: Run unit tests on Windows
+        run: pytest -v
+
+      - name: Fetch vendored binaries (checksum-verified)
+        run: python build/fetch_binaries.py
+
+      - name: PyInstaller build
+        run: pyinstaller build/burstrender.spec --distpath dist --workpath build/pyinstaller-work --noconfirm
+
+      - name: Smoke — doctor
+        shell: pwsh
+        run: |
+          & dist/burstrender/burstrender.exe --doctor
+          if ($LASTEXITCODE -ne 0) { throw "doctor reported missing tools" }
+
+      - name: Smoke — synthetic JPG burst end-to-end
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path smoke/in, smoke/out | Out-Null
+          $magick  = "dist/burstrender/_internal/bin/imagemagick/magick.exe"
+          $exiftool = "dist/burstrender/_internal/bin/exiftool/exiftool.exe"
+          # 12 frames, 0.1s apart -> one detectable burst
+          for ($i = 0; $i -lt 12; $i++) {
+            $f = "smoke/in/frame_{0:d3}.jpg" -f $i
+            & $magick -size 800x600 gradient:blue-yellow -pointsize 60 -annotate +40+300 "frame $i" $f
+            $subsec = $i * 10
+            & $exiftool -overwrite_original "-DateTimeOriginal=2024:02:16 14:14:19" "-SubSecTimeOriginal=$subsec" "-Orientation#=1" $f
+          }
+          & dist/burstrender/burstrender.exe --accept-jpg --source-path smoke/in --destination-path smoke/out --minimum-burst-length 10 -q
+          if ($LASTEXITCODE -ne 0) { throw "render exited $LASTEXITCODE" }
+          if (-not (Test-Path smoke/out/burst_1.mp4)) { throw "missing burst_1.mp4" }
+          if (-not (Test-Path smoke/out/burst_1-stabilized.mp4)) { throw "missing stabilized mp4" }
+          if (-not (Test-Path smoke/out/burst_1.gif)) { throw "missing gif" }
+          Write-Output "smoke render OK"
+
+      - name: Zip bundle
+        shell: pwsh
+        run: Compress-Archive -Path dist/burstrender -DestinationPath burstrender-windows-x64.zip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: burstrender-windows-x64
+          path: burstrender-windows-x64.zip
+
+      - name: Release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: burstrender-windows-x64.zip
+          generate_release_notes: true
