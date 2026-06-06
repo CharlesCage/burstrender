@@ -399,12 +399,13 @@ def main(args):
 
     # Full render
     output_gif = True
+    stabilize = not args.no_stabilization
     if args.gif_only:
         output_mp4 = False
         output_stabilized = False
     else:
         output_mp4 = True
-        output_stabilized = not args.no_stabilization
+        output_stabilized = stabilize
 
     for i in tqdm(
         range(len(burst_files)),
@@ -413,7 +414,7 @@ def main(args):
         disable=config.quiet,
     ):
         stage_total = (
-            2 + (1 if output_stabilized else 0) + (1 if output_gif else 0) + 2
+            2 + (1 if stabilize else 0) + (1 if output_gif else 0) + 2
         )
         stage_bar = tqdm(
             total=stage_total,
@@ -434,6 +435,7 @@ def main(args):
             output_mp4=output_mp4,
             output_stabilized=output_stabilized,
             output_gif=output_gif,
+            stabilize=stabilize,
             progress=_progress,
         )
         stage_bar.close()

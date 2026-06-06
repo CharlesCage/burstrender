@@ -86,10 +86,15 @@ def process_burst(
     output_mp4=True,
     output_stabilized=True,
     output_gif=True,
+    stabilize=True,
     progress=None,
 ):
     """Render one burst end-to-end. Returns True if all requested outputs landed.
 
+    stabilize: run the stabilization pass; output_stabilized controls only
+        whether the stabilized MP4 is shipped to the destination. (v4 fidelity:
+        --gif-only still stabilizes and builds the GIF from the stabilized MP4 —
+        it only suppresses shipping the MP4s.)
     progress: optional callable(stage_label: str) invoked as each stage starts.
     """
 
@@ -114,7 +119,7 @@ def process_burst(
         cleanup_files(output_file)
         return False
 
-    if output_stabilized:
+    if stabilize:
         _stage("Stabilizing MP4")
         if not stabilize_mp4(output_file):
             PrintLog.error(f"Failed to stabilize MP4 for {output_file}.")
@@ -124,7 +129,7 @@ def process_burst(
 
     if output_gif:
         _stage("Creating GIF")
-        if not create_gif_from_mp4(output_file, long_side, not output_stabilized):
+        if not create_gif_from_mp4(output_file, long_side, not stabilize):
             PrintLog.error(f"Failed to create GIF for {output_file}.")
             move_output_files(output_file, output_mp4, output_stabilized, False)
             cleanup_files(output_file)

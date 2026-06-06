@@ -355,6 +355,7 @@ class BurstRenderGUI(tk.Tk):
                     output_mp4=self.mp4_var.get(),
                     output_stabilized=self.stab_var.get(),
                     output_gif=self.gif_var.get(),
+                    stabilize=self.stab_var.get(),
                     progress=lambda label: self.log_queue.put(f"  {label}"),
                 )
                 done += 1
