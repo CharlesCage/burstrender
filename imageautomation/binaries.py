@@ -14,6 +14,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from imageautomation.utilities import _subprocess_window_kwargs
+
 # bundle_rel paths mirror how build/fetch_binaries.py arranges vendor files.
 TOOLS = {
     "exiftool": {
@@ -77,6 +79,7 @@ def _probe_version(tool, path):
         proc = subprocess.run(
             [path] + spec["version_args"],
             capture_output=True, text=True, timeout=15,
+            **_subprocess_window_kwargs(),
         )
         out = (proc.stdout or proc.stderr).strip().splitlines()
         return out[0] if out else "(no version output)"

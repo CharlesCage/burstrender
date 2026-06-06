@@ -62,7 +62,7 @@ from loguru import logger
 from imageautomation import runtime as config
 
 
-def render_pngs_from_cr3s(cr3_files, output_file):
+def render_pngs_from_cr3s(cr3_files, output_file, frame_progress=None):
     """
     Render numbered PNGs from RAW (CR3) or JPG inputs.
 
@@ -70,6 +70,9 @@ def render_pngs_from_cr3s(cr3_files, output_file):
     profile, PNG out) — the same command ImageMagick's dng:decode delegate
     ran implicitly — then ImageMagick applies gravity/crop/resize/orient.
     JPG inputs skip the development step.
+
+    frame_progress: optional callable(current, total) — called at the top of
+        each iteration so callers can drive a per-frame progress indicator.
 
     Returns True only if EVERY file in the burst rendered successfully.
     """
@@ -84,6 +87,8 @@ def render_pngs_from_cr3s(cr3_files, output_file):
         ),
         start=1,
     ):
+        if frame_progress:
+            frame_progress(index, len(cr3_files))
         is_jpg = input_file.upper().endswith("JPG")
 
         # Per-image defaults (user overrides via config win)

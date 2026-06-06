@@ -5,7 +5,7 @@ from imageautomation import runtime as config
 def _wire(monkeypatch, tmp_path, calls):
     config.working_directory = str(tmp_path)
     config.destination_path = str(tmp_path)
-    monkeypatch.setattr(pl, "render_pngs_from_cr3s", lambda files, out: calls.append(("render", out)) or True)
+    monkeypatch.setattr(pl, "render_pngs_from_cr3s", lambda files, out, frame_progress=None: calls.append(("render", out)) or True)
     monkeypatch.setattr(pl, "create_mp4", lambda out, ls: calls.append(("mp4", out, ls)) or True)
     monkeypatch.setattr(pl, "stabilize_mp4", lambda out: calls.append(("stabilize", out)) or True)
     monkeypatch.setattr(pl, "create_gif_from_mp4", lambda out, ls, no_stab: calls.append(("gif", out, no_stab)) or True)
@@ -52,3 +52,15 @@ def test_default_render_stabilizes_and_ships_everything(monkeypatch, tmp_path):
     assert mp4_call[2] == "height"  # current burst's orientation
     move_call = next(c for c in calls if c[0] == "move")
     assert move_call[1:] == (True, True, True)
+
+
+def test_frame_progress_forwarded(monkeypatch, tmp_path):
+    calls = []
+    seen = []
+    _wire(monkeypatch, tmp_path, calls)
+    monkeypatch.setattr(
+        pl, "render_pngs_from_cr3s",
+        lambda files, out, frame_progress=None: (frame_progress and frame_progress(1, len(files))) or True,
+    )
+    pl.process_burst([("/p/a.CR3", "width")] * 3, 0, frame_progress=lambda c, t: seen.append((c, t)))
+    assert seen == [(1, 3)]

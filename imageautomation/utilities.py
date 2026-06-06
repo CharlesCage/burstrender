@@ -48,6 +48,7 @@ Global Variables (via config):
 import glob
 import os
 import shutil
+import sys
 import yaml
 from colorama import Fore, Style
 import pathlib
@@ -235,6 +236,17 @@ class Configuration:
 #
 
 
+def _subprocess_window_kwargs():
+    """Extra subprocess kwargs that stop console windows flashing on Windows.
+
+    CREATE_NO_WINDOW only exists on Windows; getattr keeps Linux/macOS happy.
+    Uses the module-level ``sys`` import so tests can monkeypatch ``sys.platform``.
+    """
+    if sys.platform == "win32":
+        return {"creationflags": getattr(subprocess, "CREATE_NO_WINDOW", 0)}
+    return {}
+
+
 def run_subprocess(application, command, success_message=None, error_message=None, cwd=None):
     """
     Run a subprocess command and return the output.
@@ -276,6 +288,7 @@ def run_subprocess(application, command, success_message=None, error_message=Non
             check=True,
             capture_output=True,
             cwd=cwd,
+            **_subprocess_window_kwargs(),
         )
 
     except FileNotFoundError as exc:

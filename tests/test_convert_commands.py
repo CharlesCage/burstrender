@@ -83,3 +83,11 @@ def test_failure_of_any_file_fails_burst(monkeypatch, tmp_path, captured_command
     monkeypatch.setattr(ci, "run_subprocess", failing_first_rt)
     files = [(f"/photos/IMG_{i:03d}.CR3", "width") for i in range(2)]
     assert ci.render_pngs_from_cr3s(files, "burst_1") is False
+
+
+def test_frame_progress_called_per_file(monkeypatch, tmp_path, captured_commands):
+    _setup(monkeypatch, tmp_path, captured_commands)
+    seen = []
+    files = [(f"/photos/IMG_{i:03d}.CR3", "width") for i in range(3)]
+    ci.render_pngs_from_cr3s(files, "burst_3", frame_progress=lambda c, t: seen.append((c, t)))
+    assert seen == [(1, 3), (2, 3), (3, 3)]

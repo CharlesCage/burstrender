@@ -183,6 +183,10 @@ class BurstRenderGUI(tk.Tk):
         self.progress.pack(fill="x", pady=8)
         self.render_status = ttk.Label(f, text="")
         self.render_status.pack(anchor="w")
+        self.step_label = ttk.Label(f, text="")
+        self.step_label.pack(anchor="w")
+        self.step_progress = ttk.Progressbar(f, mode="determinate")
+        self.step_progress.pack(fill="x", pady=(0, 8))
         return f
 
     # ---------- helpers ----------
@@ -262,6 +266,27 @@ class BurstRenderGUI(tk.Tk):
         for btn in (self.detect_button, self.preview_button, self.render_button):
             btn.configure(state=state)
 
+    def _set_stage(self, label):
+        self.step_label.configure(text=label)
+        if label == "Converting RAW frames":
+            # determinate; frame_cb will drive it
+            self.step_progress.stop()
+            self.step_progress.configure(mode="determinate", value=0)
+        elif label in ("Creating MP4", "Stabilizing MP4", "Creating GIF"):
+            # no per-frame signal from ffmpeg — pulse
+            self.step_progress.configure(mode="indeterminate")
+            self.step_progress.start(80)
+        else:  # Moving / Cleaning — quick
+            self.step_progress.stop()
+            self.step_progress.configure(mode="determinate", value=0)
+
+    def _set_step_progress(self, cur, tot):
+        if str(self.step_progress.cget("mode")) != "determinate":
+            self.step_progress.stop()
+            self.step_progress.configure(mode="determinate")
+        self.step_progress.configure(maximum=tot, value=cur)
+        self.step_label.configure(text=f"Converting RAW frames ({cur}/{tot})")
+
     # ---------- actions ----------
 
     def on_detect(self):
@@ -302,9 +327,12 @@ class BurstRenderGUI(tk.Tk):
         self._apply_runtime()
 
         def work():
-            for i in range(len(self.burst_files)):
+            n = len(self.burst_files)
+            self.after(0, lambda: self.progress.configure(maximum=n, value=0))
+            for i in range(n):
                 if not pipeline.render_sample(self.burst_files, i):
                     self.log_queue.put(f"Sample for burst {i + 1} failed.")
+                self.after(0, lambda d=i + 1: self.progress.configure(value=d))
             self.after(0, lambda: self._show_preview(0, reset=True))
 
         self._run_in_worker(work, "Previews rendered.")
@@ -349,6 +377,14 @@ class BurstRenderGUI(tk.Tk):
             for i in range(total):
                 self.after(0, lambda i=i: self.render_status.configure(
                     text=f"Rendering burst {i + 1} of {total}…"))
+
+                def stage_cb(label, i=i):
+                    self.log_queue.put(f"  {label}")
+                    self.after(0, lambda: self._set_stage(label))
+
+                def frame_cb(cur, tot):
+                    self.after(0, lambda: self._set_step_progress(cur, tot))
+
                 pipeline.process_burst(
                     self.burst_files[i],
                     i,
@@ -356,11 +392,17 @@ class BurstRenderGUI(tk.Tk):
                     output_stabilized=self.stab_var.get(),
                     output_gif=self.gif_var.get(),
                     stabilize=self.stab_var.get(),
-                    progress=lambda label: self.log_queue.put(f"  {label}"),
+                    progress=stage_cb,
+                    frame_progress=frame_cb,
                 )
                 done += 1
                 self.after(0, lambda d=done: self.progress.configure(value=d))
             self.after(0, lambda: self.render_status.configure(text="Done."))
+            self.after(0, lambda: (
+                self.step_progress.stop(),
+                self.step_progress.configure(mode="determinate", value=0),
+                self.step_label.configure(text=""),
+            ))
 
         self._run_in_worker(work, "Render complete.")
 

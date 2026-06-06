@@ -65,14 +65,18 @@ def move_output_files(output_file, mp4=True, stabilized=True, gif=True):
     return ok
 
 
-def render_sample(burst_files, burst_index):
+def render_sample(burst_files, burst_index, frame_progress=None):
     """Render the corrected first-frame PNG for one burst to the destination.
 
     Writes {destination}/burst_{n}-testimage.png. Returns True on success.
+
+    frame_progress: optional callable(current, total) — fires per frame during
+        RAW conversion (the dominant stage). Keeps the surface uniform with
+        process_burst; for single-frame previews it fires at most once.
     """
     output_file = f"burst_{burst_index + 1}"
     first = burst_files[burst_index][0]
-    if not render_pngs_from_cr3s([first], output_file):
+    if not render_pngs_from_cr3s([first], output_file, frame_progress=frame_progress):
         return False
     if not correct_sample_png(output_file, first[1]):
         PrintLog.warning(f"Failed to correct sample PNG for {output_file}")
@@ -88,6 +92,7 @@ def process_burst(
     output_gif=True,
     stabilize=True,
     progress=None,
+    frame_progress=None,
 ):
     """Render one burst end-to-end. Returns True if all requested outputs landed.
 
@@ -96,6 +101,8 @@ def process_burst(
         --gif-only still stabilizes and builds the GIF from the stabilized MP4 —
         it only suppresses shipping the MP4s.)
     progress: optional callable(stage_label: str) invoked as each stage starts.
+    frame_progress: optional callable(current, total) — fires per frame during
+        RAW conversion (the dominant stage).
     """
 
     def _stage(label):
@@ -108,7 +115,7 @@ def process_burst(
     long_side = cr3_files[0][1]
 
     _stage("Converting RAW frames")
-    if not render_pngs_from_cr3s(cr3_files, output_file):
+    if not render_pngs_from_cr3s(cr3_files, output_file, frame_progress=frame_progress):
         PrintLog.info(f"Failed to render PNGs for {output_file}. Skipping.")
         cleanup_files(output_file)
         return False

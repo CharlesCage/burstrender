@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import imageautomation.utilities as u
 from imageautomation.utilities import delete_files, move_files
 
 
@@ -55,3 +56,12 @@ def test_move_files_handles_quote_in_path(tmp_path):
 
     assert move_files(str(src), str(dest)) is True
     assert dest.read_text() == "data"
+
+
+def test_subprocess_window_kwargs_platform(monkeypatch):
+    monkeypatch.setattr(u.sys, "platform", "linux", raising=False)
+    assert u._subprocess_window_kwargs() == {}
+
+    monkeypatch.setattr(u.sys, "platform", "win32", raising=False)
+    kwargs = u._subprocess_window_kwargs()
+    assert "creationflags" in kwargs
