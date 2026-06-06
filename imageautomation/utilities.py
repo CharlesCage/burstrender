@@ -228,6 +228,14 @@ def run_subprocess(application, command, success_message=None, error_message=Non
             default: None
 
     """
+    if not command or command[0] is None:
+        PrintLog.error(
+            f"{error_message}\n"
+            f"The {application} executable could not be found (not bundled and not on PATH).\n"
+            f"Run 'burstrender --doctor' to see what's missing."
+        )
+        return False
+
     try:
         _ = subprocess.run(
             command,

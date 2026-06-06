@@ -45,6 +45,7 @@ Global Variables (via config):
 
 # Modules
 from .utilities import run_subprocess
+from imageautomation.binaries import resolve
 
 # Logging
 from loguru import logger
@@ -79,7 +80,7 @@ def create_mp4(output_file, long_side="width"):
 
     # Execute command to create an MP4 file from the PNG files
     command = [
-        f"ffmpeg",
+        resolve("ffmpeg"),
         f"-i",
         f"{config.working_directory}/{output_file}-image_%03d.png",
         f"-vf",
@@ -126,7 +127,7 @@ def stabilize_mp4(output_file):
 
     # Execute command to perform stabilization analysis on the MP4 file
     command = [
-                f"ffmpeg",
+                resolve("ffmpeg"),
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
@@ -148,7 +149,7 @@ def stabilize_mp4(output_file):
         
     # Execute command to stabilize the MP4 file
     command = [
-                f"ffmpeg",
+                resolve("ffmpeg"),
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
@@ -195,7 +196,7 @@ def create_gif_from_mp4(output_file, long_side="width", no_stabilization=False):
 
     # Execute command to create a GIF file from the MP4 file
     command = [
-        f"ffmpeg",
+        resolve("ffmpeg"),
         f"-i",
         f"{config.working_directory}/{output_file}{'' if no_stabilization else'-stabilized'}.mp4",
         f"-filter_complex",
