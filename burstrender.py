@@ -768,6 +768,12 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
+        "--doctor",
+        action="store_true",
+        help="Check that all required external tools (exiftool, ffmpeg, ImageMagick, RawTherapee) can be found, print versions, and exit",
+    )
+
+    parser.add_argument(
         "-q",
         "--quiet",
         action="store_true",
@@ -783,6 +789,11 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    if args.doctor:
+        from imageautomation.binaries import doctor
+
+        sys.exit(0 if doctor() else 1)
 
     # Set quiet mode as global
     config.quiet = args.quiet
