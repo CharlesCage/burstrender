@@ -50,7 +50,6 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
-# Fix quote issue in move_files
 # Add recursive folder search for CR3 files
 # Detect and handle portrait mode
 
@@ -79,6 +78,7 @@ from imageautomation.utilities import (
     Configuration,
     run_subprocess,
     move_files,
+    delete_files,
 )
 
 # TUI progress bar
@@ -131,46 +131,6 @@ logger.add(
 #
 # Functions
 #
-
-
-def delete_files(filespec):
-    """
-    Delete a list of files.
-
-    Parameters:
-
-        file_list : list
-            A list of full path filenames of the files to be deleted
-
-    Returns:
-
-        result : bool
-            True if the process was successful, False otherwise
-    """
-
-    # Execute the rm command to remove files
-
-    # protection here to assure that filespec is not a directory or root
-    if filespec == "/" or filespec == "/home" or filespec == "/home/":
-        PrintLog.error(
-            f"Will not delete files in root or home. Will not delete files: {filespec}"
-        )
-        return False
-
-    command = [
-        f"sh",
-        f"-c",
-        f"rm {filespec}",
-    ]
-
-    result = run_subprocess(
-        "rm",
-        command,
-        f"Removed files: {filespec}",
-        f"Failed to remove files: {filespec}",
-    )
-
-    return result
 
 
 def clear_working_directory():

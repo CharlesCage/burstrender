@@ -9,6 +9,22 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 
+@pytest.fixture(autouse=True)
+def reset_runtime_state():
+    """Reset global runtime state between tests.
+
+    The runtime module is a mutable global singleton; PrintLog.error() sets
+    exit_code=2 as a side effect.  Without this reset, tests that exercise
+    error paths contaminate tests that assert on default runtime values.
+    """
+    from imageautomation import runtime as config
+    config.exit_code = 0
+    config.exit_reason = ""
+    yield
+    config.exit_code = 0
+    config.exit_reason = ""
+
+
 @pytest.fixture()
 def captured_commands(monkeypatch):
     """Capture run_subprocess invocations instead of executing them.

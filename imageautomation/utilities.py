@@ -45,6 +45,9 @@ Global Variables (via config):
 #
 
 # General
+import glob
+import os
+import shutil
 import yaml
 from colorama import Fore, Style
 import pathlib
@@ -271,40 +274,39 @@ def run_subprocess(application, command, success_message=None, error_message=Non
     return True
 
 
+def delete_files(filespec):
+    """Delete all files matching a glob pattern. No-match is success.
+
+    Refuses obviously catastrophic targets (root/home).
+    """
+    if filespec.rstrip("/*") in ("", "/home"):
+        PrintLog.error(f"Refusing to delete files at: {filespec}")
+        return False
+
+    ok = True
+    for path in glob.glob(filespec):
+        try:
+            os.remove(path)
+        except OSError as exc:
+            PrintLog.error(f"Failed to delete {path}: {exc}")
+            ok = False
+    if ok:
+        PrintLog.debug(f"Removed files: {filespec}")
+    return ok
+
+
 def move_files(target_file, destination_file, copy=True):
-    """
-    Move a file to a new location.
-
-    Parameters:
-
-        target_file : str
-            The full path filename of the file to be moved
-
-        destination_file : str
-            The full path filename of the destination file
-
-    Returns:
-
-        result : bool
-            True if the process was successful, False otherwise
-    """
-
-    # Execute the mv command to remove files
-    command = [
-        f"sh",
-        f"-c",
-        (
-            f"mv {target_file} {destination_file}"
-            if not copy
-            else f"cp {target_file} {destination_file}"
-        ),
-    ]
-
-    result = run_subprocess(
-        "mv",
-        command,
-        f"Moved {target_file} to {destination_file}",
-        f"Failed to move {target_file} to {destination_file}",
-    )
-
-    return result
+    """Copy (default) or move a single file. Returns True on success."""
+    try:
+        if copy:
+            shutil.copy2(target_file, destination_file)
+        else:
+            shutil.move(target_file, destination_file)
+    except OSError as exc:
+        PrintLog.error(
+            f"Failed to {'copy' if copy else 'move'} {target_file} "
+            f"to {destination_file}: {exc}"
+        )
+        return False
+    PrintLog.debug(f"Moved {target_file} to {destination_file}")
+    return True
