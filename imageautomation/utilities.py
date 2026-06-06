@@ -167,19 +167,36 @@ class Configuration:
 
     @logger.catch
     def __init__(self):
-        """Constructs all necessary attributes for the Config object."""
-        self.source = (
-            f"{pathlib.Path(__file__).parent.parent.absolute() / 'config.yaml'}"
-        )
+        """Locate config.yaml: next to the exe when frozen, repo root otherwise."""
+        import sys as _sys
+
+        if getattr(_sys, "frozen", False):
+            base = pathlib.Path(_sys.executable).resolve().parent
+        else:
+            base = pathlib.Path(__file__).parent.parent.absolute()
+        self.source = f"{base / 'config.yaml'}"
 
     @logger.catch
     def get(self):
-        """Retrieve, load, and returns the full config file"""
-
-        with open(self.source, "r") as file:
-            configuration = yaml.safe_load(file)
-
-        return configuration
+        """Load config.yaml; fall back to defaults when missing."""
+        defaults = {
+            "paths": {"working": "default"},
+            "logging": {"level": "debug", "path": "default"},
+        }
+        try:
+            with open(self.source, "r") as file:
+                configuration = yaml.safe_load(file) or {}
+        except FileNotFoundError:
+            return defaults
+        # Shallow-merge: any missing section/key falls back
+        merged = defaults
+        for section, values in configuration.items():
+            merged.setdefault(section, {})
+            if isinstance(values, dict):
+                merged[section].update(values)
+            else:
+                merged[section] = values
+        return merged
 
     @logger.catch
     def get_section(self, section, subsection="all"):
