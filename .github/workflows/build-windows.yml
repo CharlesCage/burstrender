@@ -5,6 +5,11 @@ on:
   push:
     tags: ["v*"]
 
+# The release step creates a GitHub Release; the default GITHUB_TOKEN is
+# read-only, so grant write explicitly.
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-latest

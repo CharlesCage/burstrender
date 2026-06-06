@@ -2,20 +2,84 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## Description
+BurstRender looks at a folder full of photos (CR3 RAW from a Canon R3, or JPGs), figures out which ones belong to the same burst, and turns each burst into an MP4 movie, a shake-stabilized MP4, and a looping GIF. I originally threw it together for a friend who photographs his daughter's softball team and wanted an easy way to turn the thousands of photos he shoots at each game into parent- and player-friendly movies and GIFs.
 
-BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3) or JPG files, identifies bursts of photos, and then automates RawTherapee, ImageMagick, and ffmpeg to render each of the bursts as an MP4, a motion-stabilized MP4, and a GIF. It's kinda hacky, but I threw it together for a friend who photographs his daughter's softball team and wanted an easy way to generate parent- and player-friendly movies and GIFs from the thousands of photos he shoots at each game.
+It started out kinda hacky. As of v5, it's considerably less hacky.
+
+## What's New in v5
+
+The original version only ran on Linux (or WSL under Windows), needed four separately-installed tools to work, and — as my friend discovered — quietly fell apart as system updates rolled by underneath it. v5 fixes all of that:
+
+* **A real Windows app.** One zip file with *everything* inside — Python, exiftool, ffmpeg, ImageMagick, and RawTherapee are all bundled. No WSL, no Linux, no installing anything else, and nothing for Windows Update to break. Ever.
+* **A guided GUI.** `burstrender-gui.exe` walks you through the whole detect → preview → render workflow with folder pickers, knobs, preview images, and progress bars. No terminal required.
+* **The same CLI you know.** Every flag from previous versions still works, on both Windows and Linux.
+* **`--doctor`.** One command that tells you whether all the tools BurstRender depends on are present and working. If something's wrong, this is the first thing to run.
+* **A pile of bug fixes**, including one where a portrait burst following a landscape burst rendered with the wrong dimensions, and proper handling of filenames with spaces and quotes.
+* **Releases are built and tested automatically.** Every release zip gets smoke-tested on a clean Windows machine before it's published — it rendered a real burst all the way to a GIF before you ever downloaded it.
 
 ## Table of Contents
 
-- [Usage](#usage)
-- [GUI](#gui)
+- [Quick Start](#quick-start)
 - [Installation](#installation)
+- [Using the GUI](#using-the-gui)
+- [Using the CLI](#using-the-cli)
+- [Troubleshooting](#troubleshooting)
 - [TODO](#todo)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Usage
+## Quick Start
+
+**Windows, no terminal (most people):** [Download the latest release](https://github.com/CharlesCage/burstrender/releases/latest), extract the zip anywhere, double-click `burstrender-gui.exe`, and follow the three tabs. That's the whole thing.
+
+**Windows, terminal:** same download, then run `burstrender.exe` from a terminal in the extracted folder — same flags as the Linux CLI below.
+
+**Linux:** install the four tools with apt, clone the repo, make a venv. Details below.
+
+## Installation
+
+### Windows (recommended)
+
+1. Download `burstrender-windows-x64.zip` from the [latest release](https://github.com/CharlesCage/burstrender/releases/latest). It's about 300MB because everything BurstRender needs is inside it.
+2. Right-click → **Extract All** → put it anywhere you like (e.g. `C:\burstrender`).
+3. Open the folder and run **`burstrender-gui.exe`** for the guided window, or `burstrender.exe` from a terminal for the classic CLI.
+
+**First run:** Windows SmartScreen will show a blue "Windows protected your PC" warning, because the app isn't code-signed (code-signing certificates cost real money and this is a free tool for shooting softball games). Click **More info → Run anyway**. You'll only see it once.
+
+**Updating:** delete the folder, download the new zip, extract. That's the entire update procedure — nothing is installed anywhere else on your system, no registry entries, nothing.
+
+**Why this can't rot:** every tool BurstRender uses is frozen inside the folder at a version that's been tested together. Windows updates, Python updates, and the passage of time can't touch it.
+
+### Linux
+
+Install the four external tools from your distro, then BurstRender in a venv:
+
+```bash
+sudo apt install rawtherapee imagemagick ffmpeg libimage-exiftool-perl
+git clone https://github.com/CharlesCage/burstrender
+cd burstrender
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python burstrender.py --doctor   # verify all four tools resolve
+```
+
+RawTherapee must be ≥ 5.9 for CR3 support — any current distro qualifies. (If you used an older version of BurstRender: the Debian-unstable pinning dance from the old instructions is no longer needed, and please undo it if you did it. I'm sorry. I didn't know better at the time.)
+
+The GUI works on Linux too, if you have Tk installed: `sudo apt install python3-tk`, then `.venv/bin/python burstrender_gui.py`.
+
+## Using the GUI
+
+The GUI walks you through the same workflow the CLI's [Best Practices](#best-practices) section describes, as three tabs you work left to right. A log pane at the bottom shows what's happening at every step.
+
+**Tab 1 — Detect.** Pick the folder with your photos and where you want the output to go. Choose CR3 or JPG. Click **Detect Bursts** and you'll get a table of every burst found: start and end time, photo count, and orientation. Too many tiny bursts? Raise *Min photos per burst*. Bursts getting glued together? Lower *Gap between bursts*. Detect again — it's fast after the first scan.
+
+**Tab 2 — Preview.** Click **Render Previews** to develop the first frame of each burst with the current settings, and flip through them with the arrows. This is where you tune the image: crop, gravity, normalization on/off, or a custom ffmpeg filter. Tweak, re-preview, repeat until they look right. (For the crop/gravity knobs, see [CR3 RAW Image Cropping](#cr3-raw-image-cropping) below for what the strings mean.)
+
+**Tab 3 — Render.** Check the outputs you want — MP4, stabilized MP4, GIF — and click **Render All Bursts**. The top bar tracks bursts, the bottom bar tracks the current step (it counts frames during RAW conversion, the slow part, and pulses through the video stages). When it's done, **Open Output Folder** takes you to your files.
+
+## Using the CLI
+
+The CLI is identical on Windows (`burstrender.exe` from the bundle folder) and Linux (`.venv/bin/python burstrender.py` from the repo).
+
 ```
 usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH] [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH] [--accept-jpg] [--detect-only] [--sample-images-only] [--no-stabilization] [--gif-only] [--no-normalize]
                    [--custom-vf-string CUSTOM_VF_STRING] [--crop-string CROP_STRING] [--gravity-string GRAVITY_STRING] [--doctor] [-q] [-v]
@@ -50,9 +114,10 @@ options:
 
 By Chuck Cage (chuckcage@corporation3355.org)
 ```
+
 ### Input and Output Paths
 
-Burstrender assumes an input and output path of the current folder. However, you can specify these with the following arguments/parameters:
+BurstRender assumes an input and output path of the current folder. However, you can specify these with the following arguments/parameters:
 
 `--source-path` allows you to define where burstrender will look for the CR3 files to process. *Do not use a trailing /*.
 
@@ -62,7 +127,7 @@ Note that unless you've requested sample PNGs via the `--sample-images-only` arg
 
 ### Defining a "Burst"
 
-Burstrender detects "bursts" by gathering the EXIF data from all the CR3s in the source folder, ordering them by the `EXIF:DateTimeOriginal` field supplemented with the `EXIF:SubSecTimeOriginal` field in order to capture time accurate enough for detecting up to ~100 FPS bursts, then grouping them into groups separated by gaps of more than two seconds. Additionally, it discards bursts of less than 10 images in order to prevent rendering MP4s and/or GIFs from groups too short to make interesting viewing.
+BurstRender detects "bursts" by gathering the EXIF data from all the CR3s in the source folder, ordering them by the `EXIF:DateTimeOriginal` field supplemented with the `EXIF:SubSecTimeOriginal` field in order to capture time accurate enough for detecting up to ~100 FPS bursts, then grouping them into groups separated by gaps of more than two seconds. Additionally, it discards bursts of less than 10 images in order to prevent rendering MP4s and/or GIFs from groups too short to make interesting viewing.
 
 However, you can tweak these knobs with the following arguments/parameters:
 
@@ -87,7 +152,7 @@ Detected 3 burst(s):
   Burst 3: 2024-02-16 14:28:24.710000 to 2024-02-16 14:28:25.190000 (55 photos, portrait)
 ```
 
-Note that burstrender also detects portrait or landscape photos based on the `EXIF:Orientation` EXIF data field.
+Note that burstrender also detects portrait or landscape photos based on the `EXIF:Orientation` EXIF data field, and crops/scales each burst accordingly.
 
 `--sample-images-only` tells burstrender to perform the EXIF data extraction and burst detection processes and then render *only the first image in each burst* directly to the output folder.
 
@@ -105,13 +170,13 @@ Note that these strings should not include spaces and therefore also do not requ
 
 ### Image Brightness, etc.
 
-Burstrender uses `ffmpeg` to assemble the generated PNGs into an initial MP4. During this process it applies an internal [ffmpeg simple filtergraph](https://ffmpeg.org/ffmpeg.html#Filtering) ("`-vf`") of:
+BurstRender uses `ffmpeg` to assemble the generated PNGs into an initial MP4. During this process it applies an internal [ffmpeg simple filtergraph](https://ffmpeg.org/ffmpeg.html#Filtering) ("`-vf`") of:
 
 `scale=2000:-2,setpts=2.0*PTS` for landscape images or `scale=-2:2000,setpts=2.0*PTS` for portrait images.
 
 ...which scales the large PNGs down to a more reasonable 2000px largest side (while keeping aspect ratio) and slows the resulting video speed by half.
 
-Burstrender also applies by default an [ffmpeg normalization string](https://ffmpeg.org/ffmpeg-filters.html#normalize) to the end of the filter above:
+BurstRender also applies by default an [ffmpeg normalization string](https://ffmpeg.org/ffmpeg-filters.html#normalize) to the end of the filter above:
 
 `,normalize=blackpt=black:whitept=white:smoothing=50`
 
@@ -127,19 +192,19 @@ By default burstrender will render for each detected burst:
 
 * an MP4 movie `burst_X.mp4`
 * a shake-stabilized MP4 movie `burst_X-stabilized.mp4`
-* and a GIF `burst_X.gif`
+* and a 480px looping GIF `burst_X.gif` (built from the stabilized MP4)
 
 You can adjust this with the following arguments:
 
 `--no-stabilization` specifies that you don't want to stabilize the resulting output. You will not receive the shake-stabilized MP4(s) and the GIF(s) you receive will not be stabilized.
 
-`--gif-only` specifies that you only want GIFs. You will not receive either of the MP4s.
+`--gif-only` specifies that you only want GIFs. You will not receive either of the MP4s (but stabilization still runs behind the scenes so your GIFs stay smooth, unless you also pass `--no-stabilization`).
 
 Note that burstrender will still need to make MP4s in order to create GIFs, but the required MP4s will be placed in the working folder and will be removed/cleaned up after execution.
 
 ### Utility Parameters
 
-`--doctor` checks that all four required external tools (exiftool, rawtherapee-cli, ffmpeg, ImageMagick) can be found, prints their versions, and exits. Run this first if something isn't working.
+`--doctor` checks that all four required external tools (exiftool, RawTherapee, ffmpeg, ImageMagick) can be found, prints their versions, and exits. Run this first if something isn't working.
 
 `--quiet` or `-q` mutes output to the console, which can be handy for CRON use, etc.
 
@@ -147,7 +212,7 @@ Note that burstrender will still need to make MP4s in order to create GIFs, but 
 
 ### Exit Codes
 
-Burstrender provides standard exit codes to facilitate use in scripts. Codes are as follows:
+BurstRender provides standard exit codes to facilitate use in scripts. Codes are as follows:
 
 | Exit Code | Description                 |
 |-----------|-----------------------------|
@@ -163,12 +228,12 @@ If you call burstrender from a folder containing CR3 files, it'll automatically:
 
 * read the EXIF data from all the CR3s
 * try to break them into bursts by looking for gaps of >2 seconds and eliminating bursts of less than 10 images
-* produce a half-speed, 2000px-largest-size, normalized MP4
-* produce a slightly-less-than-2000px-largest-size shake-stabilized MP4
-* and produce a 1000px-largest-side looping GIF
+* produce a half-speed, 2000px-largest-side, normalized MP4
+* produce a shake-stabilized MP4
+* and produce a 480px-largest-side looping GIF
 * all for each detected burst
 
-However, if you want more control, you can try this process:
+However, if you want more control, you can try this process (this is exactly the loop the GUI's three tabs walk you through):
 
 1. Execute burstrender with the `--detect-only` argument, along with any `--source-path` and `--destination-path` you need.
 
@@ -180,48 +245,15 @@ However, if you want more control, you can try this process:
 
 5. Now remove the `--sample-images-only` argument and run the command to generate GIFs and/or MP4(s) for all the bursts.
 
-## GUI
+## Troubleshooting
 
-BurstRender v5 includes a Tkinter GUI (`burstrender-gui.exe` on Windows, `python3 burstrender_gui.py` on Linux) that walks you through the same workflow interactively without needing a terminal. It has three tabs:
+**First, always:** run `burstrender.exe --doctor` (Windows) or `.venv/bin/python burstrender.py --doctor` (Linux) from a terminal. It prints whether each of the four tools was found, where, and what version. A screenshot of that output answers most "it doesn't work" questions instantly.
 
-* **Detect:** pick your source and destination folders, tune the gap and minimum-length settings, and see the detected burst table before committing to a full render.
-* **Preview:** render first-frame previews for each burst, and tune crop, gravity, normalize, and custom `-vf` settings until the sample images look right.
-* **Render:** choose your output format (MP4, stabilized MP4, GIF, or combinations), watch a live progress and log pane, and open the output folder when done.
+**Logs.** The CLI writes logs to a `logs/` folder (next to the script on Linux; under `%LOCALAPPDATA%\burstrender\logs` for the Windows bundle). The GUI writes to `burstrender-gui.log` in that same Windows folder, and shows the important stuff in its log pane as it works.
 
-## Installation
+**SmartScreen warning on Windows:** expected, once, because the bundle is unsigned. **More info → Run anyway.**
 
-### Windows (recommended)
-
-1. Download `burstrender-windows-x64.zip` from the [latest release](https://github.com/CharlesCage/burstrender/releases/latest).
-2. Extract it anywhere (e.g. `C:\burstrender`). Everything needed is inside —
-   Python, exiftool, ffmpeg, ImageMagick, and RawTherapee are all bundled.
-3. Run `burstrender-gui.exe` for the guided window, or `burstrender.exe` from
-   a terminal for the classic CLI.
-
-**First run:** Windows SmartScreen will warn about an unrecognized app
-(the bundle is not code-signed). Click **More info → Run anyway**. This
-happens once.
-
-**Updating:** delete the folder, extract the new zip. Nothing else is
-installed anywhere.
-
-**If something misbehaves:** run `burstrender.exe --doctor` in a terminal
-and send the output along with your question.
-
-### Linux
-
-Install the four external tools, then burstrender in a venv:
-
-```bash
-sudo apt install rawtherapee imagemagick ffmpeg libimage-exiftool-perl
-git clone https://github.com/CharlesCage/burstrender
-cd burstrender
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/python burstrender.py --doctor   # verify all four tools resolve
-```
-
-RawTherapee must be ≥ 5.9 for CR3 support (any current distro qualifies —
-the old Debian-unstable pinning dance is no longer needed or recommended).
+**"No bursts found":** your photos may be spaced wider than the 2-second default gap, or your bursts may be shorter than the 10-photo minimum. Use `--detect-only` (or the Detect tab) and tune from there.
 
 ## TODO
 
