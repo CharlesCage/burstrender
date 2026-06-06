@@ -1,0 +1,35 @@
+{
+  "exiftool": {
+    "url": "https://exiftool.org/exiftool-13.59_64.zip",
+    "sha256": "44b512b25af500724ba579d0a53c8fc5851628b692dd5e5d94ae4a15c2cba9ec",
+    "extract": "zip",
+    "arrange": {
+      "exiftool(-k).exe": "exiftool/exiftool.exe",
+      "exiftool_files": "exiftool/exiftool_files"
+    }
+  },
+  "ffmpeg": {
+    "url": "https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-8.1.1-essentials_build.zip",
+    "sha256": "6f58ce889f59c311410f7d2b18895b33c03456463486f3b1ebc93d97a0f54541",
+    "extract": "zip",
+    "arrange": {
+      "ffmpeg-8.1.1-essentials_build/bin/ffmpeg.exe": "ffmpeg/ffmpeg.exe"
+    }
+  },
+  "imagemagick": {
+    "url": "https://imagemagick.org/archive/binaries/ImageMagick-7.1.2-26-portable-Q16-x64.7z",
+    "sha256": "05e164be9190fa34c57b43e42c05a345cecb514969a3874fec8b47e41770fcb6",
+    "extract": "7z",
+    "arrange": {
+      ".": "imagemagick"
+    }
+  },
+  "rawtherapee": {
+    "url": "https://github.com/RawTherapee/RawTherapee/releases/download/5.12/RawTherapee_5.12_win64_release.zip",
+    "sha256": "a6de1797da462975435846db7b79a981557350af1bdac07525bf6884ede805dd",
+    "extract": "zip",
+    "arrange": {
+      "RawTherapee_5.12_win64_release": "rawtherapee"
+    }
+  }
+}
