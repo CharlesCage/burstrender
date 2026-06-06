@@ -88,12 +88,12 @@ from tqdm import tqdm
 from loguru import logger
 
 # Config for global variables
-import config
+from imageautomation import runtime as config
 
 # VERSION
 version = "4.0"
 config.exit_code = 0
-config.exir_reason = ""
+config.exit_reason = ""
 
 #
 # Set Up Logging

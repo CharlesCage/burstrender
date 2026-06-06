@@ -58,7 +58,7 @@ from tqdm import tqdm
 from loguru import logger
 
 # Config for global variables
-import config
+from imageautomation import runtime as config
 
 
 def render_pngs_from_cr3s(cr3_files, output_file):

@@ -50,7 +50,7 @@ from .utilities import run_subprocess
 from loguru import logger
 
 # Config for global variables
-import config
+from imageautomation import runtime as config
 
 def create_mp4(output_file, long_side="width"):
     """

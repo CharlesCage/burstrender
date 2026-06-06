@@ -52,7 +52,7 @@ from tqdm import tqdm
 from loguru import logger
 
 # Config for global variables
-import config
+from imageautomation import runtime as config
 
 # Ignore pandas warnings
 warnings.simplefilter(action="ignore", category=pd.errors.PerformanceWarning)

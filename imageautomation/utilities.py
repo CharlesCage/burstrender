@@ -56,7 +56,7 @@ import subprocess
 from loguru import logger
 
 # Config for global variables
-import config
+from imageautomation import runtime as config
 
 
 #
