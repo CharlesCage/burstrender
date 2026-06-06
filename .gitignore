@@ -8,3 +8,7 @@ logs/
 *.gif
 *.trf
 burstrender
+__pycache__/
+dist/
+build/vendor/
+build/pyinstaller-work/

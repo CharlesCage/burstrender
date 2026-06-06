@@ -45,6 +45,10 @@ Global Variables (via config):
 #
 
 # General
+import glob
+import os
+import shutil
+import sys
 import yaml
 from colorama import Fore, Style
 import pathlib
@@ -56,7 +60,7 @@ import subprocess
 from loguru import logger
 
 # Config for global variables
-import config
+from imageautomation import runtime as config
 
 
 #
@@ -164,19 +168,47 @@ class Configuration:
 
     @logger.catch
     def __init__(self):
-        """Constructs all necessary attributes for the Config object."""
-        self.source = (
-            f"{pathlib.Path(__file__).parent.parent.absolute() / 'config.yaml'}"
-        )
+        """Locate config.yaml: next to the exe when frozen, repo root otherwise.
+
+        Frozen layout (PyInstaller ≥6 one-dir):
+          Primary:   <exe-dir>/config.yaml            (user-editable override or legacy)
+          Fallback:  <exe-dir>/_internal/config.yaml  (PI6 places datas under _internal/)
+        Source layout: <repo-root>/config.yaml
+        """
+        import sys as _sys
+
+        if getattr(_sys, "frozen", False):
+            exe_dir = pathlib.Path(_sys.executable).resolve().parent
+            primary = exe_dir / "config.yaml"
+            if primary.exists():
+                base = exe_dir
+            else:
+                base = exe_dir / "_internal"
+        else:
+            base = pathlib.Path(__file__).parent.parent.absolute()
+        self.source = f"{base / 'config.yaml'}"
 
     @logger.catch
     def get(self):
-        """Retrieve, load, and returns the full config file"""
-
-        with open(self.source, "r") as file:
-            configuration = yaml.safe_load(file)
-
-        return configuration
+        """Load config.yaml; fall back to defaults when missing."""
+        defaults = {
+            "paths": {"working": "default"},
+            "logging": {"level": "debug", "path": "default"},
+        }
+        try:
+            with open(self.source, "r") as file:
+                configuration = yaml.safe_load(file) or {}
+        except FileNotFoundError:
+            return defaults
+        # Shallow-merge: any missing section/key falls back
+        merged = defaults
+        for section, values in configuration.items():
+            merged.setdefault(section, {})
+            if isinstance(values, dict):
+                merged[section].update(values)
+            else:
+                merged[section] = values
+        return merged
 
     @logger.catch
     def get_section(self, section, subsection="all"):
@@ -204,7 +236,18 @@ class Configuration:
 #
 
 
-def run_subprocess(application, command, success_message=None, error_message=None):
+def _subprocess_window_kwargs():
+    """Extra subprocess kwargs that stop console windows flashing on Windows.
+
+    CREATE_NO_WINDOW only exists on Windows; getattr keeps Linux/macOS happy.
+    Uses the module-level ``sys`` import so tests can monkeypatch ``sys.platform``.
+    """
+    if sys.platform == "win32":
+        return {"creationflags": getattr(subprocess, "CREATE_NO_WINDOW", 0)}
+    return {}
+
+
+def run_subprocess(application, command, success_message=None, error_message=None, cwd=None):
     """
     Run a subprocess command and return the output.
 
@@ -224,12 +267,28 @@ def run_subprocess(application, command, success_message=None, error_message=Non
             Optional message to PrintLog if the command is unsuccessful
             default: None
 
+        cwd : str or Path, optional
+            Working directory for the subprocess.  Useful when passing relative
+            file paths in filter strings to avoid OS-specific path issues
+            (e.g. Windows drive-letter colons in ffmpeg filtergraph options).
+            default: None (inherit current working directory)
+
     """
+    if not command or command[0] is None:
+        PrintLog.error(
+            f"{error_message}\n"
+            f"The {application} executable could not be found (not bundled and not on PATH).\n"
+            f"Run 'burstrender --doctor' to see what's missing."
+        )
+        return False
+
     try:
         _ = subprocess.run(
             command,
             check=True,
             capture_output=True,
+            cwd=cwd,
+            **_subprocess_window_kwargs(),
         )
 
     except FileNotFoundError as exc:
@@ -271,40 +330,39 @@ def run_subprocess(application, command, success_message=None, error_message=Non
     return True
 
 
+def delete_files(filespec):
+    """Delete all files matching a glob pattern. No-match is success.
+
+    Refuses obviously catastrophic targets (root/home).
+    """
+    if filespec.rstrip("/*") in ("", "/home"):
+        PrintLog.error(f"Refusing to delete files at: {filespec}")
+        return False
+
+    ok = True
+    for path in glob.glob(filespec):
+        try:
+            os.remove(path)
+        except OSError as exc:
+            PrintLog.error(f"Failed to delete {path}: {exc}")
+            ok = False
+    if ok:
+        PrintLog.debug(f"Removed files: {filespec}")
+    return ok
+
+
 def move_files(target_file, destination_file, copy=True):
-    """
-    Move a file to a new location.
-
-    Parameters:
-
-        target_file : str
-            The full path filename of the file to be moved
-
-        destination_file : str
-            The full path filename of the destination file
-
-    Returns:
-
-        result : bool
-            True if the process was successful, False otherwise
-    """
-
-    # Execute the mv command to remove files
-    command = [
-        f"sh",
-        f"-c",
-        (
-            f"mv {target_file} {destination_file}"
-            if not copy
-            else f"cp {target_file} {destination_file}"
-        ),
-    ]
-
-    result = run_subprocess(
-        "mv",
-        command,
-        f"Moved {target_file} to {destination_file}",
-        f"Failed to move {target_file} to {destination_file}",
-    )
-
-    return result
+    """Copy (default) or move a single file. Returns True on success."""
+    try:
+        if copy:
+            shutil.copy2(target_file, destination_file)
+        else:
+            shutil.move(target_file, destination_file)
+    except OSError as exc:
+        PrintLog.error(
+            f"Failed to {'copy' if copy else 'move'} {target_file} "
+            f"to {destination_file}: {exc}"
+        )
+        return False
+    PrintLog.debug(f"Moved {target_file} to {destination_file}")
+    return True

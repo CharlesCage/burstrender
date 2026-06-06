@@ -50,7 +50,6 @@
 # 2024-03-04 V1.0 Initial version
 
 # TODO
-# Fix quote issue in move_files
 # Add recursive folder search for CR3 files
 # Detect and handle portrait mode
 
@@ -67,18 +66,11 @@ import pathlib
 import argparse
 
 # Modules
-from imageautomation.imagedata import extractEXIF
-from imageautomation.imagedata import detect_bursts
-from imageautomation.combineimages import create_mp4
-from imageautomation.combineimages import stabilize_mp4
-from imageautomation.combineimages import create_gif_from_mp4
-from imageautomation.convertimages import render_pngs_from_cr3s
-from imageautomation.convertimages import correct_sample_png
+from imageautomation import pipeline
 from imageautomation.utilities import (
     PrintLog,
     Configuration,
-    run_subprocess,
-    move_files,
+    delete_files,
 )
 
 # TUI progress bar
@@ -88,12 +80,12 @@ from tqdm import tqdm
 from loguru import logger
 
 # Config for global variables
-import config
+from imageautomation import runtime as config
 
 # VERSION
-version = "4.0"
+version = "5.0"
 config.exit_code = 0
-config.exir_reason = ""
+config.exit_reason = ""
 
 #
 # Set Up Logging
@@ -105,7 +97,14 @@ logger.remove()
 # Set log path (and level) from config file
 config.log_path = Configuration().get()["logging"]["path"]
 if config.log_path == "default" or not config.log_path:
-    config.log_path = f"{pathlib.Path(__file__).parent.absolute() / 'logs'}"
+    if getattr(sys, "frozen", False):
+        if sys.platform == "win32":
+            base = pathlib.Path(os.environ.get("LOCALAPPDATA", pathlib.Path.home()))
+            config.log_path = str(base / "burstrender" / "logs")
+        else:
+            config.log_path = str(pathlib.Path.home() / ".burstrender" / "logs")
+    else:
+        config.log_path = f"{pathlib.Path(__file__).parent.absolute() / 'logs'}"
 else:
     config.log_path = Configuration().get()["logging"]["path"]
 
@@ -131,46 +130,6 @@ logger.add(
 #
 # Functions
 #
-
-
-def delete_files(filespec):
-    """
-    Delete a list of files.
-
-    Parameters:
-
-        file_list : list
-            A list of full path filenames of the files to be deleted
-
-    Returns:
-
-        result : bool
-            True if the process was successful, False otherwise
-    """
-
-    # Execute the rm command to remove files
-
-    # protection here to assure that filespec is not a directory or root
-    if filespec == "/" or filespec == "/home" or filespec == "/home/":
-        PrintLog.error(
-            f"Will not delete files in root or home. Will not delete files: {filespec}"
-        )
-        return False
-
-    command = [
-        f"sh",
-        f"-c",
-        f"rm {filespec}",
-    ]
-
-    result = run_subprocess(
-        "rm",
-        command,
-        f"Removed files: {filespec}",
-        f"Failed to remove files: {filespec}",
-    )
-
-    return result
 
 
 def clear_working_directory():
@@ -228,91 +187,6 @@ def clear_working_directory():
         return True
 
 
-def cleanup_files(output_file):
-    """
-    Remove the PNG and TRF files created during the rendering process.
-
-    Parameters:
-
-        output_file : str
-            The best filename for the group output (ex. "burst_1")
-
-        Uses global variable config.working_directory
-
-    Returns:
-
-        result : bool
-            True if the process was successful, False otherwise
-    """
-
-    result = True
-
-    # Remove PNG files
-    if not delete_files(f"{config.working_directory}/{output_file}-image_*.png"):
-        result = False
-
-    # Remove TRF file
-    if not delete_files(f"{config.working_directory}/{output_file}.trf"):
-        result = False
-
-    return result
-
-
-def move_output_files(output_file, mp4=True, stabilized=True, gif=True):
-    """
-    Move the output files to the destination path.
-
-    Parameters:
-
-        output_file : str
-            The best filename for the group output (ex. "burst_1")
-
-        mp4 : bool
-            Move the MP4 file if True
-
-        stabilized : bool
-            Move the stabilized MP4 file if True
-
-        gif : bool
-            Move the GIF file if True
-
-        Uses global variables config.working_directory and config.destination_path
-
-    Returns:
-
-        result : bool
-            True if the process was successful, False otherwise
-    """
-
-    result = True
-
-    # Move MP4 file
-    if mp4:
-        if not move_files(
-            f"{config.working_directory}/{output_file}.mp4",
-            f"{config.destination_path}/{output_file}.mp4",
-        ):
-            result = False
-
-    # Move stabilized MP4 file
-    if stabilized:
-        if not move_files(
-            f"{config.working_directory}/{output_file}-stabilized.mp4",
-            f"{config.destination_path}/{output_file}-stabilized.mp4",
-        ):
-            result = False
-
-    # Move GIF file
-    if gif:
-        if not move_files(
-            f"{config.working_directory}/{output_file}.gif",
-            f"{config.destination_path}/{output_file}.gif",
-        ):
-            result = False
-
-    return result
-
-
 def main(args):
     """
     Main function to render burst photos to MP4s, Stabilized MP4s, and GIFs.
@@ -323,7 +197,13 @@ def main(args):
     # Set working directory from config file
     config.working_directory = config_yaml["paths"]["working"]
     if config.working_directory == "default":
-        config.working_directory = f"{pathlib.Path.home() / '.burstrender' / 'working'}"
+        if sys.platform == "win32":
+            base = pathlib.Path(os.environ.get("LOCALAPPDATA", pathlib.Path.home()))
+            config.working_directory = str(base / "burstrender" / "working")
+        else:
+            config.working_directory = str(
+                pathlib.Path.home() / ".burstrender" / "working"
+            )
 
     # Assure working directory is valid
     try:
@@ -477,204 +357,89 @@ def main(args):
     # Set the quiet mode
     config.quiet = args.quiet
 
-    #
-    # Process images
-    #
+    # Detect bursts (single EXIF pass produces both views)
+    burst_info, burst_files = pipeline.detect(
+        config.source_path,
+        config.file_extension,
+        config.seconds_between_bursts,
+        config.min_burst_length,
+    )
 
-    # Call the extractEXIF function to extract EXIF data from the images
-    df = extractEXIF(config.source_path, config.file_extension)
-
-    # Exit if no input files are found
-    if df.empty:
+    if not burst_files and not burst_info:
         PrintLog.warning(
             f"No {config.file_extension} files found in the source path: {config.source_path}/ "
             f"Use the --source-path argument to specify a different source path"
         )
         sys.exit(config.exit_code)
 
-    # Call the detect_bursts function to detect burst photo groups
+    # Detect-only: print and exit
     if args.detect_only:
-        burst_info = detect_bursts(
-            df,
-            True,
-            config.seconds_between_bursts,
-            config.min_burst_length,
-        )
-
-        PrintLog.debug(f"Output data for --detect-only")
-
         print(f"Detected {len(burst_info)} burst(s):")
-        for burst in burst_info:
+        for i, burst in enumerate(burst_info):
             print(
-                f"  Burst {burst_info.index(burst) + 1}: "
+                f"  Burst {i + 1}: "
                 f"{burst['start']} to {burst['end']} ({burst['frames']} photos, "
                 f"{'landscape' if burst['long_side'] == 'width' else 'portrait'})"
             )
-        sys, exit(config.exit_code)
-    else:
-        cr3_files_list = detect_bursts(
-            df,
-            False,
-            config.seconds_between_bursts,
-            config.min_burst_length,
-        )
-
-    # Output sample images and exit if requested
-    if args.sample_images_only:
-
-        # Iterate over each group of input files and output the first image of each burst
-        for cr3_files in tqdm(
-            cr3_files_list, desc="Rendering PNGs", unit="burst", disable=config.quiet
-        ):
-            # Get the output file path for the PNG
-            output_file = "burst_{}".format(cr3_files_list.index(cr3_files) + 1)
-
-            # Render PNGs from CR3 files
-            if not render_pngs_from_cr3s([cr3_files[0]], output_file):
-                continue
-
-            # Apply correction to PNG and move to destination path
-            if not correct_sample_png(output_file, cr3_files[0][1]):
-                PrintLog.warning(f"Failed to correct sample PNG for {output_file}")
-                continue
-
-        # Clean up working directory
-        if not clear_working_directory():
-            PrintLog.warning(f"Failed to clear the working directory")
-        else:
-            PrintLog.debug(f"Cleaned up the working directory")
-
-        # Done
+        # v4 defect fix: this line was `sys, exit(...)` (tuple typo)
         sys.exit(config.exit_code)
 
-    #
-    # Process bursts
-    #
+    # Sample images only: first frame of each burst, corrected, to destination
+    if args.sample_images_only:
+        for i in tqdm(
+            range(len(burst_files)),
+            desc="Rendering PNGs",
+            unit="burst",
+            disable=config.quiet,
+        ):
+            if not pipeline.render_sample(burst_files, i):
+                continue
+        clear_working_directory()
+        sys.exit(config.exit_code)
 
-    # Set output values
+    # Full render
     output_gif = True
+    stabilize = not args.no_stabilization
     if args.gif_only:
         output_mp4 = False
         output_stabilized = False
     else:
         output_mp4 = True
-        output_stabilized = not args.no_stabilization
+        output_stabilized = stabilize
 
-    # Iterate over each group of CR3 files
-    for cr3_files in tqdm(
-        cr3_files_list, desc="Processing Bursts", unit="burst", disable=config.quiet
+    for i in tqdm(
+        range(len(burst_files)),
+        desc="Processing Bursts",
+        unit="burst",
+        disable=config.quiet,
     ):
-        PrintLog.debug(
-            "Processing burst {}".format(cr3_files_list.index(cr3_files) + 1)
+        stage_total = (
+            2 + (1 if stabilize else 0) + (1 if output_gif else 0) + 2
         )
-
-        # Get the output file path for the GIF
-        output_file = "burst_{}".format(cr3_files_list.index(cr3_files) + 1)
-
-        # Render PNGs from CR3 files
-        if not render_pngs_from_cr3s(cr3_files, output_file):
-            PrintLog.info(
-                f"Failed to render some PNGs from CR3 files for {output_file}. Skipping."
-            )
-            if not cleanup_files(output_file):
-                PrintLog.warning(f"Failed to cleanup files for {output_file}")
-            continue
-
-        # Set rendering progress bar
-        if args.no_stabilization:
-            render_action_count = 4
-        else:
-            render_action_count = 5
-
-        # Set rendering progress bar
-        render_progress_bar = tqdm(
-            total=render_action_count,
-            desc="Rendering MP4",
+        stage_bar = tqdm(
+            total=stage_total,
+            desc="Rendering",
             unit="action",
             leave=False,
             disable=config.quiet,
         )
 
-        # Create MP4 from PNGs
-        if not create_mp4(output_file, cr3_files_list[0][0][1]):
-            PrintLog.error(
-                f"Failed to create MP4 from PNGs for {output_file}. Skipping."
-            )
-            if not cleanup_files(output_file):
-                PrintLog.warning(f"Failed to cleanup files for {output_file}")
-            continue
+        def _progress(label, bar=stage_bar):
+            bar.set_description(label)
+            bar.update(1)
+            bar.refresh()
 
-        PrintLog.debug(f"Created MP4 from PNGs for {output_file}")
-        render_progress_bar.update(1)
-        render_progress_bar.refresh()
-
-        # Stabilize MP4
-        if not args.no_stabilization:
-            render_progress_bar.set_description("Stabilizing MP4")
-            render_progress_bar.refresh()
-
-            if not stabilize_mp4(output_file):
-                PrintLog.error(f"Failed to stabilize MP4 for {output_file}. Skipping.")
-                if not move_output_files(output_file, output_mp4, False, False):
-                    PrintLog.warning(f"Failed to move files for {output_file}")
-                if not cleanup_files(output_file):
-                    PrintLog.warning(f"Failed to cleanup files for {output_file}")
-                continue
-
-            PrintLog.debug(f"Stabilized MP4 for {output_file}")
-            render_progress_bar.update(1)
-            render_progress_bar.refresh()
-
-        # Create GIF from MP4
-        render_progress_bar.set_description("Creating GIF")
-        render_progress_bar.refresh()
-
-        if not create_gif_from_mp4(
-            output_file, cr3_files_list[0][0][1], args.no_stabilization
-        ):
-            PrintLog.error(
-                f"Failed to create GIF from MP4 for {output_file}. Skipping."
-            )
-            if not move_output_files(output_file, output_mp4, output_stabilized, False):
-                PrintLog.warning(f"Failed to move files for {output_file}")
-            if not cleanup_files(output_file):
-                PrintLog.warning(f"Failed to cleanup files for {output_file}")
-            continue
-
-        PrintLog.debug(f"Created GIF from MP4 for {output_file}")
-        render_progress_bar.update(1)
-        render_progress_bar.refresh()
-
-        # Move output files to destination path
-        render_progress_bar.set_description("Moving Output Files")
-        render_progress_bar.refresh()
-
-        if not move_output_files(
-            output_file, output_mp4, output_stabilized, output_gif
-        ):
-            PrintLog.warning(f"Failed to move files for {output_file}")
-
-        render_progress_bar.update(1)
-        render_progress_bar.refresh()
-
-        # Cleanup files
-        render_progress_bar.set_description("Cleaning Up Temp Files")
-        render_progress_bar.refresh()
-
-        if not cleanup_files(output_file):
-            PrintLog.warning(f"Failed to cleanup files for {output_file}")
-
-        render_progress_bar.update(1)
-        render_progress_bar.refresh()
-
-        # Close render progress bar
-        render_progress_bar.close()
-
-        PrintLog.success(
-            "Completed burst {}".format(cr3_files_list.index(cr3_files) + 1)
+        pipeline.process_burst(
+            burst_files[i],
+            i,
+            output_mp4=output_mp4,
+            output_stabilized=output_stabilized,
+            output_gif=output_gif,
+            stabilize=stabilize,
+            progress=_progress,
         )
+        stage_bar.close()
 
-    # Done
     sys.exit(config.exit_code)
 
 
@@ -768,6 +533,12 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
+        "--doctor",
+        action="store_true",
+        help="Check that all required external tools (exiftool, ffmpeg, ImageMagick, RawTherapee) can be found, print versions, and exit",
+    )
+
+    parser.add_argument(
         "-q",
         "--quiet",
         action="store_true",
@@ -783,6 +554,11 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
+
+    if args.doctor:
+        from imageautomation.binaries import doctor
+
+        sys.exit(0 if doctor() else 1)
 
     # Set quiet mode as global
     config.quiet = args.quiet

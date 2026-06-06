@@ -45,12 +45,13 @@ Global Variables (via config):
 
 # Modules
 from .utilities import run_subprocess
+from imageautomation.binaries import resolve
 
 # Logging
 from loguru import logger
 
 # Config for global variables
-import config
+from imageautomation import runtime as config
 
 def create_mp4(output_file, long_side="width"):
     """
@@ -79,7 +80,7 @@ def create_mp4(output_file, long_side="width"):
 
     # Execute command to create an MP4 file from the PNG files
     command = [
-        f"ffmpeg",
+        resolve("ffmpeg"),
         f"-i",
         f"{config.working_directory}/{output_file}-image_%03d.png",
         f"-vf",
@@ -124,13 +125,21 @@ def stabilize_mp4(output_file):
             True if the process was successful, False otherwise
     """
 
+    # FFmpeg's libavfilter uses ':' as an option separator.  On Windows,
+    # any path containing a drive-letter colon (e.g. C:\...) breaks the
+    # filtergraph parser even with single-quote quoting or '\:' escaping.
+    # Fix: use a bare filename (no directory path) for the trf file and pass
+    # cwd=config.working_directory so ffmpeg resolves it relative to the
+    # working directory — no colon in the filter string at all.
+    trf_name = f"{output_file}.trf"
+
     # Execute command to perform stabilization analysis on the MP4 file
     command = [
-                f"ffmpeg",
+                resolve("ffmpeg"),
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabdetect=shakiness=10:accuracy=15:result='{config.working_directory}/{output_file}.trf'",
+                f"vidstabdetect=shakiness=10:accuracy=15:result={trf_name}",
                 f"-f",
                 f"null",
                 f"-",
@@ -140,19 +149,20 @@ def stabilize_mp4(output_file):
         "ffmpeg",
         command,
         success_message=f"Stabilization analysis complete for {output_file}.mp4",
-        error_message=f"Failed to process stabilization analysis for {output_file}.mp4"
+        error_message=f"Failed to process stabilization analysis for {output_file}.mp4",
+        cwd=config.working_directory,
     )
 
     if not result:
         return False
-        
+
     # Execute command to stabilize the MP4 file
     command = [
-                f"ffmpeg",
+                resolve("ffmpeg"),
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabtransform=smoothing=30:input='{config.working_directory}/{output_file}.trf'",
+                f"vidstabtransform=smoothing=30:input={trf_name}",
                 f"{config.working_directory}/{output_file}-stabilized.mp4",
     ]
 
@@ -160,7 +170,8 @@ def stabilize_mp4(output_file):
         "ffmpeg",
         command,
         success_message=f"Stabilized {output_file}.mp4",
-        error_message=f"Failed to stabilize {output_file}.mp4"
+        error_message=f"Failed to stabilize {output_file}.mp4",
+        cwd=config.working_directory,
     )
 
     return result
@@ -195,7 +206,7 @@ def create_gif_from_mp4(output_file, long_side="width", no_stabilization=False):
 
     # Execute command to create a GIF file from the MP4 file
     command = [
-        f"ffmpeg",
+        resolve("ffmpeg"),
         f"-i",
         f"{config.working_directory}/{output_file}{'' if no_stabilization else'-stabilized'}.mp4",
         f"-filter_complex",

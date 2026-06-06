@@ -4,11 +4,12 @@
 
 ## Description
 
-BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3), identifies bursts of photos, and then automates RawTherapee, ImageMagick, and ffmpeg to render each of the bursts as an MP4, a motion-stabilized MP4, and a GIF. It's kinda hacky, but I threw it together for a friend who photographs his daughter's softball team and wanted an easy way to generate parent- and player-friendly movies and GIFs from the thousands of photos he shoots at each game.
+BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3) or JPG files, identifies bursts of photos, and then automates RawTherapee, ImageMagick, and ffmpeg to render each of the bursts as an MP4, a motion-stabilized MP4, and a GIF. It's kinda hacky, but I threw it together for a friend who photographs his daughter's softball team and wanted an easy way to generate parent- and player-friendly movies and GIFs from the thousands of photos he shoots at each game.
 
 ## Table of Contents
 
 - [Usage](#usage)
+- [GUI](#gui)
 - [Installation](#installation)
 - [TODO](#todo)
 - [Contributing](#contributing)
@@ -17,7 +18,7 @@ BurstRender analyzes a folder full of CR3 photos (shot with a Canon R3), identif
 ## Usage
 ```
 usage: burstrender [-h] [--source-path SOURCE_PATH] [--destination-path DESTINATION_PATH] [--seconds-between-bursts SECONDS_BETWEEN_BURSTS] [--minimum-burst-length MINIMUM_BURST_LENGTH] [--accept-jpg] [--detect-only] [--sample-images-only] [--no-stabilization] [--gif-only] [--no-normalize]
-                   [--custom-vf-string CUSTOM_VF_STRING] [--crop-string CROP_STRING] [--gravity-string GRAVITY_STRING] [-q] [-v]
+                   [--custom-vf-string CUSTOM_VF_STRING] [--crop-string CROP_STRING] [--gravity-string GRAVITY_STRING] [--doctor] [-q] [-v]
 
 Render MP4s, Stabilized MP4s, and GIFs from burst CR3 RAW photos.
 
@@ -43,6 +44,7 @@ options:
                         Specify a crop string for ImageMagick. (Default is 6000x4000+0+0.)
   --gravity-string GRAVITY_STRING
                         Specify a gravity string for ImageMagick. (Default is SouthEast.)
+  --doctor              Check that all required external tools can be found, print versions, and exit
   -q, --quiet           Suppress progress bars
   -v, --version         Show program version
 
@@ -56,21 +58,21 @@ Burstrender assumes an input and output path of the current folder. However, you
 
 `--destination-path` allows you to define where burstrender will place the final output files you've requested (e.g. PNG samples, MP4s, GIFs). *Do not use a trailing /*.
 
-Note that unless you've requested sample PNGs via the `--sample-images-only` argument, all PNGs will be created in the working folder and will be removed after each burst converstion.
+Note that unless you've requested sample PNGs via the `--sample-images-only` argument, all PNGs will be created in the working folder and will be removed after each burst conversion.
 
 ### Defining a "Burst"
 
-Burstrender detects "bursts" by gathering the EXIF data from all the CR3s in the source folder, ordering them by the `EXIF:DateTimeOriginal` field supplemented with the `EXIF:SubSecTimeOriginal` field in order to capture time accurate enough for detecting up to ~100 FPS bursts, then grouping them into groups separated by gaps of more than two seconds. Additionally, it discards bursts of less than 10 images in order to prevent rendering MP4s and/or GIFs from groups too short to make interesting viewing. 
+Burstrender detects "bursts" by gathering the EXIF data from all the CR3s in the source folder, ordering them by the `EXIF:DateTimeOriginal` field supplemented with the `EXIF:SubSecTimeOriginal` field in order to capture time accurate enough for detecting up to ~100 FPS bursts, then grouping them into groups separated by gaps of more than two seconds. Additionally, it discards bursts of less than 10 images in order to prevent rendering MP4s and/or GIFs from groups too short to make interesting viewing.
 
-Howevver, you can tweak these knobs with the following arguments/parameters:
+However, you can tweak these knobs with the following arguments/parameters:
 
 `--seconds-between-bursts` allows you to define the minimum gap between bursts in seconds. The default is *2*.
 
-`--minimum-burst-length` allows you to specify the minimum number of images to qualify an image grouping as a "burst." The defaults is *10*.
+`--minimum-burst-length` allows you to specify the minimum number of images to qualify an image grouping as a "burst." The default is *10*.
 
 ### Accept JPG Files as Input
 
-By default, bursrender will look for CR3 files. However, you can tell it to look for JPG files instead using the `--accept-jpg` flag. *Note: I only tested this with some images that came from a Nikon R8, so there might be issues if the files are small, differently-configured, etc.*
+By default, burstrender will look for CR3 files. However, you can tell it to look for JPG files instead using the `--accept-jpg` flag. *Note: I only tested this with some images that came from a Nikon R8, so there might be issues if the files are small, differently-configured, etc.*
 
 ### Assistance in Preparing Batches
 
@@ -85,17 +87,17 @@ Detected 3 burst(s):
   Burst 3: 2024-02-16 14:28:24.710000 to 2024-02-16 14:28:25.190000 (55 photos, portrait)
 ```
 
-Note that as of v3.0, burstrender also detects portrait or landscape photos based on the `EXIF:Orientation` EXIF data field. This was based on Canon R3 test images in which a value of `8` indicated landscape.
+Note that burstrender also detects portrait or landscape photos based on the `EXIF:Orientation` EXIF data field.
 
-`--sample-images-only` tells burstrender to perform the EXIF data extraction and burst detection processes and then render *only the first image in each burst* directly to the output folder. 
+`--sample-images-only` tells burstrender to perform the EXIF data extraction and burst detection processes and then render *only the first image in each burst* directly to the output folder.
 
 ### CR3 RAW Image Cropping
 
-Currently burstrender expects CR3s shot on a Canon R3. These Canon RAW files include black bars on the top and left of the image because the sensor area is larger than the output image. This information is included in the EXIF and gets automatcially handled in most display applications. I couldn't figure out how to automatically detect and remove these, so right now burstrender just assumes the CR3s were shot at an intended 6000x4000 and applies a 6000x4000+0+0 crop with gravity set to SouthEast (i.e. it takes the bottom-right-most 6000x4000 pixels of the image). 
+Currently burstrender expects CR3s shot on a Canon R3. These Canon RAW files include black bars on the top and left of the image because the sensor area is larger than the output image. This information is included in the EXIF and gets automatically handled in most display applications. I couldn't figure out how to automatically detect and remove these, so right now burstrender just assumes the CR3s were shot at an intended 6000x4000 and applies a 6000x4000+0+0 crop with gravity set to SouthEast (i.e. it takes the bottom-right-most 6000x4000 pixels of the image).
 
-If you are using a different camera and/or different settings and this doesn't work for you, OR you want to crop the image differently, you can use the following arguemnts/parameters to adjust ImageMagick's cropping of the CR3 file during conversion to PNG:
+If you are using a different camera and/or different settings and this doesn't work for you, OR you want to crop the image differently, you can use the following arguments/parameters to adjust ImageMagick's cropping of the CR3 file during conversion to PNG:
 
-`--crop-string` allows you to directly specify an [ImageMagick crop string](https://www.imagemagick.org/Usage/crop/#crop_gravity) for the conversion. The default is *6000x4000+0+0* for landscape images or *4000x6000+0+0* for portrait images. Improperly formatted crop-string parameters may lead to errors in RAW converstion.
+`--crop-string` allows you to directly specify an [ImageMagick crop string](https://www.imagemagick.org/Usage/crop/#crop_gravity) for the conversion. The default is *6000x4000+0+0* for landscape images or *4000x6000+0+0* for portrait images. Improperly formatted crop-string parameters may lead to errors in RAW conversion.
 
 `--gravity-string` allows you to specify an [ImageMagick gravity setting](https://www.imagemagick.org/Usage/crop/#crop_gravity). The default is *SouthEast* for landscape images and *NorthEast* for portrait images.
 
@@ -103,12 +105,11 @@ Note that these strings should not include spaces and therefore also do not requ
 
 ### Image Brightness, etc.
 
-Burstrender uses `ffmpeg` to assemble the generated PNGs into an initial MP4 using `ffmpeg`. During this process it applies an internal [ffmpeg simple filtergraph](https://ffmpeg.org/ffmpeg.html#Filtering) ("`-vf`") of:
+Burstrender uses `ffmpeg` to assemble the generated PNGs into an initial MP4. During this process it applies an internal [ffmpeg simple filtergraph](https://ffmpeg.org/ffmpeg.html#Filtering) ("`-vf`") of:
 
-`scale=2000:-2,setpts2.0*PTS` for landscape images or `scale=-2:2000,setpts2.0*PTS` for portrait images.
+`scale=2000:-2,setpts=2.0*PTS` for landscape images or `scale=-2:2000,setpts=2.0*PTS` for portrait images.
 
-
-..which scales the large PNGs down to a more reasonable 2000px largest side (while keeping aspect ratio) and slows the resulting video speed by half.
+...which scales the large PNGs down to a more reasonable 2000px largest side (while keeping aspect ratio) and slows the resulting video speed by half.
 
 Burstrender also applies by default an [ffmpeg normalization string](https://ffmpeg.org/ffmpeg-filters.html#normalize) to the end of the filter above:
 
@@ -116,16 +117,16 @@ Burstrender also applies by default an [ffmpeg normalization string](https://ffm
 
 However:
 
-`--no-normalization` allows you to exclude the above normalization string, and
+`--no-normalize` allows you to exclude the above normalization string, and
 
-`--custom-vf-string` allows you to include your own customized [simple filter string](https://ffmpeg.org/ffmpeg-filters.html), which will be appended to the end of the initial one above (and following the normalization string, if you haven't disabled it with `--no-normalization`.) Note that you do not need to add a leading comma as burstrender will add it for you. You also should not include any spaces in your custom filter string, nor should you enclose it in quotes.
+`--custom-vf-string` allows you to include your own customized [simple filter string](https://ffmpeg.org/ffmpeg-filters.html), which will be appended to the end of the initial one above (and following the normalization string, if you haven't disabled it with `--no-normalize`.) Note that you do not need to add a leading comma as burstrender will add it for you. You also should not include any spaces in your custom filter string, nor should you enclose it in quotes.
 
 ### Specifying Desired Output
 
 By default burstrender will render for each detected burst:
 
 * an MP4 movie `burst_X.mp4`
-* a shake-stabilized MP4 movie `burst_X-stabilized.MP4`
+* a shake-stabilized MP4 movie `burst_X-stabilized.mp4`
 * and a GIF `burst_X.gif`
 
 You can adjust this with the following arguments:
@@ -138,9 +139,11 @@ Note that burstrender will still need to make MP4s in order to create GIFs, but 
 
 ### Utility Parameters
 
+`--doctor` checks that all four required external tools (exiftool, rawtherapee-cli, ffmpeg, ImageMagick) can be found, prints their versions, and exits. Run this first if something isn't working.
+
 `--quiet` or `-q` mutes output to the console, which can be handy for CRON use, etc.
 
-`--version` or `-v` oututs the version of burstrender you're using
+`--version` or `-v` outputs the version of burstrender you're using.
 
 ### Exit Codes
 
@@ -152,11 +155,11 @@ Burstrender provides standard exit codes to facilitate use in scripts. Codes are
 | 1         | Critical error              |
 | 2         | Non-critical error          |
 
-Specifically, burstrender will continue on all warning and errors, but will exit immediately on critical errors. Additionally, if burstrender fails to produce any image combination renderings (i.e. MP4, stabilized MP4, or GIF), it will attempt to move any renderings successfully completed for the burst then skip to the next burst and continue.
+Specifically, burstrender will continue on all warnings and errors, but will exit immediately on critical errors. Additionally, if burstrender fails to produce any image combination renderings (i.e. MP4, stabilized MP4, or GIF), it will attempt to move any renderings successfully completed for the burst then skip to the next burst and continue.
 
 ### Best Practices
 
-If you call burstrender from a folder containing CR3 files, it'll automatically 
+If you call burstrender from a folder containing CR3 files, it'll automatically:
 
 * read the EXIF data from all the CR3s
 * try to break them into bursts by looking for gaps of >2 seconds and eliminating bursts of less than 10 images
@@ -167,256 +170,62 @@ If you call burstrender from a folder containing CR3 files, it'll automatically
 
 However, if you want more control, you can try this process:
 
-1. Execute burstrender with the `--detect-only` argument, along with any `--source-path `and `--destination-path` you need.
-   
+1. Execute burstrender with the `--detect-only` argument, along with any `--source-path` and `--destination-path` you need.
+
 2. Look at the burst data returned. If you like it, go on to the next step. If not, add `--seconds-between-bursts` and/or `--minimum-burst-length` parameters to your command and run it again until you like the results.
 
 3. Remove the `--detect-only` argument from your command (keeping any other changes) and add the `--sample-images-only` argument. Run the command again. This will generate PNGs from the first CR3 file in each burst.
 
-4. Take a look at the generated PNGs. If you like them, move on to the next step. Otherwise, add the `--crop-string`, `--gravity-string`, `--custom-vf-string`, and/or `--no-normalization` arguments with parameters and run it again until you like the results.
+4. Take a look at the generated PNGs. If you like them, move on to the next step. Otherwise, add the `--crop-string`, `--gravity-string`, `--custom-vf-string`, and/or `--no-normalize` arguments with parameters and run it again until you like the results.
 
 5. Now remove the `--sample-images-only` argument and run the command to generate GIFs and/or MP4(s) for all the bursts.
 
+## GUI
+
+BurstRender v5 includes a Tkinter GUI (`burstrender-gui.exe` on Windows, `python3 burstrender_gui.py` on Linux) that walks you through the same workflow interactively without needing a terminal. It has three tabs:
+
+* **Detect:** pick your source and destination folders, tune the gap and minimum-length settings, and see the detected burst table before committing to a full render.
+* **Preview:** render first-frame previews for each burst, and tune crop, gravity, normalize, and custom `-vf` settings until the sample images look right.
+* **Render:** choose your output format (MP4, stabilized MP4, GIF, or combinations), watch a live progress and log pane, and open the output folder when done.
+
 ## Installation
 
-Apologies for the manual/crappy way this installation works. I'm still learning to deploy Python well. Right now it's important to know that this is only designed to work on Linux or on the Debian WSL system under Windows. I've deployed to both with success following these instructions. TODO: package this properly.
+### Windows (recommended)
 
-And yes, this is pretty hacky. If you wish to improve, please share.
+1. Download `burstrender-windows-x64.zip` from the [latest release](https://github.com/CharlesCage/burstrender/releases/latest).
+2. Extract it anywhere (e.g. `C:\burstrender`). Everything needed is inside —
+   Python, exiftool, ffmpeg, ImageMagick, and RawTherapee are all bundled.
+3. Run `burstrender-gui.exe` for the guided window, or `burstrender.exe` from
+   a terminal for the classic CLI.
 
-### Install RawTherapee
+**First run:** Windows SmartScreen will warn about an unrecognized app
+(the bundle is not code-signed). Click **More info → Run anyway**. This
+happens once.
 
-Need to install 5.9 or later. This is in Debian 12 ("Bookworm"). Check with `apt list rawtherapee`.
+**Updating:** delete the folder, extract the new zip. Nothing else is
+installed anywhere.
 
-1. Check to see if RawTherapee is already installed by issuing the `rawtherapee-cli` command. If RawTherapee responds, you're good to go.
+**If something misbehaves:** run `burstrender.exe --doctor` in a terminal
+and send the output along with your question.
 
-2. Otherwise, install RawTherapee with `sudo apt install rawtherapee` or whatever works for your distro.
-   
-3. Repeat #1 above to make sure `rawtherapee-cli` responds.
+### Linux
 
-If you're installing to Debian WSL under Windows, you MIGHT be stuck with Debian 11 ("Bullseye"). If so, or for any reason you find yourself with an older version of  RawTherapee, your goal is to install v5.9 or later. Here are some options if you're on Debian. Feel free to search for other possibilities.
+Install the four external tools, then burstrender in a venv:
 
-#### Option 1: Install from Unstable
+```bash
+sudo apt install rawtherapee imagemagick ffmpeg libimage-exiftool-perl
+git clone https://github.com/CharlesCage/burstrender
+cd burstrender
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python burstrender.py --doctor   # verify all four tools resolve
+```
 
-**BE CAREFUL. YOU CAN EASILY BUILD FRANKENDEBIAN IF YOU'RE NOT CAREFUL. YOU HAVE BEEN WARNED.**
-
-Seriously, this worked for me, but do it at your own risk. For this example, I'm installing on Debian WSL.
-
-1. Before you do all this, make sure to `sudo apt update` and `sudo apt upgrade` to make sure everything is current with your WSL install.
-
-1. Edit your `/etc/apt/sources.list` file to add Debian unstable.
-
-   On current Debian WSL, the file should look something like this:
-
-   ```
-   deb http://deb.debian.org/debian bullseye main non-free contrib
-   deb http://deb.debian.org/debian bullseye-updates main non-free contrib
-   deb http://security.debian.org/debian-security bullseye-security main non-free contrib
-   deb http://ftp.debian.org/debian bullseye-backports main non-free contrib
-   ```
-
-   Edit it (with `sudo`, of course, since `/etc/apt/` is owned by `root`). Add the following line:
-
-   `deb http://deb.debian.org/debian unstable main non-free contrib`
-
-   Save the file.
-
-2. Create the file `/etc/apt/preferences` in order to use pinning to prevent Debian from trying to update your entire install to unstable.
-
-   Put the following text in the file:
-
-   ```
-   Package: *
-   Pin: release a=oldstable
-   Pin-Priority: 900
-
-   Package: *
-   Pin: release a=unstable
-   Pin-Priority: 100
-   ```
-
-   This essentially says "default everything to oldstable (what WSL currently uses) but let me request installing packages from unstable."
-
-   Save the file.
-
-3. Update the package library with `sudo apt update`.
-
-   LOOK CAREFULLY at the output to confirm that "All packages are up to date." This should be the case since you updated/upgraded everything before starting this process. If you see this, you're ready to go to the next step.
-   
-   If insteaad it shows a kajillion packages requiring update, something is screwed up. You'll need to **fix it BEFORE you do an upgrade** or you're probably screwed. Worst case scenario, you can remove the line in `/etc/apt/sources.list` you added in #1 above, remove the `/etc/apt/preferences` file you created in #2, and re-run a `sudo apt update` . If you're back to "All packages are up to date." then you can start over and try again or abandon pinning and try something else.
-
-4. Install rawtherapee from unstable with the command `sudo apt install -t unstable rawtherapee`.
-
-   As of today, this installed v5.10 for me along with a bunch of dependencies from unstable. So far it doesn't seem to have broken anything else, though there's always a risk with mixing releases.
-
-5. Check to see if the installed app starts with the command `rawtherapee-cli`. It should respond without errors.
-
-#### Option 2: Build RawTherapee from Source
-
-Instructions are [here](https://rawpedia.rawtherapee.com/Linux).
-
-#### Option 3: ???
-
-If for some reason RawTherapee is not in your distribution, you can potentially get it [here](https://rawtherapee.com/) as a Linux AppImage and source code. If you install it as an AppImage or compile it from source you'll want to make sure it ends up in your PATH such that you can execute it as your user (the one you intend to run burstrender with) from anywhere. You can test this with #1 above.
-
-### Test RawTherapee
-
-When you're all done, let's run a test to convert a CR3 to a PNG to make sure everything is good. Use the command:
-
-`rawtherapee-cli -o "YOUR_OUTPUT_PATH_AND_FILE.png" -n -Y -c "YOUR_INPUT_RAW.CR3"`
-
-You should get a PNG. Open it up in Windows and it should look like the CR3 image. If so, you're good to move on with the install. If the image is all white, you probably have an old version of RawTherapee, or at least something older than v5.9. When I first tried it with v5.8 that comes in Debian oldstable (v5.8) this happened to me.
-
-### Install ImageMagick
-
-1. Check to see if ImageMagick is already installed by issuing the `convert` command. If convert responds, you're good to go.
-
-2. Otherwise, install ImageMagick with `sudo apt install imagemagick` or whatever works for your distro.
-   
-3. Repeat #1 above to make sure convert responds. Pretty much every distro in existence seems to have ffmpeg, but if for some reason you compile it from source or install it via other mechanisms, be sure to make sure it's in your PATH such that you can execute it as your user (the one you intend to run burstrender with) from anywhere. You can test this with #1 above.
-
-### Configure ImageMagick for RAW
-
-ImageMagick can't handle RAW files out of the box, at least not in most available versions. And some versions that handle RAW don't handle CR3s. I avoid this problem by adding RawTherapee as a helper for ImageMagick RAW file processing. There are other possibilities, including adding various RAW libraries and compiling some of the latest versions of ImageMagick from source. See the resource below if you want/need to try that method. But this worked great for me and involed less mess.
-
-1. Find ImageMagick's `delegates.xml` file.
-
-   On both Debian 12 and a Debian WSL ("Buster") install I found mine in `/etc/ImageMagick-6/delegates.xml`, so you might check thereabouts and get lucky.
-
-   If not, you can try the command `find / -name delegates.xml`, but it can take a long time. You can always try `/etc` instead of `/` first, too. Or try the method below.
-   
-   If you find multiple `delegates.xml` files (I didn't, thankfully!) or you just want to try this method first, you may have some luck with the command `convert -debug "all" abc.xyz test.jpg`. This will produce a ton of console logging output from ImageMagick, and you can look for a `Loading delegate configure file:` line which should tell you which file ImageMagick is actually using.
-
-2. Edit the `delegates.xml` file.
-   
-   Note the ownership of the file. If it's owned by `root` you'll need to use `sudo`.
-
-   You may also want to protect yourself by first making a copy of `delegates.xml` to a file in the same place named `delegates.xml.old`. Very helpful if you rrun into problems.
-
-   Our goal here is to add RawTherapee as a helper app for DNG fiiles (which will also handle our CR3s). I had luck searching for `dng` in the `delegates.xml` file. If you find a line with something like `<delegate decode="dng:decode"...`  you'll want to modify it to match the line below. If you don't find such a line, add the line below in the `<delegatemap>` section of the file:
-
-   `<delegate decode="dng:decode" command="&quot;rawtherapee-cli&quot; -o &quot;%u.png&quot; -n -Y -c &quot;%F&quot;"/>`
-
-   Some additional help if you're doing this in WSL: you may need to enable Copy/Paste within the WSL shell (or [mintty](https://mintty.github.io/) if you're using that). In most of them it's under Options/Options or sometimes (like in mintty) under Options/Text. These enable you to use `Ctrl+Shift+V` to paste from the Windows clipboard, so you can copy the line above and paste it into your terminal edit app (probably vim or nano),
-
-3. Test the new ImageMagick configuration.
-
-   Grab a CR3 and try to convert it to a PNG directly with ImageMagick using the following command:
-
-   `convert -debug "all" your-file-here.CR3 test.PNG`
-
-   If all goes well you should get an output PNG, and you should see a `rawtherapee-cli` command in the spew of console logging.
-
-If this doesn't work, [this is a great resource](https://www.isoftstoneinc.com/insights/libraw-rawtherapee-imagemagick/) for understanding how the whole process works and what you might need to do in order to make it work for your potentially unique ImageMagick and RawTherapee installation.
-
-### Install ffmpeg
-
-1. You may already have ffmpeg installed. It's pretty damn common. Check by issuing the command `ffmpeg`. If it's installed, you're good to go.
-   
-2. If not, install it via `sudo apt install ffmpeg` or whatever works for your distro. You shouldn't need any special version of this as all the features used here have been in the package for a long time.
-
-### Install exiftool
-
-`sudo apt install exiftool` or whatever works for your distro.
-
-### Clone the Repo
-
-1. If you don't already have git installed, install it with `sudo apt install git`.
-   
-2. Clone this repo into somewhere safe, like maybe underneath `~/github` in your home folder. It doesn't matter where you put it, but the instructions here are based on this assumption. If you're sitting in the location you want to clone, issue the command `git clone https://github.com/CharlesCage/burstrender`.
-
-### Check config.yaml
-
-Burstrender reads some basic parameters from a config.yaml file. Check the included file to adjust the defaults as needed for your install. Specifically:
-
-* The default working folder is set to `~/.burstrender/working`. Make sure this location (or whatever location you choose) can accommodate at minimum the PNGs, MP4s, and GIF for the largest burst you process. (Burstrender cleans up the created PNGs and moves the MP4s and GIF to the output folder after processing each burst.) If the selected location doesn't exist, burstrender will try to create it.
-
-* The default logging path is the `logs` folder underneath the location where you cloned this repo. Burstrender automatically rotates log files when they reach 10 MB, and 10 log files are kept before they are deleted. (So the total log storage should never be that large.) You can specify anywhere you like for the logs, but make sure the user that will run burstrender has the appropriate permissions for the log location.
-
-### Make Sure You Have Python3.11.x
-
-1. Execute the command `python3 --version`. If you see 3.11 or later, you can move on to creating and activating the virtual environment.
-   
-2. If older, you need to install version 3.11 or newer. Use any method you like to do this. For those insttalling on Debain WSL ("Buster"), I was able to install it from unstable after adding the unstable repo as noted above. 
-
-   `sudo apt install -t unstable python3`
-
-   However you go about it, be sure to check it again afterward to confirm that it's installed. And yes, this might break things if you're using Python. It didn't for me, but pay attention.
-
-### Create/Activate .venv Virtual Environment
-
-1. Change directories to the location where you git cloned the repo. In the example here, we put it in `~/github/burstrender`. So for that you'd `cd ~/github/burstrender`.
-
-2. Install python3-venv with the command `sudo apt install python3-venv`.
-
-   If you're on Debian WSL and installed Python3.11 above, use the command `sudo apt install python3.11-venv` instead.
-
-3. Create the virtual environment with the command `python3 -m venv .venv`.
-
-4. Activate the .venv virtual environment there with the command `source .venv/bin/activate`.
-
-   Your prompt should now be preceeded with `(.venv)` and maybe look something like `(.venv) chuckcage@joshua:~/github/burstrender$`.
-
-### Install Python Requirements
-
-Ok. If you're on Debian WSL this gets just super fun and complicated. If you're on Debian 12, you can probably just skip to the `pip3 install -r requirements.txt` command below. Otherwise, make sure you're still in the burstrender folder with the virtual environment activated (from previous step) and here we go:
-
-1. Install wheel with pip: `pip3 install wheel`
-   
-2. Install all the build requirements for the py3exiv2 pip package:
-
-   `sudo apt-get install build-essential python-all-dev libexiv2-dev`
-
-   If you're on Debian WSL ("Bookworm") you might get an error indicating that `python-all-dev` doesn't exist, and if so just omit it and install the rest. I had luck with this, though YMMV.
-
-3. Install the remaining build requirement for py3exiv2, libboost-python-dev. If you're on Debian WSL ("Bookworm") you might be able to get away with just `sudo apt install libboost-python-dev`. Or you may need to use aptitude as mentioned below. BUT, my experience with Debian WSL ("Buster") required installing from unstable. I was able to make it work by using aptitude and letting it figure out how to solve the dependency problem as follows:
-
-   Start with `sudo apt install aptitude`.
-
-   Then `sudo aptitude install -t unstable libboost-python-dev`. You SHOULD be able to accept the default solutions it provides. If all goes well, you end up with the package installed.
-
-If none of that works, DuckDuckGo is your friend.
-
-Once you have libboost-python-dev installed we can finally:
-
-4. Install the requirements with the command `pip3 install -r requirements.txt`.
-
-   Hopefully this installs everything, takes a while to build py3exiv2, and you get all happy white text. If it spews red, you'll need to troubleshoot. DuckDuckGo is your friend.
-   
-5. Deactivate the .venv virtual environment with the command `deactivate`.
-
-### Copy and Edit the burstrender Script
-
-In order to allow execution of burstrender.py within the .venv virtual environment from anywhere and without calling the python instance, this file is a shell script designed to do all that for you. But you need to do a few things to get it working.
-
-1. Make a copy of the provided `burstrender.sample` file to a file named `burstrender`. If you're still sitting in your `burstrender` folder you can use the command
-    
-    `cp burstrender.sample burstrender`
-
-2. Edit the `burstrender` script file provided with the repo and adjust the paths so that they reference the location in which you put the git clone of this repo. NOTE that this is not the burstrender folder, but rather the burstrender file within the burstrender folder. If you cloned the repo to `~/github/burstrender` then just change both lines in the file from `~/gitlab/burstrender` to `~/github/burstrender` or wherever you put it.
-   
-3. Make the `burstrender` script executable with the command `chmod +x burstrender` or whatever works for your distro.
-
-4. Test the script by executing it. If you're still in the burstrender folder, try `./burstrender`. Since there are no CR3 files provied in the repo, you should get a message that no CR3 files were found in the source path. If you get other errors, troubleshoot.
-
-### Add a Symlink for the burstrender Script
-
-1. Find a location that's in your PATH. The easiest way to do this is to open a shell and type `$PATH`. A common location for this would be `/home/YOURUSER/.local/bin`. But YMMV. Find a place in the path that you're comfortable placing a symlink referencing the `burstrender` script.
-   
-2. Create the symlink from the burstrender script to your chosen target location from #1 above. For example, if you cloned the repo to `~/github/burstrender` and you chose `/home/YOURUSER/.local/bin` above, you'd use the command:
-   
-   `ln -s /home/YOURUSER/github/burstrender/burstrender /home/YOURUSER/.local/bin/`
-   
-   (If you chose somewhere owned by root, use `sudo`.)
-
-### Test Your Install
-
-Test the install by executing `burstrender -h` from somewhere outside the place you put the symlink or the place you put the cloned repo. You should see the help output from burstrender.
-
-And you're ready to go!
+RawTherapee must be ≥ 5.9 for CR3 support (any current distro qualifies —
+the old Debian-unstable pinning dance is no longer needed or recommended).
 
 ## TODO
 
-- [ ] Package for at least semi-easy deployment. NO REALLY.
+- [ ] Recursive folder search
 
 ## Contributing
 
