@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
   push:
     tags: ["v*"]
-    branches: ["v5-windows-bundle"]
 
 jobs:
   build:
