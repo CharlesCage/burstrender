@@ -47,7 +47,7 @@ jobs:
             $subsec = $i * 10
             & $exiftool -overwrite_original "-DateTimeOriginal=2024:02:16 14:14:19" "-SubSecTimeOriginal=$subsec" "-Orientation#=1" $f
           }
-          & dist/burstrender/burstrender.exe --accept-jpg --source-path smoke/in --destination-path smoke/out --minimum-burst-length 10
+          & dist/burstrender/burstrender.exe --accept-jpg --source-path smoke/in --destination-path smoke/out --minimum-burst-length 10 -q
           if ($LASTEXITCODE -ne 0) { throw "render exited $LASTEXITCODE" }
           if (-not (Test-Path smoke/out/burst_1.mp4)) { throw "missing burst_1.mp4" }
           if (-not (Test-Path smoke/out/burst_1-stabilized.mp4)) { throw "missing stabilized mp4" }
