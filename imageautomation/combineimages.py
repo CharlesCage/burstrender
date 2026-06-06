@@ -125,13 +125,18 @@ def stabilize_mp4(output_file):
             True if the process was successful, False otherwise
     """
 
+    # FFmpeg's libavfilter uses ':' as an option separator, so Windows paths
+    # with drive letters (e.g. C:\...) must use forward slashes to avoid
+    # breaking the filter-graph parser.
+    trf_path = f"{config.working_directory}/{output_file}.trf".replace("\\", "/")
+
     # Execute command to perform stabilization analysis on the MP4 file
     command = [
                 resolve("ffmpeg"),
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabdetect=shakiness=10:accuracy=15:result='{config.working_directory}/{output_file}.trf'",
+                f"vidstabdetect=shakiness=10:accuracy=15:result='{trf_path}'",
                 f"-f",
                 f"null",
                 f"-",
@@ -146,14 +151,14 @@ def stabilize_mp4(output_file):
 
     if not result:
         return False
-        
+
     # Execute command to stabilize the MP4 file
     command = [
                 resolve("ffmpeg"),
                 f"-i",
                 f"{config.working_directory}/{output_file}.mp4",
                 f"-vf",
-                f"vidstabtransform=smoothing=30:input='{config.working_directory}/{output_file}.trf'",
+                f"vidstabtransform=smoothing=30:input='{trf_path}'",
                 f"{config.working_directory}/{output_file}-stabilized.mp4",
     ]
 
