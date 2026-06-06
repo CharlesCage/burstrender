@@ -20,9 +20,11 @@ def reset_runtime_state():
     from imageautomation import runtime as config
     config.exit_code = 0
     config.exit_reason = ""
+    config.quiet = False
     yield
     config.exit_code = 0
     config.exit_reason = ""
+    config.quiet = False
 
 
 @pytest.fixture()

@@ -50,6 +50,7 @@ Global Variables (via config):
 # Modules
 from .utilities import PrintLog
 from .utilities import run_subprocess
+from imageautomation.binaries import resolve
 
 # TUI progress bar
 from tqdm import tqdm
@@ -63,96 +64,85 @@ from imageautomation import runtime as config
 
 def render_pngs_from_cr3s(cr3_files, output_file):
     """
-    Render PNG files from CR3 files using ImageMagick.
+    Render numbered PNGs from RAW (CR3) or JPG inputs.
 
-    Parameters:
+    RAW inputs are explicitly developed with rawtherapee-cli (neutral
+    profile, PNG out) — the same command ImageMagick's dng:decode delegate
+    ran implicitly — then ImageMagick applies gravity/crop/resize/orient.
+    JPG inputs skip the development step.
 
-        cr3_files : list
-            A list of full path filenames of the CR3 files
-
-        output_file : str
-            The output file name for the PNG files
-
-    Returns:
-
-        bool
-            True if the process was successful, False otherwise
+    Returns True only if EVERY file in the burst rendered successfully.
     """
+    all_ok = True
 
-    # Loop through cr3_files and execute command to convert each CR3 file to a PNG file
-    for cr3_file in tqdm(
-        cr3_files,
-        desc=f"Converting {config.file_extension.upper().replace('.', '')}s to PNGs",
-        leave=False,
-        disable=True if len(cr3_files) == 1 else config.quiet,
+    for index, (input_file, long_side) in enumerate(
+        tqdm(
+            cr3_files,
+            desc=f"Converting {config.file_extension.upper().replace('.', '')}s to PNGs",
+            leave=False,
+            disable=True if len(cr3_files) == 1 else config.quiet,
+        ),
+        start=1,
     ):
+        is_jpg = input_file.upper().endswith("JPG")
 
-        # Set width or height for resize based on long_side
-        if cr3_file[1] == "width":  # long_side is width
-            resize_string = "2000"
-        else:
-            resize_string = "x2000"
-
-        # Set crop string if not specified by user
-        if not config.crop_string:
-            # No default crop for jpg
-            if cr3_file[0].upper().endswith("JPG"):
-                im_crop_string = None
-            else:
-                if cr3_file[1] == "width":
-                    im_crop_string = "6000x4000+0+0"
-                else:
-                    im_crop_string = "4000x6000+0+0"
-        else:
+        # Per-image defaults (user overrides via config win)
+        resize_string = "2000" if long_side == "width" else "x2000"
+        if config.crop_string:
             im_crop_string = config.crop_string
-
-        # Set gravity string if not specified by user
-        if not config.gravity_string:
-            # No default gravity for jpg
-            if cr3_file[0].upper().endswith("JPG"):
-                im_gravity_string = None
-            else:
-                if cr3_file[1] == "width":
-                    im_gravity_string = "SouthEast"
-                else:
-                    im_gravity_string = "NorthEast"
+        elif is_jpg:
+            im_crop_string = None
         else:
+            im_crop_string = "6000x4000+0+0" if long_side == "width" else "4000x6000+0+0"
+        if config.gravity_string:
             im_gravity_string = config.gravity_string
+        elif is_jpg:
+            im_gravity_string = None
+        else:
+            im_gravity_string = "SouthEast" if long_side == "width" else "NorthEast"
 
-        command = [
-            f"convert",
-            f"{cr3_file[0]}",
-        ]
+        # Step 1: develop RAW to PNG (skipped for JPG)
+        if is_jpg:
+            magick_input = input_file
+        else:
+            developed = f"{config.working_directory}/{output_file}-develop.png"
+            rt_command = [
+                resolve("rawtherapee-cli"),
+                "-o", developed,
+                "-n",
+                "-Y",
+                "-c", input_file,
+            ]
+            if not run_subprocess(
+                "rawtherapee-cli",
+                rt_command,
+                f"Developed {input_file}",
+                f"Failed to develop {input_file}",
+            ):
+                all_ok = False
+                continue
+            magick_input = developed
 
-        # Add gravity and crop strings if specified
+        # Step 2: gravity/crop/resize/orient with ImageMagick
+        command = [resolve("magick"), magick_input]
         if im_gravity_string:
-            command.append("-gravity")
-            command.append(f"{im_gravity_string}")
+            command += ["-gravity", im_gravity_string]
         if im_crop_string:
-            command.append("-crop")
-            command.append(f"{im_crop_string}")
-
-        # Add resize string
-        command.append("-resize")
-        command.append(f"{resize_string}")
-
-        # Add auto-orient
-        command.append("-auto-orient")
-
-        # Add output file name
+            command += ["-crop", im_crop_string]
+        command += ["-resize", resize_string, "-auto-orient"]
         command.append(
-            f"{config.working_directory}/{output_file}-image_{format(cr3_files.index(cr3_file) + 1).zfill(3)}.png"
+            f"{config.working_directory}/{output_file}-image_{format(index).zfill(3)}.png"
         )
 
-        # print(command)
-        result = run_subprocess(
-            "convert",
+        if not run_subprocess(
+            "magick",
             command,
-            f"Converted {cr3_file} to {output_file}.png",
-            f"Failed to convert {cr3_file} to {output_file}.png",
-        )
+            f"Converted {input_file} to {output_file}-image_{format(index).zfill(3)}.png",
+            f"Failed to convert {input_file}",
+        ):
+            all_ok = False
 
-    return result
+    return all_ok
 
 
 def correct_sample_png(output_file, long_side="width"):
@@ -181,7 +171,7 @@ def correct_sample_png(output_file, long_side="width"):
 
     # Execute command to apply a correction to the GIF file
     command = [
-        f"ffmpeg",
+        resolve("ffmpeg"),
         f"-y",
         f"-i",
         f"{config.working_directory}/{output_file}-image_001.png",
@@ -191,7 +181,7 @@ def correct_sample_png(output_file, long_side="width"):
     ]
 
     result = run_subprocess(
-        "convert",
+        "ffmpeg",
         command,
         f"Applied correction to {output_file}.png",
         f"Failed to apply correction to {output_file}.png",
